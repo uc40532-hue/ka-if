@@ -477,25 +477,49 @@
     background: linear-gradient(135deg, var(--gold), #d97706); color: #071922; font-weight: 800; font-size: 12.5px;
     border: none; padding: 9px; border-radius: 10px; cursor: pointer; transition: all 0.2s; width: 100%;
   }
-  .cat-card-btn:hover { filter: brightness(1.1); transform: scale(1.01); }
-
   /* ==========================================================================
      ✨ REVOLUTIONARY MINIMALIST 3D DRESSING ROOM & PROFILE STUDIO
      ========================================================================== */
   #screen-profile {
-    height: calc(100vh - 56px);
     display: none;
-    flex-direction: column;
-    overflow: hidden;
     position: relative;
     background: radial-gradient(circle at 50% 25%, #082636 0%, #030d12 75%);
+    width: 100%;
   }
-  #screen-profile.active { display: flex; }
+  #screen-profile.active { display: block; }
 
-  /* TOP STAGE (~42% height) */
+  /* Default / Mobile Structure (< 920px) */
+  @media (max-width: 919px) {
+    #screen-profile.active {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 62px);
+      overflow: hidden;
+    }
+    .profile-web-grid {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .profile-stage-hero {
+      height: 42%;
+      min-height: 210px;
+      max-height: 270px;
+      flex-shrink: 0;
+      padding: 6px 12px;
+    }
+    .profile-drawer {
+      flex: 1;
+      height: 58%;
+      overflow: hidden;
+      padding: 8px 12px 65px;
+    }
+  }
+
+  /* TOP STAGE */
   .profile-stage-hero {
-    height: 42%;
-    min-height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1327,7 +1351,22 @@
   }
   .footer-link-item:hover { opacity: 0.8; }
 
-  /* Responsive Web Layout for Desktop, Tablets & Monitors */
+  /* Responsive Web Layout for Mobile, Tablets & Desktop Monitors */
+  @media (max-width: 600px) {
+    .app-topbar { padding: 0 10px; height: 56px; }
+    .brand-subtitle { display: none; }
+    .brand-title { font-size: 15px; }
+    .topbar-right-box { gap: 5px; }
+    .topbar-badge-pill { padding: 4px 8px; font-size: 11px; }
+    .topbar-avatar-btn { padding: 3px; }
+    #topbarCharName { display: none; }
+    .topbar-google-btn { padding: 5px 8px; }
+    #topbarGoogleText { display: none; }
+    .score-pill { padding: 4px 9px; font-size: 11.5px; }
+    .hero-banner { padding: 16px 14px; }
+    .hero-banner h1 { font-size: 20px; }
+  }
+
   @media (min-width: 768px) {
     .desktop-nav-bar { display: flex; }
     .bottom-nav { display: none !important; }
@@ -1338,26 +1377,44 @@
   }
 
   @media (min-width: 920px) {
+    #screen-profile.active {
+      display: block;
+      min-height: calc(100vh - 62px);
+      overflow: visible;
+      padding-bottom: 30px;
+    }
     .profile-web-grid {
       display: grid;
       grid-template-columns: 360px 1fr;
-      gap: 20px;
-      max-width: 1100px;
+      gap: 24px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: 24px 16px 40px;
       align-items: start;
     }
     .profile-stage-hero {
       position: sticky;
       top: 80px;
+      height: auto;
+      min-height: 480px;
       border-radius: 20px;
-      border: 1px solid rgba(244, 236, 216, 0.1);
+      border: 1px solid rgba(244, 236, 216, 0.12);
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      background: rgba(4, 18, 26, 0.85);
+      backdrop-filter: blur(14px);
+      padding: 20px 16px;
     }
     .profile-drawer {
       border-radius: 20px;
-      border: 1px solid rgba(244, 236, 216, 0.1);
-      min-height: 580px;
+      border: 1px solid rgba(244, 236, 216, 0.12);
+      height: 700px;
+      max-height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+      padding: 16px 18px 24px;
+      background: rgba(4, 18, 26, 0.85);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
   }
 
@@ -6343,8 +6400,8 @@ function showScreen(screenId) {
     if (topbar) topbar.style.display = 'none';
     if (bottomNav) bottomNav.style.display = 'none';
   } else {
-    if (topbar) topbar.style.display = 'flex';
-    if (bottomNav) bottomNav.style.display = 'flex';
+    if (topbar) topbar.style.display = '';
+    if (bottomNav) bottomNav.style.display = '';
   }
 
   // Mobile nav links
