@@ -2348,7 +2348,7 @@ const AudioEngine = {
     if (this.isPlayingBgm || !this.enabled) return;
     this.isPlayingBgm = true;
 
-    // 🌿 KEŞİF MODU: Huzurlu, sıcak, Anadolu ezgili Kalimba & Bas (Cmaj7 - G - Am7 - Fmaj7)
+    // 🌿 KEŞİF MODU: Huzurlu, dinlendirici Anadolu ezgili Kalimba & Bas (Cmaj7 - G - Am7 - Fmaj7)
     const exploreChords = [
       { bass: 130.81, notes: [261.63, 329.63, 392.00, 493.88, 523.25] }, // Cmaj7
       { bass: 98.00,  notes: [246.94, 293.66, 392.00, 440.00, 493.88] }, // G
@@ -2356,61 +2356,60 @@ const AudioEngine = {
       { bass: 87.31,  notes: [220.00, 261.63, 349.23, 392.00, 523.25] }  // Fmaj7
     ];
 
-    // ⚔️ DESTANSI COĞRAFYA SAVAŞI & EPİK KÂŞİF TEMASI (D Minor - Bb - C - Dm - F - Gm - A7 - Dm)
-    const epicChords = [
-      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [440.00, 587.33, 523.25, 440.00, 392.00, 440.00, 587.33, 659.25] }, // Dm
-      { bass: 58.27,  brass: [116.54, 233.08, 293.66], melody: [466.16, 587.33, 466.16, 349.23, 466.16, 587.33, 698.46, 587.33] }, // Bb
-      { bass: 65.41,  brass: [130.81, 261.63, 329.63], melody: [523.25, 659.25, 523.25, 392.00, 523.25, 659.25, 783.99, 659.25] }, // C
-      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [587.33, 698.46, 587.33, 440.00, 587.33, 698.46, 880.00, 783.99] }, // Dm
-      { bass: 87.31,  brass: [174.61, 261.63, 349.23], melody: [698.46, 880.00, 698.46, 523.25, 698.46, 880.00, 1046.5, 880.00] }, // F
-      { bass: 49.00,  brass: [98.00,  196.00, 293.66], melody: [587.33, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Gm
-      { bass: 55.00,  brass: [110.00, 220.00, 277.18], melody: [554.37, 659.25, 554.37, 440.00, 554.37, 659.25, 880.00, 739.99] }, // A7
-      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [587.33, 880.00, 698.46, 587.33, 440.00, 392.00, 349.23, 293.66] }  // Dm (Final Fanfare)
+    // ⚔️ ASİL & DESTANSI TÜRK KÂŞİFİ SENFONİSİ (TRAMPETSİZ & DAVULSUZ, TAMAMEN ORKESTRAL YAYLILAR & NEFESLİLER)
+    // Re Minör (Dm) - Si Bemol (Bb) - Do (C) - Fa (F) - Sol Minör (Gm) - La (A7) - Re Minör (Dm)
+    const epicSymphony = [
+      { bass: 73.42,  pad: [220.00, 261.63, 293.66], harp: [440.00, 587.33, 440.00, 349.23], melody: [587.33, 587.33, 659.25, 698.46, 587.33, 523.25, 440.00, 523.25] }, // Dm (Asil Başlangıç)
+      { bass: 58.27,  pad: [233.08, 293.66, 349.23], harp: [466.16, 587.33, 466.16, 349.23], melody: [587.33, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Bb (Geniş Ufuklar)
+      { bass: 65.41,  pad: [261.63, 329.63, 392.00], harp: [523.25, 659.25, 523.25, 392.00], melody: [659.25, 783.99, 659.25, 523.25, 659.25, 783.99, 880.00, 783.99] }, // C (Cesaret & Güç)
+      { bass: 87.31,  pad: [261.63, 349.23, 440.00], harp: [523.25, 698.46, 523.25, 440.00], melody: [698.46, 880.00, 698.46, 587.33, 698.46, 880.00, 1046.5, 880.00] }, // F (Yükselen Zirveler)
+      { bass: 49.00,  pad: [196.00, 233.08, 293.66], harp: [392.00, 587.33, 466.16, 392.00], melody: [783.99, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Gm (Gizemli Coğrafya)
+      { bass: 55.00,  pad: [220.00, 277.18, 329.63], harp: [440.00, 554.37, 440.00, 329.63], melody: [880.00, 783.99, 698.46, 659.25, 554.37, 659.25, 783.99, 880.00] }, // A7 (Zirveye Tırmanış)
+      { bass: 73.42,  pad: [220.00, 293.66, 349.23], harp: [440.00, 587.33, 440.00, 293.66], melody: [880.00, 698.46, 587.33, 523.25, 440.00, 392.00, 349.23, 293.66] }  // Dm (Muazzam Kapanış)
     ];
 
     let step = 0;
     const isGame = this.currentMode === 'game';
-    const stepDuration = isGame ? 0.20 : 0.42; // Epic 150 BPM driving tempo in quest mode
+    const stepDuration = isGame ? 0.26 : 0.42; // Akıcı, asil ve sinematik tempo
 
     const scheduleMeasure = () => {
       if (!this.isPlayingBgm || !this.enabled || !this.ctx) return;
 
       if (this.currentMode === 'game') {
-        const chordIdx = Math.floor(step / 8) % epicChords.length;
-        const prog = epicChords[chordIdx];
+        const chordIdx = Math.floor(step / 8) % epicSymphony.length;
+        const prog = epicSymphony[chordIdx];
         const beat = step % 8;
 
-        // 1. Destansı Timpani & Savaş Davulu Vuruşları
+        // 1. Sıcak Çello & Kontrbas Yaylı Temeli (Trampetsiz, Yumuşak ve Derin Akustik Bas)
         if (beat === 0) {
-          this.playEpicDrum(0.42);
+          this.playTone(prog.bass, 0.72, 'sine', this.bgmGain, 0, 0.24);
+          this.playTone(prog.bass * 2, 0.65, 'triangle', this.bgmGain, 0.02, 0.14);
         } else if (beat === 4) {
-          this.playEpicDrum(0.32);
-        } else if (beat === 6) {
-          this.playEpicDrum(0.25);
+          this.playTone(prog.bass * 1.5, 0.55, 'sine', this.bgmGain, 0, 0.18);
         }
 
-        // 2. Güçlü Destansı Pirinç / Nefesli Güç Akorları (Brass Staccato)
+        // 2. Sinematik Nefesli & Yaylı Korosu Akoru (Warm French Horn & String Pad)
         if (beat === 0 || beat === 4) {
-          prog.brass.forEach((f, i) => {
-            this.playTone(f, 0.32, 'sawtooth', this.bgmGain, i * 0.015, 0.18);
-            this.playTone(f * 0.5, 0.35, 'triangle', this.bgmGain, 0, 0.24);
+          prog.pad.forEach((freq, idx) => {
+            this.playTone(freq, 0.58, 'triangle', this.bgmGain, idx * 0.02, 0.11);
+            this.playTone(freq * 0.5, 0.60, 'sine', this.bgmGain, 0, 0.13);
           });
         }
 
-        // 3. Dörtnala Koşan Epik Yaylılar / Ritmik Arpej
-        const arpeggioFreq = prog.brass[beat % prog.brass.length] * 2;
-        this.playTone(arpeggioFreq, 0.14, 'triangle', this.bgmGain, 0, 0.16);
+        // 3. Berrak Arp & Flüt Akışı (Crystalline Harp / Pizzicato Flow)
+        const harpNote = prog.harp[beat % prog.harp.length];
+        this.playTone(harpNote, 0.22, 'sine', this.bgmGain, 0, 0.10);
         if (beat % 2 === 1) {
-          this.playTone(prog.bass * 2, 0.12, 'sawtooth', this.bgmGain, 0.04, 0.12);
+          this.playTone(harpNote * 1.5, 0.18, 'triangle', this.bgmGain, 0.03, 0.07);
         }
 
-        // 4. Görkemli Destansı Melodi (Heroic Soaring Lead Melody)
+        // 4. Görkemli & Asil Kâşif Melodisi (Soaring Noble Flute & Violin Lead)
         const leadFreq = prog.melody[beat];
-        this.playTone(leadFreq, 0.24, 'triangle', this.bgmGain, 0, 0.24);
-        this.playTone(leadFreq * 1.002, 0.24, 'sine', this.bgmGain, 0.01, 0.14); // Chorus shimmer
+        this.playTone(leadFreq, 0.38, 'triangle', this.bgmGain, 0, 0.22);
+        this.playTone(leadFreq * 1.003, 0.35, 'sine', this.bgmGain, 0.01, 0.12); // Doğal akor parıltısı
 
       } else {
-        // 🌿 Sakin Keşif Melodisi
+        // 🌿 Sakin Keşif Melodisi (Menü)
         const prog = exploreChords[Math.floor(step / 8) % exploreChords.length];
         const beat = step % 8;
 
@@ -2612,7 +2611,7 @@ const ALL_DATA = {
       "name": "Tektonik Göller",
       "icon": "⛰️",
       "color": "#3b82f6",
-      "img": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&h=340&q=80",
+      "img": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80",
       "info": "Fay hatları boyunca oluşan tektonik çukurlukların sularla dolmasıyla oluşurlar. Türkiye'de en yaygın göl türüdür.",
       "lakes": [
         {
@@ -2700,7 +2699,7 @@ const ALL_DATA = {
       "name": "Karstik Göller",
       "icon": "🪨",
       "color": "#2e9e6b",
-      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&h=340&q=80",
+      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
       "info": "Kalker, jips ve kaya tuzu gibi kolay eriyebilen kayaçların erimesiyle oluşan çanaklarda (obruk, dolin, polye) biriken sulardır. Akdeniz ve İç Anadolu'da yaygındır.",
       "lakes": [
         {
@@ -2770,7 +2769,7 @@ const ALL_DATA = {
       "name": "Volkanik Göller",
       "icon": "🌋",
       "color": "#e2543a",
-      "img": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=600&h=340&q=80",
+      "img": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=800&q=80",
       "info": "Volkanik patlamalarla oluşan krater, kaldera ve maar çukurluklarında suların toplanmasıyla meydana gelirler.",
       "lakes": [
         {
@@ -2810,7 +2809,7 @@ const ALL_DATA = {
       "name": "Buzul (Sirk) Gölleri",
       "icon": "🧊",
       "color": "#38bdf8",
-      "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&h=340&q=80",
+      "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
       "info": "Yüksek dağ zirvelerinde buzulların aşındırmasıyla oluşan sirk çanaklarında eriyen buzul sularının birikmesiyle oluşurlar.",
       "lakes": [
         {
@@ -2862,7 +2861,7 @@ const ALL_DATA = {
       "name": "Heyelan Set Gölleri",
       "icon": "⛏️",
       "color": "#a97148",
-      "img": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=600&q=80",
+      "img": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
       "info": "Kayan kütlelerin vadilerin önünü kapatmasıyla oluşan göllerdir. Eğim ve yağışın çok olduğu Karadeniz'de yaygındır.",
       "lakes": [
         {
@@ -2914,7 +2913,7 @@ const ALL_DATA = {
       "name": "Volkanik Set Gölleri",
       "icon": "🔥",
       "color": "#b06fd1",
-      "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+      "img": "https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=800&q=80",
       "info": "Volkanik lavların vadilerin önünü tıkaması sonucu oluşan göllerdir. Doğu Anadolu Bölgesi'nde yaygındır.",
       "lakes": [
         {
@@ -2960,7 +2959,7 @@ const ALL_DATA = {
       "name": "Alüvyal Set Gölleri",
       "icon": "🏞️",
       "color": "#8fae3c",
-      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
       "info": "Akarsuların taşıdıkları alüvyonları yan kolların ya da koyların önüne yığmasıyla oluşan doğal göllerdir.",
       "lakes": [
         {
@@ -3000,7 +2999,7 @@ const ALL_DATA = {
       "name": "Kıyı Set (Lagün) Gölleri",
       "icon": "🌊",
       "color": "#1fb6b0",
-      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+      "img": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80",
       "info": "Dalga ve kıyı akıntılarının oluşturduğu kıyı kordonlarının koy veya körfez önlerini kapatmasıyla denizden ayrılan göllerdir.",
       "lakes": [
         {
@@ -3052,7 +3051,7 @@ const ALL_DATA = {
       "name": "Baraj Gölleri",
       "icon": "🧱",
       "color": "#94a3ad",
-      "img": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&h=340&q=80",
+      "img": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
       "info": "Akarsu vadilerinin insan eliyle baraj bentleriyle kapatılması sonucu oluşan yapay su depolama alanlarıdır.",
       "lakes": [
         {
@@ -3186,7 +3185,7 @@ const ALL_DATA = {
           "hint": "4135m Uludoruk zirvesiyle Türkiye'nin ikinci yüksek dağı."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": "kirik",
@@ -3237,7 +3236,7 @@ const ALL_DATA = {
           "hint": "Hatay İskenderun boyunca uzanan tektonik horst sırası."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": "volkanik_daglar",
@@ -3312,7 +3311,7 @@ const ALL_DATA = {
           "hint": "Manisa'da Türkiye'nin en genç volkanik konileri ve jeoparkı."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1465919292275-c60b4c619a6c?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "OVALAR_CATEGORIES": [
@@ -3371,7 +3370,7 @@ const ALL_DATA = {
           "hint": "İzmir'in kuzeyinde Bakırçay'ın denize ulaştığı delta."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": "tektonik_ovalar",
@@ -3428,7 +3427,7 @@ const ALL_DATA = {
           "hint": "GAP sulamasıyla Güneydoğu'nun pamuk üretim üssü."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": "karstik_ovalar",
@@ -3473,7 +3472,7 @@ const ALL_DATA = {
           "hint": "Antalya-Konya sınırında suları yer altına batan polye."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "PLATOLAR_CATEGORIES": [
@@ -3580,7 +3579,7 @@ const ALL_DATA = {
           "hint": "Güneydoğu'da GAP ile sulanan geniş tarım platosu."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "AKARSULAR_CATEGORIES": [
@@ -3681,7 +3680,7 @@ const ALL_DATA = {
           "hint": "Ardahan'dan doğup Gürcistan-Azerbaycan üzerinden Hazar'a dökülür."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "HAYVANCILIK_CATEGORIES": [
@@ -3752,7 +3751,7 @@ const ALL_DATA = {
           "hint": "Türkiye deniz balığı üretiminin yarısından fazlasını sağlar."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "SANAYI_CATEGORIES": [
@@ -3829,7 +3828,7 @@ const ALL_DATA = {
           "hint": "Hammadde çabuk bozulduğu için tarlaların yanında kurulan tesisler."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "MADEN_CATEGORIES": [
@@ -3906,7 +3905,7 @@ const ALL_DATA = {
           "hint": "Türkiye'de ilk petrolün çıkarıldığı tarihi saha."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "LIMANLAR_CATEGORIES": [
@@ -3965,7 +3964,7 @@ const ALL_DATA = {
           "hint": "Güney Marmara ve İç Batı Anadolu maden ihracat kapısı."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "KORFEZLER_CATEGORIES": [
@@ -4030,7 +4029,7 @@ const ALL_DATA = {
           "hint": "Doğu Akdeniz'de ağır sanayi ve petrol boru hatları körfezi."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "SINIR_KAPILARI_CATEGORIES": [
@@ -4095,7 +4094,7 @@ const ALL_DATA = {
           "hint": "Şanlıurfa'da Suriye ile olan gümrük kapımız."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "SERBEST_BOLGELER_CATEGORIES": [
@@ -4142,7 +4141,7 @@ const ALL_DATA = {
           "hint": "Güneydoğu Anadolu'nun Ortadoğu'ya ihracat merkezi."
         }
       ],
-      "img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&h=340&q=80"
+      "img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
     }
   ]
 };
