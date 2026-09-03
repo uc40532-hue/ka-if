@@ -2611,7 +2611,7 @@ const ALL_DATA = {
       "name": "Tektonik Göller",
       "icon": "⛰️",
       "color": "#3b82f6",
-      "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&h=300&q=80",
+      "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&h=300&q=80",
       "info": "Fay hatları boyunca oluşan tektonik çukurlukların sularla dolmasıyla oluşurlar. Türkiye'de en yaygın göl türüdür.",
       "lakes": [
         {
@@ -7065,7 +7065,6 @@ function openTheme(theme) {
     card.className = 'cat-card';
 
     const defaultImg = cat.img || theme.img || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80';
-    const exampleNames = items.slice(0, 3).map(i => i.name).join(', ') + (items.length > 3 ? '...' : '');
 
     card.innerHTML = '<div class="cat-card-img-wrap">' +
       '<img class="cat-card-img" src="' + defaultImg + '" alt="' + cat.name + '" loading="lazy" onerror="this.src=\'' + theme.img + '\'">' +
@@ -7077,7 +7076,6 @@ function openTheme(theme) {
       '<span>' + (cat.icon || '📍') + '</span>' +
       '<span>' + cat.name + '</span>' +
       '</div>' +
-      (exampleNames ? '<div style="font-size:11px; color:var(--gold); font-weight:700; margin:3px 0 6px;">📍 ' + exampleNames + '</div>' : '') +
       '<div class="cat-card-desc">' + (cat.info || cat.desc || '') + '</div>' +
       '</div>' +
       '<button class="cat-card-btn" onclick="startCategoryGameByIndex(' + index + ')">Haritada Oyna</button>' +
