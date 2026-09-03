@@ -2324,23 +2324,31 @@ const AudioEngine = {
     } catch (e) {}
   },
 
-  // Destansı davul / Timpani vuruşu
-  playEpicDrum(peakGain = 0.38, delay = 0) {
-    if (!this.enabled || !this.ctx) return;
+  playAmbientPad(notes, duration = 3.8, peakGain = 0.20) {
+    if (!this.enabled) return;
+    if (!this.ctx) this.init();
+    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+    if (!this.ctx) return;
+
     try {
-      const now = this.ctx.currentTime + delay;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(115, now);
-      osc.frequency.exponentialRampToValueAtTime(38, now + 0.22);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(peakGain, now + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
-      osc.connect(gain);
-      gain.connect(this.bgmGain);
-      osc.start(now);
-      osc.stop(now + 0.26);
+      const now = this.ctx.currentTime;
+      notes.forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = idx === 0 ? 'sine' : (idx % 2 === 0 ? 'sine' : 'triangle');
+        osc.frequency.setValueAtTime(freq, now);
+        
+        // Yumuşak, kadife gibi 0.85s içe doğuş (Attack)
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(peakGain / Math.sqrt(notes.length), now + 0.85);
+        // Pürüzsüz ve uzun sönümlenme (Release)
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+        
+        osc.connect(gain);
+        gain.connect(this.bgmGain);
+        osc.start(now + idx * 0.02);
+        osc.stop(now + duration + 0.1);
+      });
     } catch (e) {}
   },
 
@@ -2348,91 +2356,39 @@ const AudioEngine = {
     if (this.isPlayingBgm || !this.enabled) return;
     this.isPlayingBgm = true;
 
-    // 🌿 KEŞİF MODU: Huzurlu, dinlendirici Anadolu ezgili Kalimba & Bas (Cmaj7 - G - Am7 - Fmaj7)
-    const exploreChords = [
-      { bass: 130.81, notes: [261.63, 329.63, 392.00, 493.88, 523.25] }, // Cmaj7
-      { bass: 98.00,  notes: [246.94, 293.66, 392.00, 440.00, 493.88] }, // G
-      { bass: 110.00, notes: [220.00, 261.63, 329.63, 392.00, 440.00] }, // Am7
-      { bass: 87.31,  notes: [220.00, 261.63, 349.23, 392.00, 523.25] }  // Fmaj7
+    // 🌿 KEŞİF MODU: Huzurlu, sıcak ve dinlendirici derin ambiyans akorları
+    const explorePads = [
+      [130.81, 196.00, 246.94, 261.63, 329.63], // Cmaj7
+      [110.00, 164.81, 220.00, 261.63, 329.63], // Am7
+      [87.31,  130.81, 174.61, 220.00, 261.63], // Fmaj7
+      [98.00,  146.83, 196.00, 246.94, 293.66]  // Gsus4
     ];
 
-    // ⚔️ ASİL & DESTANSI TÜRK KÂŞİFİ SENFONİSİ (TRAMPETSİZ & DAVULSUZ, TAMAMEN ORKESTRAL YAYLILAR & NEFESLİLER)
-    // Re Minör (Dm) - Si Bemol (Bb) - Do (C) - Fa (F) - Sol Minör (Gm) - La (A7) - Re Minör (Dm)
-    const epicSymphony = [
-      { bass: 73.42,  pad: [220.00, 261.63, 293.66], harp: [440.00, 587.33, 440.00, 349.23], melody: [587.33, 587.33, 659.25, 698.46, 587.33, 523.25, 440.00, 523.25] }, // Dm (Asil Başlangıç)
-      { bass: 58.27,  pad: [233.08, 293.66, 349.23], harp: [466.16, 587.33, 466.16, 349.23], melody: [587.33, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Bb (Geniş Ufuklar)
-      { bass: 65.41,  pad: [261.63, 329.63, 392.00], harp: [523.25, 659.25, 523.25, 392.00], melody: [659.25, 783.99, 659.25, 523.25, 659.25, 783.99, 880.00, 783.99] }, // C (Cesaret & Güç)
-      { bass: 87.31,  pad: [261.63, 349.23, 440.00], harp: [523.25, 698.46, 523.25, 440.00], melody: [698.46, 880.00, 698.46, 587.33, 698.46, 880.00, 1046.5, 880.00] }, // F (Yükselen Zirveler)
-      { bass: 49.00,  pad: [196.00, 233.08, 293.66], harp: [392.00, 587.33, 466.16, 392.00], melody: [783.99, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Gm (Gizemli Coğrafya)
-      { bass: 55.00,  pad: [220.00, 277.18, 329.63], harp: [440.00, 554.37, 440.00, 329.63], melody: [880.00, 783.99, 698.46, 659.25, 554.37, 659.25, 783.99, 880.00] }, // A7 (Zirveye Tırmanış)
-      { bass: 73.42,  pad: [220.00, 293.66, 349.23], harp: [440.00, 587.33, 440.00, 293.66], melody: [880.00, 698.46, 587.33, 523.25, 440.00, 392.00, 349.23, 293.66] }  // Dm (Muazzam Kapanış)
+    // ⚔️ SİNEMATİK EPİK AMBİYANS (SIFIR FLÜT, SIFIR TRAMPET, SIFIR DAVUL - TAMAMEN KADİFE SİNEMATİK AKOR SWELL'LERİ)
+    // Dm9 -> Bbmaj7 -> C9 -> Fmaj7 -> Gm7 -> Am7
+    const gamePads = [
+      [73.42, 146.83, 220.00, 261.63, 329.63], // Dm9 (Derin ve Gizemli)
+      [58.27, 116.54, 174.61, 220.00, 293.66], // Bbmaj7 (Genişleyen Ufuk)
+      [65.41, 130.81, 196.00, 246.94, 293.66], // C9 (Asil ve Güçlü)
+      [87.31, 174.61, 220.00, 261.63, 329.63], // Fmaj7 (Yükselen Zirve)
+      [49.00, 98.00,  146.83, 174.61, 220.00], // Gm7 (Sakin Derinlik)
+      [55.00, 110.00, 164.81, 220.00, 261.63]  // Am7 (Dingin Kapanış)
     ];
 
-    let step = 0;
-    const isGame = this.currentMode === 'game';
-    const stepDuration = isGame ? 0.26 : 0.42; // Akıcı, asil ve sinematik tempo
+    let chordStep = 0;
+    const padIntervalTime = 3200; // Her 3.2 saniyede bir akor doğar, iç içe eriyerek akar
 
-    const scheduleMeasure = () => {
+    const triggerNextPad = () => {
       if (!this.isPlayingBgm || !this.enabled || !this.ctx) return;
-
-      if (this.currentMode === 'game') {
-        const chordIdx = Math.floor(step / 8) % epicSymphony.length;
-        const prog = epicSymphony[chordIdx];
-        const beat = step % 8;
-
-        // 1. Sıcak Çello & Kontrbas Yaylı Temeli (Trampetsiz, Yumuşak ve Derin Akustik Bas)
-        if (beat === 0) {
-          this.playTone(prog.bass, 0.72, 'sine', this.bgmGain, 0, 0.24);
-          this.playTone(prog.bass * 2, 0.65, 'triangle', this.bgmGain, 0.02, 0.14);
-        } else if (beat === 4) {
-          this.playTone(prog.bass * 1.5, 0.55, 'sine', this.bgmGain, 0, 0.18);
-        }
-
-        // 2. Sinematik Nefesli & Yaylı Korosu Akoru (Warm French Horn & String Pad)
-        if (beat === 0 || beat === 4) {
-          prog.pad.forEach((freq, idx) => {
-            this.playTone(freq, 0.58, 'triangle', this.bgmGain, idx * 0.02, 0.11);
-            this.playTone(freq * 0.5, 0.60, 'sine', this.bgmGain, 0, 0.13);
-          });
-        }
-
-        // 3. Berrak Arp & Flüt Akışı (Crystalline Harp / Pizzicato Flow)
-        const harpNote = prog.harp[beat % prog.harp.length];
-        this.playTone(harpNote, 0.22, 'sine', this.bgmGain, 0, 0.10);
-        if (beat % 2 === 1) {
-          this.playTone(harpNote * 1.5, 0.18, 'triangle', this.bgmGain, 0.03, 0.07);
-        }
-
-        // 4. Görkemli & Asil Kâşif Melodisi (Soaring Noble Flute & Violin Lead)
-        const leadFreq = prog.melody[beat];
-        this.playTone(leadFreq, 0.38, 'triangle', this.bgmGain, 0, 0.22);
-        this.playTone(leadFreq * 1.003, 0.35, 'sine', this.bgmGain, 0.01, 0.12); // Doğal akor parıltısı
-
-      } else {
-        // 🌿 Sakin Keşif Melodisi (Menü)
-        const prog = exploreChords[Math.floor(step / 8) % exploreChords.length];
-        const beat = step % 8;
-
-        if (beat === 0) {
-          this.playTone(prog.bass, 0.45, 'sine', this.bgmGain, 0, 0.25);
-        } else if (beat === 4) {
-          this.playTone(prog.bass * 1.5, 0.3, 'sine', this.bgmGain, 0, 0.18);
-        }
-
-        const noteIdx = [0, 2, 4, 1, 3, 2, 4, 1][beat];
-        const noteFreq = prog.notes[noteIdx % prog.notes.length];
-        this.playTone(noteFreq, 0.22, 'triangle', this.bgmGain, 0, 0.15);
-
-        if (beat === 2 || beat === 6) {
-          this.playTone(noteFreq * 2, 0.12, 'sine', this.bgmGain, 0.03, 0.06);
-        }
-      }
-
-      step++;
+      const currentList = this.currentMode === 'game' ? gamePads : explorePads;
+      const notes = currentList[chordStep % currentList.length];
+      this.playAmbientPad(notes, 3.9, this.currentMode === 'game' ? 0.22 : 0.16);
+      chordStep++;
     };
 
+    triggerNextPad();
     if (this.bgmInterval) clearInterval(this.bgmInterval);
-    this.bgmInterval = setInterval(scheduleMeasure, stepDuration * 1000);
+    this.bgmInterval = setInterval(triggerNextPad, padIntervalTime);
   },
 
   stopBgm() {
