@@ -7,9 +7,9 @@
 <meta name="theme-color" content="#f2b134">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Göl Kâşifi">
+<meta name="apple-mobile-web-app-title" content="Türkiye Kâşifi">
 <link rel="apple-touch-icon" href="icon.svg">
-<title>Göl Kâşifi — Türkiye Coğrafya Oyunu</title>
+<title>Türkiye Kâşifi — Türkiye Coğrafya & Harita Keşif Oyunu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
 <!-- MapLibre GL JS -->
@@ -1761,10 +1761,10 @@
 
   <!-- TOP BAR -->
   <div class="app-topbar" id="mainTopbar">
-    <div class="app-brand" onclick="showScreen('screen-home')" title="Göl Kâşifi Anasayfa">
+    <div class="app-brand" onclick="showScreen('screen-home')" title="Türkiye Kâşifi Anasayfa">
       <span class="app-brand-icon">🗺️</span>
       <div class="brand-text-wrap">
-        <span class="brand-title">Göl Kâşifi</span>
+        <span class="brand-title">Türkiye Kâşifi</span>
         <span class="brand-subtitle">Türkiye Coğrafya & Kâşif Platformu</span>
       </div>
     </div>
@@ -2014,7 +2014,7 @@
   <footer class="app-web-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span>🗺️</span> <span>Göl Kâşifi — Türkiye Coğrafya & Kâşif Platformu</span>
+        <span>🗺️</span> <span>Türkiye Kâşifi — Türkiye Coğrafya & Kâşif Platformu</span>
       </div>
       <p class="footer-desc">
         Türkiye'nin 81 ilindeki gölleri, dağları, ovaları ve sanayi havzalarını eğlenceli harita eşleştirmeleri ve canlı düellolar ile keşfedin.
@@ -2225,7 +2225,7 @@
 
 <script>
 /* ==========================================================================
-   🎵 PROCEDURAL AUDIO & DYNAMIC MUSIC SYNTHESIZER ENGINE (ROYALTY-FREE WEB AUDIO)
+   🎵 DESTANSI TÜRK KÂŞİFİ SENFONİSİ & PROCEDURAL WEB AUDIO ENGINE
    ========================================================================== */
 const AudioEngine = {
   ctx: null,
@@ -2244,7 +2244,7 @@ const AudioEngine = {
       this.ctx = new AudioCtx();
       this.bgmGain = this.ctx.createGain();
       this.sfxGain = this.ctx.createGain();
-      this.bgmGain.gain.value = this.enabled ? 0.22 : 0;
+      this.bgmGain.gain.value = this.enabled ? 0.26 : 0;
       this.sfxGain.gain.value = this.enabled ? 0.35 : 0;
       this.bgmGain.connect(this.ctx.destination);
       this.sfxGain.connect(this.ctx.destination);
@@ -2271,7 +2271,7 @@ const AudioEngine = {
     this.unlockAudio();
     this.enabled = !this.enabled;
     localStorage.setItem('golkasifi_audio_enabled', this.enabled ? 'true' : 'false');
-    if (this.bgmGain) this.bgmGain.gain.value = this.enabled ? 0.22 : 0;
+    if (this.bgmGain) this.bgmGain.gain.value = this.enabled ? 0.26 : 0;
     if (this.sfxGain) this.sfxGain.gain.value = this.enabled ? 0.35 : 0;
     if (this.enabled) {
       this.startBgm();
@@ -2315,12 +2315,32 @@ const AudioEngine = {
       osc.type = type;
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime + delay);
       gain.gain.setValueAtTime(0, this.ctx.currentTime + delay);
-      gain.gain.linearRampToValueAtTime(peakGain, this.ctx.currentTime + delay + 0.02);
+      gain.gain.linearRampToValueAtTime(peakGain, this.ctx.currentTime + delay + 0.018);
       gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + delay + duration);
       osc.connect(gain);
       gain.connect(targetGain);
       osc.start(this.ctx.currentTime + delay);
-      osc.stop(this.ctx.currentTime + delay + duration + 0.05);
+      osc.stop(this.ctx.currentTime + delay + duration + 0.04);
+    } catch (e) {}
+  },
+
+  // Destansı davul / Timpani vuruşu
+  playEpicDrum(peakGain = 0.38, delay = 0) {
+    if (!this.enabled || !this.ctx) return;
+    try {
+      const now = this.ctx.currentTime + delay;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(115, now);
+      osc.frequency.exponentialRampToValueAtTime(38, now + 0.22);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(peakGain, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
+      osc.connect(gain);
+      gain.connect(this.bgmGain);
+      osc.start(now);
+      osc.stop(now + 0.26);
     } catch (e) {}
   },
 
@@ -2328,7 +2348,7 @@ const AudioEngine = {
     if (this.isPlayingBgm || !this.enabled) return;
     this.isPlayingBgm = true;
 
-    // Explore Mode: Peaceful, gentle, uplifting chords (Cmaj7 - G - Am7 - Fmaj7)
+    // 🌿 KEŞİF MODU: Huzurlu, sıcak, Anadolu ezgili Kalimba & Bas (Cmaj7 - G - Am7 - Fmaj7)
     const exploreChords = [
       { bass: 130.81, notes: [261.63, 329.63, 392.00, 493.88, 523.25] }, // Cmaj7
       { bass: 98.00,  notes: [246.94, 293.66, 392.00, 440.00, 493.88] }, // G
@@ -2336,42 +2356,61 @@ const AudioEngine = {
       { bass: 87.31,  notes: [220.00, 261.63, 349.23, 392.00, 523.25] }  // Fmaj7
     ];
 
-    // Game/Activity Mode: High-Energy, Driving Quest Music (Em - C - D - Bm at ~155 BPM)
-    const gameChords = [
-      { bass: 82.41,  pulse: 164.81, notes: [329.63, 392.00, 493.88, 659.25, 783.99] }, // Em
-      { bass: 65.41,  pulse: 130.81, notes: [261.63, 329.63, 392.00, 523.25, 659.25] }, // C
-      { bass: 73.42,  pulse: 146.83, notes: [293.66, 369.99, 440.00, 587.33, 739.99] }, // D
-      { bass: 61.74,  pulse: 123.47, notes: [246.94, 293.66, 369.99, 493.88, 587.33] }  // Bm
+    // ⚔️ DESTANSI COĞRAFYA SAVAŞI & EPİK KÂŞİF TEMASI (D Minor - Bb - C - Dm - F - Gm - A7 - Dm)
+    const epicChords = [
+      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [440.00, 587.33, 523.25, 440.00, 392.00, 440.00, 587.33, 659.25] }, // Dm
+      { bass: 58.27,  brass: [116.54, 233.08, 293.66], melody: [466.16, 587.33, 466.16, 349.23, 466.16, 587.33, 698.46, 587.33] }, // Bb
+      { bass: 65.41,  brass: [130.81, 261.63, 329.63], melody: [523.25, 659.25, 523.25, 392.00, 523.25, 659.25, 783.99, 659.25] }, // C
+      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [587.33, 698.46, 587.33, 440.00, 587.33, 698.46, 880.00, 783.99] }, // Dm
+      { bass: 87.31,  brass: [174.61, 261.63, 349.23], melody: [698.46, 880.00, 698.46, 523.25, 698.46, 880.00, 1046.5, 880.00] }, // F
+      { bass: 49.00,  brass: [98.00,  196.00, 293.66], melody: [587.33, 698.46, 587.33, 466.16, 587.33, 698.46, 783.99, 698.46] }, // Gm
+      { bass: 55.00,  brass: [110.00, 220.00, 277.18], melody: [554.37, 659.25, 554.37, 440.00, 554.37, 659.25, 880.00, 739.99] }, // A7
+      { bass: 73.42,  brass: [146.83, 220.00, 293.66], melody: [587.33, 880.00, 698.46, 587.33, 440.00, 392.00, 349.23, 293.66] }  // Dm (Final Fanfare)
     ];
 
     let step = 0;
     const isGame = this.currentMode === 'game';
-    const stepDuration = isGame ? 0.19 : 0.42; // Dynamic tempo: fast & driving during game activity
+    const stepDuration = isGame ? 0.20 : 0.42; // Epic 150 BPM driving tempo in quest mode
 
     const scheduleMeasure = () => {
       if (!this.isPlayingBgm || !this.enabled || !this.ctx) return;
 
       if (this.currentMode === 'game') {
-        const prog = gameChords[Math.floor(step / 8) % gameChords.length];
+        const chordIdx = Math.floor(step / 8) % epicChords.length;
+        const prog = epicChords[chordIdx];
         const beat = step % 8;
 
-        // Driving rhythmic pulse bass on beat
-        if (beat % 2 === 0) {
-          this.playTone(prog.bass, 0.18, 'triangle', this.bgmGain, 0, 0.32);
-        } else {
-          this.playTone(prog.pulse, 0.13, 'sawtooth', this.bgmGain, 0, 0.16);
+        // 1. Destansı Timpani & Savaş Davulu Vuruşları
+        if (beat === 0) {
+          this.playEpicDrum(0.42);
+        } else if (beat === 4) {
+          this.playEpicDrum(0.32);
+        } else if (beat === 6) {
+          this.playEpicDrum(0.25);
         }
 
-        // Fast adrenaline-pumping arpeggio run
-        const noteIdx = [0, 2, 4, 3, 1, 3, 2, 4][beat];
-        const noteFreq = prog.notes[noteIdx % prog.notes.length];
-        this.playTone(noteFreq, 0.18, 'triangle', this.bgmGain, 0, 0.22);
+        // 2. Güçlü Destansı Pirinç / Nefesli Güç Akorları (Brass Staccato)
+        if (beat === 0 || beat === 4) {
+          prog.brass.forEach((f, i) => {
+            this.playTone(f, 0.32, 'sawtooth', this.bgmGain, i * 0.015, 0.18);
+            this.playTone(f * 0.5, 0.35, 'triangle', this.bgmGain, 0, 0.24);
+          });
+        }
 
-        // High octane sparkle
-        this.playTone(noteFreq * 2, 0.05, 'sine', this.bgmGain, 0.02, 0.07);
+        // 3. Dörtnala Koşan Epik Yaylılar / Ritmik Arpej
+        const arpeggioFreq = prog.brass[beat % prog.brass.length] * 2;
+        this.playTone(arpeggioFreq, 0.14, 'triangle', this.bgmGain, 0, 0.16);
+        if (beat % 2 === 1) {
+          this.playTone(prog.bass * 2, 0.12, 'sawtooth', this.bgmGain, 0.04, 0.12);
+        }
+
+        // 4. Görkemli Destansı Melodi (Heroic Soaring Lead Melody)
+        const leadFreq = prog.melody[beat];
+        this.playTone(leadFreq, 0.24, 'triangle', this.bgmGain, 0, 0.24);
+        this.playTone(leadFreq * 1.002, 0.24, 'sine', this.bgmGain, 0.01, 0.14); // Chorus shimmer
 
       } else {
-        // Calm exploration
+        // 🌿 Sakin Keşif Melodisi
         const prog = exploreChords[Math.floor(step / 8) % exploreChords.length];
         const beat = step % 8;
 
@@ -3146,7 +3185,8 @@ const ALL_DATA = {
           "lat": 37.5,
           "hint": "4135m Uludoruk zirvesiyle Türkiye'nin ikinci yüksek dağı."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&h=340&q=80"
     },
     {
       "id": "kirik",
@@ -3330,7 +3370,8 @@ const ALL_DATA = {
           "lat": 39.05,
           "hint": "İzmir'in kuzeyinde Bakırçay'ın denize ulaştığı delta."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&h=340&q=80"
     },
     {
       "id": "tektonik_ovalar",
@@ -3538,7 +3579,8 @@ const ALL_DATA = {
           "lat": 37.15,
           "hint": "Güneydoğu'da GAP ile sulanan geniş tarım platosu."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "AKARSULAR_CATEGORIES": [
@@ -3638,7 +3680,8 @@ const ALL_DATA = {
           "lat": 41.2,
           "hint": "Ardahan'dan doğup Gürcistan-Azerbaycan üzerinden Hazar'a dökülür."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "HAYVANCILIK_CATEGORIES": [
@@ -3708,7 +3751,8 @@ const ALL_DATA = {
           "lat": 41,
           "hint": "Türkiye deniz balığı üretiminin yarısından fazlasını sağlar."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1546445317-29f4545e9d53?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "SANAYI_CATEGORIES": [
@@ -3784,7 +3828,8 @@ const ALL_DATA = {
           "lat": 41,
           "hint": "Hammadde çabuk bozulduğu için tarlaların yanında kurulan tesisler."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "MADEN_CATEGORIES": [
@@ -3860,7 +3905,8 @@ const ALL_DATA = {
           "lat": 37.8,
           "hint": "Türkiye'de ilk petrolün çıkarıldığı tarihi saha."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "LIMANLAR_CATEGORIES": [
@@ -3918,7 +3964,8 @@ const ALL_DATA = {
           "lat": 40.35,
           "hint": "Güney Marmara ve İç Batı Anadolu maden ihracat kapısı."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "KORFEZLER_CATEGORIES": [
@@ -3982,7 +4029,8 @@ const ALL_DATA = {
           "lat": 36.6,
           "hint": "Doğu Akdeniz'de ağır sanayi ve petrol boru hatları körfezi."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "SINIR_KAPILARI_CATEGORIES": [
@@ -4046,7 +4094,8 @@ const ALL_DATA = {
           "lat": 36.71,
           "hint": "Şanlıurfa'da Suriye ile olan gümrük kapımız."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ],
   "SERBEST_BOLGELER_CATEGORIES": [
@@ -4092,7 +4141,8 @@ const ALL_DATA = {
           "lat": 37.1,
           "hint": "Güneydoğu Anadolu'nun Ortadoğu'ya ihracat merkezi."
         }
-      ]
+      ],
+      "img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&h=340&q=80"
     }
   ]
 };
