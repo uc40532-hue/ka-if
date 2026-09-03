@@ -522,30 +522,36 @@
       overflow: hidden;
     }
     .profile-stage-hero {
-      height: 38%;
-      min-height: 190px;
+      height: 235px;
+      min-height: 215px;
       max-height: 250px;
       flex-shrink: 0;
-      padding: 6px 12px;
+      padding: 10px 14px 8px;
       overflow: hidden;
+      background: radial-gradient(circle at 50% 35%, #0c3144 0%, #03080e 90%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
     }
     .profile-drawer {
       flex: 1;
-      height: 62%;
-      min-height: 0; /* Ensures child flex scrolling */
+      min-height: 0;
       background: rgba(4, 18, 26, 0.98);
       backdrop-filter: blur(20px);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px 24px 0 0;
+      border-radius: 22px 22px 0 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       overscroll-behavior: contain;
-      padding: 8px 10px 70px;
+      padding: 10px 10px 0;
     }
     .wardrobe-cards-scroll {
       flex: 1;
-      min-height: 0; /* Ensures overflow scrolling */
+      min-height: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
@@ -553,38 +559,48 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
       gap: 8px;
-      padding: 6px 2px 24px;
+      padding: 6px 4px 150px; /* 150px bottom padding ensures cards are NEVER hidden behind Satın Al bar & nav */
       align-content: start;
     }
   }
 
-  /* TOP STAGE */
+  /* TOP STAGE (DESKTOP & MOBILE COMMON) */
   .profile-stage-hero {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
-    padding: 8px 16px;
+    padding: 14px 16px;
   }
   .stage-top-meta {
-    position: absolute;
-    top: 8px; left: 16px; right: 16px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 10;
+    gap: 8px;
   }
-  .stage-rank-pill {
+  .stage-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     background: rgba(4, 16, 24, 0.9);
     border: 1px solid rgba(245, 158, 11, 0.4);
     color: #fff;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 800;
     padding: 4px 11px;
     border-radius: 20px;
+    cursor: pointer;
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .stage-user-pill:hover {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: var(--gold);
+    transform: scale(1.03);
   }
   .stage-gender-switch {
     display: flex;
@@ -608,12 +624,35 @@
     border: 1px solid var(--gold);
     color: var(--gold);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 800;
-    padding: 4px 12px;
+    padding: 4px 11px;
     border-radius: 20px;
     backdrop-filter: blur(8px);
     box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
+  }
+
+  /* Try-on indicator banner placed at top of stage, COMPLETELY off the character avatar */
+  .try-on-chip {
+    display: none;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(217, 119, 6, 0.95));
+    color: #071922;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    z-index: 15;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 2px;
+    animation: bouncePop 0.3s ease-out;
+  }
+  .try-on-chip.active { display: flex; }
+  @keyframes bouncePop {
+    0% { transform: scale(0.7); opacity: 0; }
+    70% { transform: scale(1.06); }
+    100% { transform: scale(1); opacity: 1; }
   }
 
   .hero-pedestal-wrap {
@@ -621,12 +660,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 14px;
+    margin: auto 0;
   }
   .hero-pedestal-disc {
     position: absolute;
-    bottom: -8px;
-    width: 140px; height: 28px;
+    bottom: -6px;
+    width: 135px; height: 24px;
     background: radial-gradient(ellipse, rgba(245, 158, 11, 0.4) 0%, rgba(6, 182, 212, 0.2) 50%, transparent 75%);
     border-radius: 50%;
     filter: blur(3px);
@@ -638,43 +677,20 @@
   }
 
   .hero-avatar-circle {
-    width: 145px;
-    height: 145px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 10px 24px rgba(0,0,0,0.85));
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.85));
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     animation: avatarFloat 4s ease-in-out infinite;
   }
   @keyframes avatarFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-4px); }
   }
   .avatar-svg-canvas { width: 100%; height: 100%; display: block; }
-
-  .try-on-chip {
-    display: none;
-    position: absolute;
-    bottom: 2px;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(217, 119, 6, 0.95));
-    color: #071922;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 3px 10px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
-    z-index: 10;
-    align-items: center;
-    gap: 6px;
-    animation: bouncePop 0.3s ease-out;
-  }
-  .try-on-chip.active { display: flex; }
-  @keyframes bouncePop {
-    0% { transform: scale(0.7); opacity: 0; }
-    70% { transform: scale(1.08); }
-    100% { transform: scale(1); opacity: 1; }
-  }
 
   /* WARDROBE DRAWER & CATEGORY NAVIGATION */
   .profile-drawer {
@@ -761,7 +777,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
     gap: 9px;
-    padding: 6px 2px 20px;
+    padding: 6px 4px 120px;
     align-content: start;
   }
 
@@ -871,45 +887,64 @@
 
   /* Instant Bottom Buy Bar */
   .profile-bottom-action-bar {
-    position: absolute;
-    bottom: 58px;
-    left: 14px; right: 14px;
-    background: rgba(6, 24, 34, 0.96);
-    border: 1px solid var(--gold);
-    border-radius: 16px;
-    padding: 8px 12px;
+    position: fixed;
+    bottom: 66px;
+    left: 12px; right: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(4, 18, 26, 0.97);
+    border: 1.5px solid var(--gold);
+    border-radius: 18px;
+    padding: 9px 12px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.8), 0 0 16px rgba(242, 177, 52, 0.3);
-    z-index: 50;
-    animation: slideUpAction 0.22s ease-out;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(245, 158, 11, 0.35);
+    z-index: 95;
+    animation: slideUpAction 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(14px);
   }
   @keyframes slideUpAction {
     from { transform: translateY(100%); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+  }
+  .try-on-item-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .btn-action-buy {
     flex: 1;
     background: linear-gradient(135deg, var(--gold), #d97706);
     color: #071922;
     font-weight: 800;
-    font-size: 13px;
+    font-size: 12.5px;
     border: none;
-    padding: 10px;
+    padding: 9px 12px;
     border-radius: 12px;
     cursor: pointer;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+    transition: all 0.2s;
   }
-  .btn-action-buy:hover { filter: brightness(1.1); }
+  .btn-action-buy:hover { filter: brightness(1.1); transform: scale(1.02); }
   .btn-action-cancel {
     background: rgba(255,255,255,0.08);
     color: var(--cream);
     font-weight: 700;
-    font-size: 12px;
+    font-size: 11.5px;
     border: 1px solid rgba(255,255,255,0.15);
-    padding: 10px 14px;
+    padding: 9px 12px;
     border-radius: 12px;
     cursor: pointer;
+    transition: all 0.2s;
   }
   .btn-action-cancel:hover { background: rgba(255,255,255,0.15); }
 
@@ -1209,128 +1244,123 @@
 
   /* AUTH PRIVILEGES SHOWCASE MODAL */
   .modal-box-auth-showcase {
-    max-width: 620px;
-    width: 95%;
+    max-width: 480px;
+    width: 94%;
     background: linear-gradient(145deg, #092636, #04141d);
-    border: 1.5px solid rgba(242, 177, 52, 0.5);
-    border-radius: 24px;
-    padding: 24px 22px 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 30px rgba(242, 177, 52, 0.2);
+    border: 1.5px solid rgba(245, 158, 11, 0.45);
+    border-radius: 22px;
+    padding: 20px 18px 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 30px rgba(245, 158, 11, 0.2);
     text-align: center;
     position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  .auth-showcase-hero-stage {
+    max-height: 94vh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+  }
+  .modal-close-corner-btn {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--cream-dim);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 12px 0 16px;
-    background: radial-gradient(circle, rgba(242, 177, 52, 0.12) 0%, rgba(5, 20, 28, 0.6) 70%);
-    border: 1px dashed rgba(242, 177, 52, 0.3);
-    border-radius: 20px;
-    padding: 16px 14px;
-    position: relative;
+    font-size: 13px;
+    font-weight: 800;
+    transition: all 0.2s;
+  }
+  .modal-close-corner-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .auth-showcase-compact-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, rgba(4, 18, 26, 0.6) 70%);
+    border: 1px dashed rgba(245, 158, 11, 0.3);
+    border-radius: 16px;
+    padding: 10px 14px;
+    margin: 10px 0 12px;
+    box-sizing: border-box;
   }
   .auth-avatar-circle-wrap {
-    width: 110px;
-    height: 110px;
+    width: 78px;
+    height: 78px;
     border-radius: 50%;
     background: #071a24;
-    border: 2.5px solid var(--gold);
-    box-shadow: 0 0 24px rgba(242, 177, 52, 0.45);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
     overflow: hidden;
-    margin-bottom: 8px;
-    animation: avatarFloat 3s ease-in-out infinite;
+    flex-shrink: 0;
   }
-  @keyframes avatarFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+  .auth-showcase-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    flex: 1;
   }
-  .auth-preset-title-badge {
-    background: rgba(242, 177, 52, 0.18);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 12px;
-    font-weight: 800;
-    padding: 4px 14px;
-    border-radius: 14px;
-    display: inline-flex;
+  .auth-perk-pill {
+    display: flex;
     align-items: center;
     gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
   .auth-cycle-btn {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-top: 8px;
     transition: all 0.2s;
   }
   .auth-cycle-btn:hover { background: rgba(255, 255, 255, 0.18); }
 
-  .privileges-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 8px;
-    margin: 16px 0 20px;
-    text-align: left;
-  }
-  .privilege-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(244, 236, 216, 0.08);
-    border-radius: 14px;
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    transition: all 0.2s;
-  }
-  .privilege-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(242, 177, 52, 0.35);
-  }
-  .privilege-card-top {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12.5px;
-    font-weight: 800;
-    color: #fff;
-  }
-  .privilege-card-desc {
-    font-size: 11px;
-    color: var(--cream-dim);
-    line-height: 1.35;
-  }
-
+  /* Official White Google Button */
   .btn-google-auth-hero {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 14px 20px;
-    border-radius: 16px;
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid #dadce0;
+    padding: 11px 18px;
+    border-radius: 14px;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.2s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
+    max-width: 380px;
+    box-sizing: border-box;
   }
   .btn-google-auth-hero:hover {
-    filter: brightness(1.12);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
+    background: #f8fafc !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.25), 0 3px 8px rgba(0, 0, 0, 0.3);
   }
 
   .btn-guest-explore-link {
@@ -1339,7 +1369,8 @@
     color: var(--cream-dim);
     font-size: 12px;
     font-weight: 700;
-    margin-top: 12px;
+    margin-top: 6px;
+    padding: 6px 12px;
     cursor: pointer;
     text-decoration: underline;
     transition: color 0.2s;
@@ -1556,7 +1587,12 @@
       </div>
 
       <button class="topbar-google-btn" id="topbarGoogleAuthBtn" onclick="handleGoogleAuth()" title="Google ile Giriş Yap">
-        <span class="google-g-icon">G</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
         <span id="topbarGoogleText">Google Giriş</span>
       </button>
 
@@ -1671,57 +1707,56 @@
       <!-- Top / Left 3D Character Hero Stage -->
       <div class="profile-stage-hero">
         
-        <!-- Guest Notice Banner (Shown when not logged in) -->
-        <div class="guest-banner-alert" id="profileGuestBanner" style="display:none;">
-          <div class="guest-banner-content">
-            <span class="guest-banner-icon">💡</span>
-            <div class="guest-banner-text">
-              <strong>Misafir Modu:</strong> Karakter kombinasyonlarını ve kazandığın puanları bulutta saklamak için Google ile giriş yap.
-            </div>
-          </div>
-          <button class="guest-banner-btn" onclick="openAuthPrivilegesModal('profile')">🔑 Giriş Yap (+500 P)</button>
-        </div>
-
         <div class="stage-top-meta">
-          <div class="stage-rank-pill" id="profileRankBadge">Acemi Gözlemci</div>
-          
+          <!-- User Nickname & Rename Button -->
+          <div class="stage-user-pill" onclick="promptChangeUsername()" title="İsmini Değiştir (Tıkla)">
+            <span id="profileCharName">Kâşif</span>
+            <span style="font-size: 11px; opacity: 0.85;">✏️</span>
+          </div>
+
           <!-- Hızlı Cinsiyet Seçimi -->
           <div class="stage-gender-switch">
             <button class="gender-tab-btn active" id="btnGenderMale" onclick="setGender('male')">👨 Erkek</button>
             <button class="gender-tab-btn" id="btnGenderFemale" onclick="setGender('female')">👩 Kadın</button>
           </div>
 
+          <!-- Bakiye -->
           <div class="stage-balance-pill">
             <span>💰</span>
             <span id="profileScoreDisplay" style="color:var(--gold);">0 P</span>
           </div>
         </div>
 
+        <!-- Try-On Banner (Above Character, Never Covers Body) -->
+        <div class="try-on-chip" id="tryOnBadge">
+          <span id="tryOnBadgeText">✨ DENENİYOR</span>
+          <span style="cursor:pointer; font-size:12px; font-weight:900; background:rgba(0,0,0,0.4); border-radius:50%; width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; color:#fff;" onclick="cancelTryOn()" title="Deneneni Çıkar">✕</span>
+        </div>
+
+        <!-- 3D Avatar Center Stage (100% Unobstructed) -->
         <div class="hero-pedestal-wrap">
           <div class="hero-pedestal-disc"></div>
           <div class="hero-avatar-circle" id="avatarStage"></div>
         </div>
 
-        <div class="stage-user-bar">
-          <div class="stage-user-name-box" onclick="promptChangeUsername()" title="İsmini Değiştir (Tıkla)">
-            <span class="stage-user-name" id="profileCharName">Kâşif</span>
-            <span class="stage-edit-icon">✏️</span>
-          </div>
-          <button class="stage-auth-btn" id="btnGoogleAuth" onclick="handleGoogleAuth()" title="Google ile Giriş Yap / Hesap Yönetimi">
-            <span id="googleAuthIcon">🔑</span>
-            <span id="googleAuthText">Google ile Giriş</span>
-          </button>
-        </div>
-
-        <div class="try-on-chip" id="tryOnBadge">
-          <span id="tryOnBadgeText">✨ DENENİYOR</span>
-          <span style="cursor:pointer; font-size:12px; font-weight:900; background:rgba(0,0,0,0.4); border-radius:50%; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center;" onclick="cancelTryOn()" title="Deneneni Çıkar">✕</span>
-        </div>
+        <!-- Rank Title Pill -->
+        <div class="stage-rank-pill" id="profileRankBadge" style="font-size:11px; padding:3px 10px; margin-top:2px;">Acemi Gözlemci</div>
       </div>
 
       <!-- Right Wardrobe Drawer -->
       <div class="profile-drawer">
         
+        <!-- Guest Notice Banner (Inside drawer, never pushes character stage) -->
+        <div class="guest-banner-alert" id="profileGuestBanner" style="display:none; margin-bottom: 8px;">
+          <div class="guest-banner-content">
+            <span class="guest-banner-icon">💡</span>
+            <div class="guest-banner-text">
+              <strong>Misafir Modu:</strong> Karakter kombinasyonlarını ve kazandığın puanları kaydetmek için giriş yap.
+            </div>
+          </div>
+          <button class="guest-banner-btn" onclick="openAuthPrivilegesModal('profile')">🔑 Giriş Yap</button>
+        </div>
+
         <!-- Category Icon Selector Row -->
         <div class="category-icon-row">
           <button class="cat-icon-btn active" onclick="switchSlot('outfit')" title="Kıyafetler">🥋</button>
@@ -1744,8 +1779,12 @@
         <!-- Scrollable Wardrobe Grid -->
         <div class="wardrobe-cards-scroll" id="wardrobeItemsGrid"></div>
 
-        <!-- Instant Try-On Buy Action Bar -->
+        <!-- Instant Try-On Buy Action Bar (Floating at Bottom) -->
         <div class="profile-bottom-action-bar" id="profileBottomActionBar" style="display:none;">
+          <div class="try-on-item-label" id="tryOnItemLabel">
+            <span id="tryOnItemIcon">🥋</span>
+            <span id="tryOnItemName">Deneniyor</span>
+          </div>
           <button class="btn-action-buy" id="btnDrawerBuy">💰 Satın Al</button>
           <button class="btn-action-cancel" onclick="cancelTryOn()">✕ Çıkar</button>
         </div>
@@ -1805,85 +1844,54 @@
 <!-- RICH AUTH & CHARACTER CREATOR PRIVILEGES SHOWCASE MODAL -->
 <div class="modal-overlay" id="modalAuthPrivileges">
   <div class="modal-box-auth-showcase">
+    <button class="modal-close-corner-btn" onclick="closeAuthPrivilegesModal()" title="Kapat">✕</button>
     
-    <div style="font-size: 11px; font-weight: 800; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase;">
+    <div style="font-size: 10.5px; font-weight: 800; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase;">
       ✨ TÜRKİYE KÂŞİF KULÜBÜ
     </div>
-    <h2 style="color: #fff; margin: 4px 0 6px; font-size: 22px; font-family: 'Space Grotesk', sans-serif;">
+    <h2 style="color: #fff; margin: 3px 0 4px; font-size: 19px; font-family: 'Space Grotesk', sans-serif;">
       Kendi Kâşifini Yarat & Giriş Yap!
     </h2>
-    <p style="color: var(--cream-dim); font-size: 13px; line-height: 1.45; max-width: 480px; margin: 0 auto 10px;">
-      Google ile tek tıkla giriş yaparak kâşifini dilediğin gibi donat, puanlarını bulutta güvenle sakla ve Türkiye lider tablosunda yüksel!
+    <p style="color: var(--cream-dim); font-size: 12px; line-height: 1.4; max-width: 420px; margin: 0 auto;">
+      Google ile tek tıkla giriş yaparak kâşifini donat, puanlarını bulutta sakla ve Türkiye lider tablosunda yüksel!
     </p>
 
-    <!-- Interactive Character Showcase Stage -->
-    <div class="auth-showcase-hero-stage">
-      <div class="auth-avatar-circle-wrap" id="authShowcaseAvatar"></div>
-      <div class="auth-preset-title-badge" id="authPresetTitle">
-        <span>👑</span> <span id="authPresetText">Şehzade Kâşifi</span>
-      </div>
-      <button class="auth-cycle-btn" onclick="nextAuthPreset()" title="Farklı Bir Kombinasyon Gör">
-        🔀 Stili Değiştir
-      </button>
-    </div>
-
-    <!-- Privileges Grid -->
-    <div class="privileges-grid">
-      <div class="privilege-card">
-        <div class="privilege-card-top">
-          <span>🎨</span> <span>60+ Eşsiz Gardırop</span>
-        </div>
-        <div class="privilege-card-desc">
-          Efe yelekleri, saray kaftanları, yerli hayvanlar (Van Kedisi, Kangal) ile tarzını yarat.
-        </div>
+    <!-- Interactive Character Showcase Stage (Compact & Fitted) -->
+    <div class="auth-showcase-compact-row">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <div class="auth-avatar-circle-wrap" id="authShowcaseAvatar"></div>
+        <button class="auth-cycle-btn" onclick="nextAuthPreset()" title="Farklı Bir Kombinasyon Gör">
+          🔀 Stili Değiştir
+        </button>
       </div>
 
-      <div class="privilege-card" style="border-color: rgba(242,177,52,0.35); background: rgba(242,177,52,0.06);">
-        <div class="privilege-card-top" style="color: var(--gold);">
-          <span>🎁</span> <span>+500 Hoş Geldin Puanı</span>
+      <div class="auth-showcase-perks">
+        <div class="auth-perk-pill" style="border-color:rgba(245,158,11,0.4); background:rgba(245,158,11,0.12); color:var(--gold);">
+          <span>🎁</span> <span><strong>+500 Hoş Geldin Puanı</strong></span>
         </div>
-        <div class="privilege-card-desc">
-          İlk Google girişine özel anında 500 Kâşif Puanı hesabına yüklensin!
+        <div class="auth-perk-pill">
+          <span>👗</span> <span><strong>110+ Yöresel Gardırop</strong> (Efe, Kaftan)</span>
         </div>
-      </div>
-
-      <div class="privilege-card">
-        <div class="privilege-card-top">
-          <span>🏆</span> <span>Haftalık Türkiye Ligi</span>
-        </div>
-        <div class="privilege-card-desc">
-          Puanların silinmez; Bronz'dan Elmas Lige yüksel, adını zirveye yazdır.
-        </div>
-      </div>
-
-      <div class="privilege-card">
-        <div class="privilege-card-top">
-          <span>⚔️</span> <span>Canlı 2X Düellolar</span>
-        </div>
-        <div class="privilege-card-desc">
-          Gerçek oyuncularla canlı eşleş, her doğru tahminde 2 katı puan kazan.
-        </div>
-      </div>
-
-      <div class="privilege-card">
-        <div class="privilege-card-top">
-          <span>☁️</span> <span>Bulut Senkronizasyonu</span>
-        </div>
-        <div class="privilege-card-desc">
-          Bilgisayar, tablet ve telefonunda aynı hesap ve gardıropla oyna.
+        <div class="auth-perk-pill">
+          <span>🏆</span> <span><strong>Haftalık Lig & Canlı 2X Düello</strong></span>
         </div>
       </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+    <!-- Action Buttons (Google White + Authentic SVG Logo & Direct Guest Continue) -->
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 6px;">
       <button class="btn-google-auth-hero" onclick="closeAuthPrivilegesModal(); handleGoogleAuth();">
-        <span class="google-g-icon" style="background:#fff; -webkit-background-clip:initial; -webkit-text-fill-color:initial; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; color:#071922; font-size:12px;">G</span>
-        <span>Google ile Hızlıca Giriş Yap (+500 P)</span>
+        <svg width="19" height="19" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Google ile Giriş Yap (+500 P)</span>
       </button>
 
       <button class="btn-guest-explore-link" onclick="exploreAsGuest()">
-        👀 Giriş Yapmadan Misafir Olarak Gardıroba Göz At →
+        👀 Giriş Yapmadan Misafir Olarak Devam Et →
       </button>
     </div>
 
@@ -1892,18 +1900,24 @@
 
 <!-- BACKWARD-COMPATIBLE AUTH REQUIRED MODAL -->
 <div class="modal-overlay" id="modalAuthRequired">
-  <div class="modal-box" style="border-color: var(--gold);">
+  <div class="modal-box" style="border-color: var(--gold); max-width: 440px;">
     <div class="modal-big-icon">🔒</div>
-    <h2 style="color: #fff; margin-bottom: 6px; font-size: 20px;" id="authModalTitle">Giriş Yapmanız Gerekiyor</h2>
-    <p style="color: var(--cream-dim); font-size: 13.5px; line-height: 1.45; margin: 10px 0 18px;" id="authModalDesc">
-      Puanlarınızın ve rozetlerinizin kaydedilmesi, Türkiye sıralamasında yarışabilmeniz ve Düelloya katılabilmeniz için lütfen Google ile giriş yapın.
+    <h2 style="color: #fff; margin-bottom: 4px; font-size: 19px;" id="authModalTitle">Giriş Yapmanız Gerekiyor</h2>
+    <p style="color: var(--cream-dim); font-size: 12.5px; line-height: 1.4; margin: 8px 0 16px;" id="authModalDesc">
+      Puanlarınızın kaydedilmesi, Türkiye sıralamasında yarışabilmeniz ve Düelloya katılabilmeniz için lütfen Google ile giriş yapın.
     </p>
 
-    <div class="modal-actions">
-      <button class="cat-card-btn" onclick="closeAuthModal(); handleGoogleAuth();" style="padding: 12px; font-size: 14px; background: linear-gradient(135deg, #10b981, #059669);">
-        🔑 Google ile Giriş Yap
+    <div class="modal-actions" style="gap: 8px; width: 100%; align-items: center;">
+      <button class="btn-google-auth-hero" onclick="closeAuthModal(); handleGoogleAuth();" style="width: 100%;">
+        <svg width="19" height="19" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Google ile Giriş Yap</span>
       </button>
-      <button class="btn-action-cancel" onclick="closeAuthModal()" style="width: 100%;">
+      <button class="btn-action-cancel" onclick="closeAuthModal()" style="width: 100%; padding: 10px;">
         ✕ Kapat
       </button>
     </div>
@@ -6495,15 +6509,21 @@ function tryOnItem(itemOrId) {
   const badge = document.getElementById('tryOnBadge');
   const badgeText = document.getElementById('tryOnBadgeText');
   if (badge && badgeText) {
-    badgeText.textContent = '✨ ' + item.name;
+    badgeText.textContent = '✨ ' + item.name + ' Deneniyor';
     badge.classList.add('active');
   }
 
   const btmBar = document.getElementById('profileBottomActionBar');
+  const iconEl = document.getElementById('tryOnItemIcon');
+  const nameEl = document.getElementById('tryOnItemName');
   const buyBtn = document.getElementById('btnDrawerBuy');
-  if (btmBar && buyBtn) {
-    buyBtn.innerHTML = '💰 ' + item.price.toLocaleString('tr-TR') + ' P Satın Al';
-    buyBtn.onclick = () => openBuyConfirmModal(item.id);
+  if (btmBar) {
+    if (iconEl) iconEl.textContent = item.icon;
+    if (nameEl) nameEl.textContent = item.name;
+    if (buyBtn) {
+      buyBtn.innerHTML = '💰 ' + item.price.toLocaleString('tr-TR') + ' P Satın Al';
+      buyBtn.onclick = () => openBuyConfirmModal(item.id);
+    }
     btmBar.style.display = 'flex';
   }
 
