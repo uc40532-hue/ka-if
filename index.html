@@ -206,14 +206,14 @@
     96% { transform: rotate(12deg); }
   }
   .app-topbar {
-    height: 56px;
+    height: 62px;
     background: rgba(3, 14, 20, 0.95);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(244, 236, 216, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -221,18 +221,122 @@
   .app-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .app-brand-icon {
+    font-size: 24px;
+    filter: drop-shadow(0 0 10px rgba(242,177,52,0.6));
+    animation: badgeSpin 10s ease-in-out infinite;
+  }
+  .brand-text-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 17px;
     color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .brand-subtitle {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Desktop Web Navigation Bar */
+  .desktop-nav-bar {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 6px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .desktop-nav-link {
+    background: transparent;
+    border: none;
+    color: var(--cream-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
   }
-  .app-brand-icon {
-    font-size: 20px;
-    filter: drop-shadow(0 0 8px rgba(242,177,52,0.5));
+  .desktop-nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
   }
-  .topbar-right-box { display: flex; align-items: center; gap: 10px; }
+  .desktop-nav-link.active {
+    color: #071922;
+    background: linear-gradient(135deg, var(--gold), #e6a122);
+    box-shadow: 0 0 14px rgba(242, 177, 52, 0.4);
+  }
+  .desktop-nav-link.active .desk-badge-pill {
+    background: #071922;
+    color: var(--gold);
+  }
+  .desk-badge-pill {
+    background: #ff5722;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Topbar Google Button */
+  .topbar-google-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(242, 177, 52, 0.4);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 13px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(242, 177, 52, 0.15);
+  }
+  .topbar-google-btn:hover {
+    background: linear-gradient(135deg, rgba(242, 177, 52, 0.25), rgba(242, 177, 52, 0.1));
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 0 18px rgba(242, 177, 52, 0.35);
+  }
+  .topbar-google-btn.logged-in {
+    border-color: #10b981;
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.12);
+  }
+  .google-g-icon {
+    font-weight: 900;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    background: -webkit-linear-gradient(45deg, #4285F4, #EA4335, #FBBC05, #34A853);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .topbar-right-box { display: flex; align-items: center; gap: 8px; }
   .topbar-avatar-btn {
     display: flex;
     align-items: center;
@@ -993,6 +1097,270 @@
   .nav-item.duel-nav.active { color: #ff5722; }
   .nav-icon { font-size: 17px; }
 
+  /* Guest Alert Banner in Profile / Wardrobe */
+  .guest-banner-alert {
+    background: linear-gradient(135deg, rgba(242, 177, 52, 0.15), rgba(255, 87, 34, 0.1));
+    border: 1px solid rgba(242, 177, 52, 0.4);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s ease-out;
+  }
+  .guest-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .guest-banner-icon { font-size: 22px; flex-shrink: 0; }
+  .guest-banner-text {
+    font-size: 12.5px;
+    color: var(--cream);
+    line-height: 1.4;
+  }
+  .guest-banner-text strong { color: var(--gold); }
+  .guest-banner-btn {
+    background: linear-gradient(135deg, var(--gold), #d97706);
+    color: #071922;
+    border: none;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 7px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(242, 177, 52, 0.35);
+  }
+  .guest-banner-btn:hover { transform: scale(1.04); filter: brightness(1.1); }
+
+  /* AUTH PRIVILEGES SHOWCASE MODAL */
+  .modal-box-auth-showcase {
+    max-width: 620px;
+    width: 95%;
+    background: linear-gradient(145deg, #092636, #04141d);
+    border: 1.5px solid rgba(242, 177, 52, 0.5);
+    border-radius: 24px;
+    padding: 24px 22px 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 30px rgba(242, 177, 52, 0.2);
+    text-align: center;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .auth-showcase-hero-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0 16px;
+    background: radial-gradient(circle, rgba(242, 177, 52, 0.12) 0%, rgba(5, 20, 28, 0.6) 70%);
+    border: 1px dashed rgba(242, 177, 52, 0.3);
+    border-radius: 20px;
+    padding: 16px 14px;
+    position: relative;
+  }
+  .auth-avatar-circle-wrap {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #071a24;
+    border: 2.5px solid var(--gold);
+    box-shadow: 0 0 24px rgba(242, 177, 52, 0.45);
+    overflow: hidden;
+    margin-bottom: 8px;
+    animation: avatarFloat 3s ease-in-out infinite;
+  }
+  @keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  .auth-preset-title-badge {
+    background: rgba(242, 177, 52, 0.18);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .auth-cycle-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .auth-cycle-btn:hover { background: rgba(255, 255, 255, 0.18); }
+
+  .privileges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+    margin: 16px 0 20px;
+    text-align: left;
+  }
+  .privilege-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(244, 236, 216, 0.08);
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all 0.2s;
+  }
+  .privilege-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(242, 177, 52, 0.35);
+  }
+  .privilege-card-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .privilege-card-desc {
+    font-size: 11px;
+    color: var(--cream-dim);
+    line-height: 1.35;
+  }
+
+  .btn-google-auth-hero {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 14px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .btn-google-auth-hero:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
+  }
+
+  .btn-guest-explore-link {
+    background: none;
+    border: none;
+    color: var(--cream-dim);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+    display: inline-block;
+  }
+  .btn-guest-explore-link:hover { color: var(--gold); }
+
+  /* Web Site Modern Footer */
+  .app-web-footer {
+    border-top: 1px solid rgba(244, 236, 216, 0.08);
+    background: rgba(2, 10, 15, 0.95);
+    padding: 26px 20px 70px;
+    margin-top: 40px;
+    text-align: center;
+  }
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer-desc {
+    font-size: 12px;
+    color: var(--cream-dim);
+    line-height: 1.5;
+    max-width: 600px;
+  }
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .footer-link-item {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .footer-link-item:hover { opacity: 0.8; }
+
+  /* Responsive Web Layout for Desktop, Tablets & Monitors */
+  @media (min-width: 768px) {
+    .desktop-nav-bar { display: flex; }
+    .bottom-nav { display: none !important; }
+    .app-web-footer { padding-bottom: 24px; }
+    .content-wrap { padding-bottom: 30px; }
+    .theme-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    .cat-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  }
+
+  @media (min-width: 920px) {
+    .profile-web-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      align-items: start;
+    }
+    .profile-stage-hero {
+      position: sticky;
+      top: 80px;
+      border-radius: 20px;
+      border: 1px solid rgba(244, 236, 216, 0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .profile-drawer {
+      border-radius: 20px;
+      border: 1px solid rgba(244, 236, 216, 0.1);
+      min-height: 580px;
+    }
+  }
+
   /* MODALS */
   .modal-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.85);
@@ -1044,22 +1412,47 @@
 
   <!-- TOP BAR -->
   <div class="app-topbar" id="mainTopbar">
-    <div class="app-brand" onclick="showScreen('screen-home')">
+    <div class="app-brand" onclick="showScreen('screen-home')" title="Göl Kâşifi Anasayfa">
       <span class="app-brand-icon">🗺️</span>
-      <span>Göl Kâşifi</span>
+      <div class="brand-text-wrap">
+        <span class="brand-title">Göl Kâşifi</span>
+        <span class="brand-subtitle">Türkiye Coğrafya & Kâşif Platformu</span>
+      </div>
     </div>
 
+    <!-- Desktop Navigation Links (Visible on desktop & tablets >= 768px) -->
+    <nav class="desktop-nav-bar" id="desktopNav">
+      <button class="desktop-nav-link active" id="deskNavHome" onclick="showScreen('screen-home')">
+        <span class="desk-nav-icon">🏠</span> <span>Anasayfa</span>
+      </button>
+      <button class="desktop-nav-link" id="deskNavDuel" onclick="handleNavDuelClick()">
+        <span class="desk-nav-icon">⚔️</span> <span>Canlı Düello</span>
+        <span class="desk-badge-pill">2X</span>
+      </button>
+      <button class="desktop-nav-link" id="deskNavProfile" onclick="handleNavProfileClick()">
+        <span class="desk-nav-icon">👤</span> <span>Kâşif & Gardırop</span>
+      </button>
+      <button class="desktop-nav-link" id="deskNavBadges" onclick="openBadgesDirectly()">
+        <span class="desk-nav-icon">🎖️</span> <span>Rozetler</span>
+      </button>
+    </nav>
+
     <div class="topbar-right-box">
-      
-      
       <button class="topbar-badge-pill" id="topbarBadgeBtn" onclick="openBadgesDirectly()" title="Coğrafya Rozetleri">
         <span class="topbar-badge-icon">🎖️</span>
         <span id="topbarBadgeText">0 / 70</span>
       </button>
-      <div class="topbar-avatar-btn" onclick="showScreen('screen-profile')" title="Profil & Gardırop">
+      
+      <div class="topbar-avatar-btn" onclick="handleNavProfileClick()" title="Kâşif Gardırobu & Profil">
         <div class="mini-avatar-slot" id="topbarMiniAvatar"></div>
         <span id="topbarCharName" style="font-size: 12.5px; font-weight: 700; color: #fff;">Kâşif</span>
       </div>
+
+      <button class="topbar-google-btn" id="topbarGoogleAuthBtn" onclick="handleGoogleAuth()" title="Google ile Giriş Yap">
+        <span class="google-g-icon">G</span>
+        <span id="topbarGoogleText">Google Giriş</span>
+      </button>
+
       <div class="score-pill" id="globalScorePill">
         <span id="globalTotalScore">0</span> P
       </div>
@@ -1166,94 +1559,127 @@
 
   <!-- SCREEN 5: GARDIROP & PROFIL -->
   <div class="screen" id="screen-profile">
-    
-    <!-- Top 3D Character Hero Stage -->
-    <div class="profile-stage-hero">
-      <div class="stage-top-meta">
-        <div class="stage-rank-pill" id="profileRankBadge">Acemi Gözlemci</div>
-        
-        <!-- Hızlı Cinsiyet Seçimi -->
-        <div class="stage-gender-switch">
-          <button class="gender-tab-btn active" id="btnGenderMale" onclick="setGender('male')">👨 Erkek</button>
-          <button class="gender-tab-btn" id="btnGenderFemale" onclick="setGender('female')">👩 Kadın</button>
-        </div>
-
-        <div class="stage-balance-pill">
-          <span>💰</span>
-          <span id="profileScoreDisplay" style="color:var(--gold);">0 P</span>
-        </div>
-      </div>
-
-      <div class="hero-pedestal-wrap">
-        <div class="hero-pedestal-disc"></div>
-        <div class="hero-avatar-circle" id="avatarStage"></div>
-      </div>
-
-      <div class="stage-user-bar">
-        <div class="stage-user-name-box" onclick="promptChangeUsername()" title="İsmini Değiştir (Tıkla)">
-          <span class="stage-user-name" id="profileCharName">Kâşif</span>
-          <span class="stage-edit-icon">✏️</span>
-        </div>
-        <button class="stage-auth-btn" id="btnGoogleAuth" onclick="handleGoogleAuth()" title="Google ile Giriş Yap / Hesap Yönetimi">
-          <span id="googleAuthIcon">🔑</span>
-          <span id="googleAuthText">Google ile Giriş</span>
-        </button>
-      </div>
-
-      <div class="try-on-chip" id="tryOnBadge">
-        <span id="tryOnBadgeText">✨ DENENİYOR</span>
-        <span style="cursor:pointer; font-size:12px; font-weight:900; background:rgba(0,0,0,0.4); border-radius:50%; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center;" onclick="cancelTryOn()" title="Deneneni Çıkar">✕</span>
-      </div>
-    </div>
-
-    <!-- Bottom Slide-Up Wardrobe Drawer -->
-    <div class="profile-drawer">
+    <div class="profile-web-grid">
       
-      <!-- Category Icon Selector Row -->
-      <div class="category-icon-row">
-        <button class="cat-icon-btn active" onclick="switchSlot('outfit')" title="Kıyafetler">🥋</button>
-        <button class="cat-icon-btn" onclick="switchSlot('headwear')" title="Şapkalar">🎓</button>
-        <button class="cat-icon-btn" onclick="switchSlot('face')" title="Gözlük & Bıyık">🧔</button>
-        <button class="cat-icon-btn" onclick="switchSlot('accessory')" title="Eşyalar">☕</button>
-        <button class="cat-icon-btn" onclick="switchSlot('pet')" title="Türkiye Faunası">🐾</button>
-        <button class="cat-icon-btn" onclick="switchSlot('background')" title="Bölgesel Sahneler">🌄</button>
-        <button class="cat-icon-btn" onclick="switchSlot('badges')" title="Rozetler & Başarılar">🎖️</button>
-        <button class="cat-icon-btn" onclick="switchSlot('body')" title="Ten & Saç">👤</button>
+      <!-- Top / Left 3D Character Hero Stage -->
+      <div class="profile-stage-hero">
+        
+        <!-- Guest Notice Banner (Shown when not logged in) -->
+        <div class="guest-banner-alert" id="profileGuestBanner" style="display:none;">
+          <div class="guest-banner-content">
+            <span class="guest-banner-icon">💡</span>
+            <div class="guest-banner-text">
+              <strong>Misafir Modu:</strong> Karakter kombinasyonlarını ve kazandığın puanları bulutta saklamak için Google ile giriş yap.
+            </div>
+          </div>
+          <button class="guest-banner-btn" onclick="openAuthPrivilegesModal('profile')">🔑 Giriş Yap (+500 P)</button>
+        </div>
+
+        <div class="stage-top-meta">
+          <div class="stage-rank-pill" id="profileRankBadge">Acemi Gözlemci</div>
+          
+          <!-- Hızlı Cinsiyet Seçimi -->
+          <div class="stage-gender-switch">
+            <button class="gender-tab-btn active" id="btnGenderMale" onclick="setGender('male')">👨 Erkek</button>
+            <button class="gender-tab-btn" id="btnGenderFemale" onclick="setGender('female')">👩 Kadın</button>
+          </div>
+
+          <div class="stage-balance-pill">
+            <span>💰</span>
+            <span id="profileScoreDisplay" style="color:var(--gold);">0 P</span>
+          </div>
+        </div>
+
+        <div class="hero-pedestal-wrap">
+          <div class="hero-pedestal-disc"></div>
+          <div class="hero-avatar-circle" id="avatarStage"></div>
+        </div>
+
+        <div class="stage-user-bar">
+          <div class="stage-user-name-box" onclick="promptChangeUsername()" title="İsmini Değiştir (Tıkla)">
+            <span class="stage-user-name" id="profileCharName">Kâşif</span>
+            <span class="stage-edit-icon">✏️</span>
+          </div>
+          <button class="stage-auth-btn" id="btnGoogleAuth" onclick="handleGoogleAuth()" title="Google ile Giriş Yap / Hesap Yönetimi">
+            <span id="googleAuthIcon">🔑</span>
+            <span id="googleAuthText">Google ile Giriş</span>
+          </button>
+        </div>
+
+        <div class="try-on-chip" id="tryOnBadge">
+          <span id="tryOnBadgeText">✨ DENENİYOR</span>
+          <span style="cursor:pointer; font-size:12px; font-weight:900; background:rgba(0,0,0,0.4); border-radius:50%; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center;" onclick="cancelTryOn()" title="Deneneni Çıkar">✕</span>
+        </div>
       </div>
 
-      <!-- Filter Pills -->
-      <div class="wardrobe-filter-bar" id="wardrobeFilterBar">
-        <button class="f-pill active" onclick="filterOwnership('all')">Tümü</button>
-        <button class="f-pill" onclick="filterOwnership('owned')">👔 Gardırobum</button>
-        <button class="f-pill" onclick="filterOwnership('unowned')">🛍️ Mağaza</button>
-      </div>
+      <!-- Right Wardrobe Drawer -->
+      <div class="profile-drawer">
+        
+        <!-- Category Icon Selector Row -->
+        <div class="category-icon-row">
+          <button class="cat-icon-btn active" onclick="switchSlot('outfit')" title="Kıyafetler">🥋</button>
+          <button class="cat-icon-btn" onclick="switchSlot('headwear')" title="Şapkalar">🎓</button>
+          <button class="cat-icon-btn" onclick="switchSlot('face')" title="Gözlük & Bıyık">🧔</button>
+          <button class="cat-icon-btn" onclick="switchSlot('accessory')" title="Eşyalar">☕</button>
+          <button class="cat-icon-btn" onclick="switchSlot('pet')" title="Türkiye Faunası">🐾</button>
+          <button class="cat-icon-btn" onclick="switchSlot('background')" title="Bölgesel Sahneler">🌄</button>
+          <button class="cat-icon-btn" onclick="switchSlot('badges')" title="Rozetler & Başarılar">🎖️</button>
+          <button class="cat-icon-btn" onclick="switchSlot('body')" title="Ten & Saç">👤</button>
+        </div>
 
-      <!-- Scrollable Wardrobe Grid -->
-      <div class="wardrobe-cards-scroll" id="wardrobeItemsGrid"></div>
+        <!-- Filter Pills -->
+        <div class="wardrobe-filter-bar" id="wardrobeFilterBar">
+          <button class="f-pill active" onclick="filterOwnership('all')">Tümü</button>
+          <button class="f-pill" onclick="filterOwnership('owned')">👔 Gardırobum</button>
+          <button class="f-pill" onclick="filterOwnership('unowned')">🛍️ Mağaza</button>
+        </div>
 
-      <!-- Instant Try-On Buy Action Bar -->
-      <div class="profile-bottom-action-bar" id="profileBottomActionBar" style="display:none;">
-        <button class="btn-action-buy" id="btnDrawerBuy">💰 Satın Al</button>
-        <button class="btn-action-cancel" onclick="cancelTryOn()">✕ Çıkar</button>
+        <!-- Scrollable Wardrobe Grid -->
+        <div class="wardrobe-cards-scroll" id="wardrobeItemsGrid"></div>
+
+        <!-- Instant Try-On Buy Action Bar -->
+        <div class="profile-bottom-action-bar" id="profileBottomActionBar" style="display:none;">
+          <button class="btn-action-buy" id="btnDrawerBuy">💰 Satın Al</button>
+          <button class="btn-action-cancel" onclick="cancelTryOn()">✕ Çıkar</button>
+        </div>
+
       </div>
 
     </div>
-
   </div>
 
-  <!-- BOTTOM NAV -->
+  <!-- MODERN WEB FOOTER -->
+  <footer class="app-web-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span>🗺️</span> <span>Göl Kâşifi — Türkiye Coğrafya & Kâşif Platformu</span>
+      </div>
+      <p class="footer-desc">
+        Türkiye'nin 81 ilindeki gölleri, dağları, ovaları ve sanayi havzalarını eğlenceli harita eşleştirmeleri ve canlı düellolar ile keşfedin.
+      </p>
+      <div class="footer-links">
+        <a class="footer-link-item" onclick="showScreen('screen-home')">🏠 Anasayfa</a>
+        <a class="footer-link-item" onclick="handleNavDuelClick()">⚔️ Canlı Düello</a>
+        <a class="footer-link-item" onclick="handleNavProfileClick()">👤 Kâşif Gardırobu</a>
+        <a class="footer-link-item" onclick="openBadgesDirectly()">🎖️ Coğrafya Rozetleri</a>
+        <a class="footer-link-item" onclick="installPWA()">📲 Web Uygulamasını Yükle</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTTOM NAV (Mobile Screens) -->
   <div class="bottom-nav" id="mainBottomNav">
     <button class="nav-item active" id="navHome" onclick="showScreen('screen-home')">
       <span class="nav-icon">🏠</span>
       <span>Anasayfa</span>
     </button>
-    <button class="nav-item duel-nav" id="navDuel" onclick="showScreen('screen-duel')">
+    <button class="nav-item duel-nav" id="navDuel" onclick="handleNavDuelClick()">
       <span class="nav-icon">⚔️</span>
       <span>Düello</span>
     </button>
-    <button class="nav-item" id="navProfile" onclick="showScreen('screen-profile')">
+    <button class="nav-item" id="navProfile" onclick="handleNavProfileClick()">
       <span class="nav-icon">👤</span>
-      <span>Gardırop</span>
+      <span>Kâşifim</span>
     </button>
   </div>
 
@@ -1269,7 +1695,95 @@
   </div>
 </div>
 
-<!-- AUTH REQUIRED MODAL -->
+<!-- RICH AUTH & CHARACTER CREATOR PRIVILEGES SHOWCASE MODAL -->
+<div class="modal-overlay" id="modalAuthPrivileges">
+  <div class="modal-box-auth-showcase">
+    
+    <div style="font-size: 11px; font-weight: 800; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase;">
+      ✨ TÜRKİYE KÂŞİF KULÜBÜ
+    </div>
+    <h2 style="color: #fff; margin: 4px 0 6px; font-size: 22px; font-family: 'Space Grotesk', sans-serif;">
+      Kendi Kâşifini Yarat & Giriş Yap!
+    </h2>
+    <p style="color: var(--cream-dim); font-size: 13px; line-height: 1.45; max-width: 480px; margin: 0 auto 10px;">
+      Google ile tek tıkla giriş yaparak kâşifini dilediğin gibi donat, puanlarını bulutta güvenle sakla ve Türkiye lider tablosunda yüksel!
+    </p>
+
+    <!-- Interactive Character Showcase Stage -->
+    <div class="auth-showcase-hero-stage">
+      <div class="auth-avatar-circle-wrap" id="authShowcaseAvatar"></div>
+      <div class="auth-preset-title-badge" id="authPresetTitle">
+        <span>👑</span> <span id="authPresetText">Şehzade Kâşifi</span>
+      </div>
+      <button class="auth-cycle-btn" onclick="nextAuthPreset()" title="Farklı Bir Kombinasyon Gör">
+        🔀 Stili Değiştir
+      </button>
+    </div>
+
+    <!-- Privileges Grid -->
+    <div class="privileges-grid">
+      <div class="privilege-card">
+        <div class="privilege-card-top">
+          <span>🎨</span> <span>60+ Eşsiz Gardırop</span>
+        </div>
+        <div class="privilege-card-desc">
+          Efe yelekleri, saray kaftanları, yerli hayvanlar (Van Kedisi, Kangal) ile tarzını yarat.
+        </div>
+      </div>
+
+      <div class="privilege-card" style="border-color: rgba(242,177,52,0.35); background: rgba(242,177,52,0.06);">
+        <div class="privilege-card-top" style="color: var(--gold);">
+          <span>🎁</span> <span>+500 Hoş Geldin Puanı</span>
+        </div>
+        <div class="privilege-card-desc">
+          İlk Google girişine özel anında 500 Kâşif Puanı hesabına yüklensin!
+        </div>
+      </div>
+
+      <div class="privilege-card">
+        <div class="privilege-card-top">
+          <span>🏆</span> <span>Haftalık Türkiye Ligi</span>
+        </div>
+        <div class="privilege-card-desc">
+          Puanların silinmez; Bronz'dan Elmas Lige yüksel, adını zirveye yazdır.
+        </div>
+      </div>
+
+      <div class="privilege-card">
+        <div class="privilege-card-top">
+          <span>⚔️</span> <span>Canlı 2X Düellolar</span>
+        </div>
+        <div class="privilege-card-desc">
+          Gerçek oyuncularla canlı eşleş, her doğru tahminde 2 katı puan kazan.
+        </div>
+      </div>
+
+      <div class="privilege-card">
+        <div class="privilege-card-top">
+          <span>☁️</span> <span>Bulut Senkronizasyonu</span>
+        </div>
+        <div class="privilege-card-desc">
+          Bilgisayar, tablet ve telefonunda aynı hesap ve gardıropla oyna.
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <button class="btn-google-auth-hero" onclick="closeAuthPrivilegesModal(); handleGoogleAuth();">
+        <span class="google-g-icon" style="background:#fff; -webkit-background-clip:initial; -webkit-text-fill-color:initial; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; color:#071922; font-size:12px;">G</span>
+        <span>Google ile Hızlıca Giriş Yap (+500 P)</span>
+      </button>
+
+      <button class="btn-guest-explore-link" onclick="exploreAsGuest()">
+        👀 Giriş Yapmadan Misafir Olarak Gardıroba Göz At →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- BACKWARD-COMPATIBLE AUTH REQUIRED MODAL -->
 <div class="modal-overlay" id="modalAuthRequired">
   <div class="modal-box" style="border-color: var(--gold);">
     <div class="modal-big-icon">🔒</div>
@@ -1294,12 +1808,14 @@
   <div class="modal-box">
     <div class="modal-big-icon">🏷️</div>
     <h2 style="color: #fff; margin-bottom: 4px; font-size: 20px;">Kâşif İsmini Değiştir</h2>
-    <p style="color: var(--cream-dim); font-size: 13px; margin: 8px 0;">Türkiye lider tablosunda ve düellolarda görünecek isminizi belirleyin.</p>
+    <p style="color: var(--cream-dim); font-size: 13px; margin: 8px 0 12px;">Türkiye lider tablosunda ve düellolarda görünecek isminizi belirleyin.</p>
     
-    <input type="text" id="inputNewUsername" maxlength="18" placeholder="Örn: Anadolu Kâşifi" style="width: 100%; box-sizing: border-box; background: rgba(5, 20, 28, 0.9); border: 1.5px solid var(--gold); color: #fff; font-size: 15px; font-weight: 700; padding: 10px 14px; border-radius: 12px; margin: 12px 0 16px; outline: none; text-align: center;" />
+    <div id="nameChangeCooldownNotice" style="font-size: 12px; line-height: 1.45; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(242,177,52,0.3); margin-bottom: 12px; text-align: left;"></div>
+
+    <input type="text" id="inputNewUsername" maxlength="18" placeholder="Örn: Anadolu Kâşifi" style="width: 100%; box-sizing: border-box; background: rgba(5, 20, 28, 0.9); border: 1.5px solid var(--gold); color: #fff; font-size: 15px; font-weight: 700; padding: 10px 14px; border-radius: 12px; margin-bottom: 16px; outline: none; text-align: center;" />
 
     <div class="modal-actions">
-      <button class="cat-card-btn" onclick="saveNewUsername()" style="padding: 11px;">💾 Kaydet & Güncelle</button>
+      <button class="cat-card-btn" id="btnSaveUsername" onclick="saveNewUsername()" style="padding: 11px;">💾 Kaydet & Güncelle</button>
       <button class="btn-action-cancel" onclick="closeEditNameModal()" style="width:100%;">✕ Vazgeç</button>
     </div>
   </div>
@@ -3036,40 +3552,80 @@ const PRIMARY_MAP_STYLE = {
   ]
 };
 
-/* COMPREHENSIVE 3D WARDROBE CATALOG */
+/* COMPREHENSIVE 3D WARDROBE CATALOG (DEVASA TÜRKİYE & ESTETİK KÂŞİF KOLEKSİYONU) */
 const WARDROBE_CATALOG = [
   // --- 🥋 KIYAFETLER & KOSTÜMLER ---
   { id: 'outfit_basic', type: 'outfit', name: 'Temel Kâşif Tişörtü', icon: '👕', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Genç kâşifin standart pamuklu tişörtü.' },
+  { id: 'outfit_prenses_pembe', type: 'outfit', name: 'Masalsı Pembe Saray Elbisesi', icon: '👗', price: 1200, tier: 'tier-cute', tierName: 'Masalsı', desc: 'Pudra pembesi tüller, inci işlemeleri ve ışıltılı saten fiyonklu prenses elbisesi.' },
+  { id: 'outfit_lavanta', type: 'outfit', name: 'Isparta Lavanta Hasadı Elbisesi', icon: '🪻', price: 450, tier: 'tier-cute', tierName: 'Pastel Kır', desc: 'Lila rengi fırfırlı kır elbisesi, hasır kemer ve lavanta nakışları.' },
+  { id: 'outfit_denizkizi', type: 'outfit', name: 'Ege Turkuaz Denizkızı Kostümü', icon: '🧜‍♀️', price: 950, tier: 'tier-epic', tierName: 'Büyülü Deniz', desc: 'Deniz kabukları ve turkuaz pullu ışıltılı denizkızı eteği.' },
+  { id: 'outfit_peri', type: 'outfit', name: 'Kelebekler Vadisi Orman Perisi', icon: '🧚‍♀️', price: 1500, tier: 'tier-epic', tierName: 'Büyülü Doğa', desc: 'Uçuşan tüller, ışıltılı peri kanatları ve sarmaşık çiçekleri.' },
+  { id: 'outfit_oversize_pink', type: 'outfit', name: 'Pastel Pembe Oversize Kalp Sweatshirt', icon: '🌸', price: 300, tier: 'tier-common', tierName: 'Sevimli Trend', desc: 'Göğsünde tatlı kalp nakışı olan salaş pembe kâşif sweatshirtü.' },
+  { id: 'outfit_vintage_polka', type: 'outfit', name: 'Vintage Puantiyeli Bahar Elbisesi', icon: '💃', price: 500, tier: 'tier-cute', tierName: 'Retro Şıklık', desc: 'Kırmızı zemin üzerine beyaz puantiyeli sevimli nostaljik elbise.' },
+  { id: 'outfit_kpop_idol', type: 'outfit', name: 'Harajuku Pastel Yıldız Kombini', icon: '⭐', price: 700, tier: 'tier-cute', tierName: 'Modern Trend', desc: 'Lila pilili etek, neon yıldız detaylı sevimli crop ceket.' },
+  { id: 'outfit_kedi_tulum', type: 'outfit', name: 'Pofuduk Pembe Kedi Tulumu', icon: '🐱', price: 650, tier: 'tier-cute', tierName: 'Pofuduk Sevimli', desc: 'Kuyruklu, pati desenli yumuşacık pembe kedi pijama tulumu.' },
+  { id: 'outfit_gelin_bindalli', type: 'outfit', name: 'Geleneksel Kadife Kırmızı Bindallı', icon: '🏮', price: 1800, tier: 'tier-epic', tierName: 'Tarihi Zarafet', desc: 'Bordo kadife üzerine altın sırma işlemeli asil Osmanlı gelinliği.' },
   { id: 'outfit_milli_takim', type: 'outfit', name: 'Ay-Yıldızlı Milli Takım Forması', icon: '🇹🇷', price: 350, tier: 'tier-cute', tierName: 'Milli Gurur', desc: 'Kırmızı zemin üzerinde beyaz hilal ve yıldızlı kâşif forması.' },
   { id: 'outfit_zeybek', type: 'outfit', name: 'Ege Efesi & Zeybek Yeleği', icon: '🥋', price: 450, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Sırmalı siyah cepken, kırmızı kuşak ve altın köstek zincirleri.' },
   { id: 'outfit_sultan', type: 'outfit', name: 'Saraylı Zümrüt Kaftanı', icon: '👑', price: 3200, tier: 'tier-epic', tierName: 'Tarihi Lüks', desc: 'Saf ipekten dokunmuş, altın ve zümrüt sırmalı tarihi hükümdar kaftanı.' },
+  { id: 'outfit_padisah', type: 'outfit', name: 'Görkemli Padişah Kaftanı & Samur Kürk', icon: '👑', price: 4200, tier: 'tier-epic', tierName: 'Tarihi Lüks', desc: 'Bordo ipek kadife, altın varak sırmalar ve asil samur kürk yakalı padişah kaftanı.' },
+  { id: 'outfit_seymen', type: 'outfit', name: 'Ankara Seymen Yeleği & Gümüş Köstek', icon: '🕺', price: 650, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Zümrüt yeşili sırmalı cepken, işlemeli kuşak ve asil Seymen kıyafeti.' },
+  { id: 'outfit_bar', type: 'outfit', name: 'Doğu Anadolu Bar & Kafkas Cepkeni', icon: '🗡️', price: 550, tier: 'tier-cute', tierName: 'Kültürel', desc: 'Göğsünde gümüş fişeklikleri ve dik yakasıyla Kafkas/Bar halk oyunu kostümü.' },
   { id: 'outfit_yoruk', type: 'outfit', name: 'Toroslar Yörük Çoban Cepkeni', icon: '🐑', price: 300, tier: 'tier-common', tierName: 'Kültürel', desc: 'Toros yaylalarına özgü keçe yelek ve heybe motifleri.' },
   { id: 'outfit_dadas', type: 'outfit', name: 'Erzurum Dadaş Kıyafeti & Kemer', icon: '🗡️', price: 500, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Gümüş savatlı kemer ve asil dadaş cepkeni.' },
   { id: 'outfit_karadeniz', type: 'outfit', name: 'Karadeniz Balıkçı Yağmurluğu', icon: '⚓', price: 300, tier: 'tier-common', tierName: 'Bölgesel', desc: 'Fırtınalı Karadeniz dalgalarına dayanıklı sarı balıkçı ceketi.' },
   { id: 'outfit_horon', type: 'outfit', name: 'Karadeniz Horon Yeleği', icon: '🪗', price: 400, tier: 'tier-cute', tierName: 'Kültürel', desc: 'Gümüş köstekli ve siyah zıpkalı geleneksel horon yeleği.' },
+  { id: 'outfit_kilim', type: 'outfit', name: 'Anadolu Dokuma Motifli Kâşif Hırkası', icon: '🧶', price: 400, tier: 'tier-common', tierName: 'Otantik', desc: 'Geometrik rengarenk Türk kilimi ve koçboynuzu motifli sıcak yün hırka.' },
+  { id: 'outfit_asci', type: 'outfit', name: 'Gaziantep Ustabaşı / Şef Önlüğü', icon: '👨‍🍳', price: 350, tier: 'tier-common', tierName: 'Lezzet Ustası', desc: 'Geleneksel Türk mutfağı aşçı önlüğü ve boyun fuları.' },
+  { id: 'outfit_dagci', type: 'outfit', name: 'Kaçkarlar Kış Dağcısı Termal Tulumu', icon: '🏔️', price: 750, tier: 'tier-cute', tierName: 'Ekstrem Keşif', desc: 'Buzul tırmanışlarına dayanıklı turuncu-lacivert profesyonel dağcı tulumu.' },
   { id: 'outfit_safari', type: 'outfit', name: 'Göbeklitepe Kâşif Yeleği', icon: '🧭', price: 200, tier: 'tier-common', tierName: 'Keşif', desc: 'Tarihin sıfır noktasında araştırma için çok cepli arkeolog yeleği.' },
   { id: 'outfit_miner', type: 'outfit', name: 'Zonguldak Madenci Tulumu', icon: '🦺', price: 350, tier: 'tier-common', tierName: 'Bölgesel', desc: 'Fosforlu sarı reflektörlü, kömür ocaklarına dayanıklı ağır hizmet tulumu.' },
   { id: 'outfit_dino', type: 'outfit', name: 'Yeşil T-Rex Dinozor Tulumu', icon: '🦖', price: 600, tier: 'tier-cute', tierName: 'Tatlı & Komik', desc: 'Kuyruğu ve sevimli kapüşonuyla haritada yürüyen şirin dinozor kostümü.' },
   { id: 'outfit_duck', type: 'outfit', name: 'Çeşme Ördekli Plaj Simidi', icon: '🦆', price: 400, tier: 'tier-cute', tierName: 'Komik', desc: 'Belinde sarı ördekli şişme simit ve Ege koyları plaj kombini.' },
   { id: 'outfit_cyborg', type: 'outfit', name: '2099 Fütüristik Kâşif Zırhı', icon: '🤖', price: 2200, tier: 'tier-epic', tierName: 'Fütüristik', desc: 'Göğsünde parlayan reaktör ve neon hatlarıyla geleceğin zırhı.' },
 
-  // --- 🎓 ŞAPKALAR & BAŞLIKLAR ---
+  // --- 🎓 ŞAPKALAR & SAÇ AKSESUARLARI ---
   { id: 'head_none', type: 'headwear', name: 'Başlıksız', icon: '🧑', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Doğal saç modeli.' },
+  { id: 'head_cicek_taci', type: 'headwear', name: 'Bahar Çiçekleri & Papatya Tacı', icon: '🌸', price: 350, tier: 'tier-cute', tierName: 'Çiçek Bahçesi', desc: 'Taze papatyalar, pembe güller ve kır çiçeklerinden örülmüş taç.' },
+  { id: 'head_fiyonk_dev', type: 'headwear', name: 'Dev Pastel Pembe Saten Fiyonk', icon: '🎀', price: 250, tier: 'tier-common', tierName: 'Sevimli', desc: 'Saçın üstünde ışıldayan ipek saten dev fiyonk.' },
+  { id: 'head_kedi_kulak_isikli', type: 'headwear', name: 'Işıklı Neon Kedi Kulaklığı', icon: '🎧', price: 600, tier: 'tier-cute', tierName: 'Trend & Müzik', desc: 'Karanlıkta pembe neon ışık saçan sevimli kedi kulaklığı.' },
+  { id: 'head_kelebek_toka', type: 'headwear', name: 'Uçuşan Simli Kelebek Tokalar', icon: '🦋', price: 300, tier: 'tier-common', tierName: 'Işıltılı', desc: 'Saçların iki yanında uçuşan parıltılı 3D kelebek tokalar.' },
+  { id: 'head_cadı_pembe', type: 'headwear', name: 'Pastel Yıldızlı Peri Büyücüsü Şapkası', icon: '🪄', price: 850, tier: 'tier-epic', tierName: 'Büyülü', desc: 'Yıldız desenli pudra pembesi sivri peri şapkası.' },
+  { id: 'head_inci_tac', type: 'headwear', name: 'Kuğu Gölü Zarafet İnci Tacı', icon: '👑', price: 1200, tier: 'tier-epic', tierName: 'Zarif Prenses', desc: 'Saf beyaz inciler ve pırlanta ışıltılı zarif prenses tacı.' },
+  { id: 'head_bere_ayi', type: 'headwear', name: 'Sevimli Ayıcık Kulaklı Pelüş Bere', icon: '🧸', price: 250, tier: 'tier-common', tierName: 'Tatlı Kışlık', desc: 'Yumuşacık krem rengi ayıcık kulaklı pelüş kış beresi.' },
+  { id: 'head_hasir_kurdele', type: 'headwear', name: 'Geniş Hasır Şapka & Uçuşan Kurdele', icon: '👒', price: 300, tier: 'tier-common', tierName: 'Sayfiye', desc: 'Ege kıyılarına yakışır pembe saten kurdeleli hasır şapka.' },
   { id: 'head_fes', type: 'headwear', name: 'Püsküllü Kırmızı Osmanlı Fesi', icon: '🎩', price: 350, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'İpek siyah püsküllü klasik kırmızı kadife fes.' },
   { id: 'head_efe', type: 'headwear', name: 'Oyalı Zeybek Köstekli Fesi', icon: '🪖', price: 450, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Renkli oyaları ve altın köstekleriyle Ege efesi başlığı.' },
+  { id: 'head_sarik_alperen', type: 'headwear', name: 'Alperen Kürklü Savaşçı Börkü', icon: '🐺', price: 900, tier: 'tier-cute', tierName: 'Tarihi Türk', desc: 'Kırmızı tepeli, kurt kürklü ve pirinç plakalı tarihi Alperen börkü.' },
+  { id: 'head_kuvayimilliye', type: 'headwear', name: 'Kuva-yi Milliye İstiklal Kalpağı', icon: '🇹🇷', price: 800, tier: 'tier-cute', tierName: 'Milli Gurur', desc: 'Milli mücadele ruhunu simgeleyen asil siyah astragan kalpak.' },
   { id: 'head_kavuk', type: 'headwear', name: 'Topkapı Sarık & Zümrütlü Kavuk', icon: '💎', price: 3500, tier: 'tier-epic', tierName: 'Tarihi Lüks', desc: 'Beyaz ipek sarıklı, altın sorguçlu ve zümrüt taşlı görkemli kavuk.' },
+  { id: 'head_tac', type: 'headwear', name: 'Topkapı Saray Sultanı Zümrüt Tacı', icon: '👸', price: 4500, tier: 'tier-epic', tierName: 'Saray Lüksü', desc: 'Saf altından, zümrüt ve elmas taşlarla bezeli görkemli saray tacı.' },
   { id: 'head_kalpak', type: 'headwear', name: 'Erzurum Dadaş Kalpağı', icon: '💂', price: 550, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Kış soğuklarına meydan okuyan asil siyah kürk kalpak.' },
   { id: 'head_posu', type: 'headwear', name: 'Toros Yörük Poşusu', icon: '🧣', price: 300, tier: 'tier-common', tierName: 'Kültürel', desc: 'Geleneksel motifli sarılı Yörük başlığı.' },
+  { id: 'head_yemeni', type: 'headwear', name: 'Oymalı İpek Anadolu Yemenisi', icon: '🧣', price: 350, tier: 'tier-common', tierName: 'Geleneksel', desc: 'Kenarları renkli oyalı, ipek dokuma geleneksel Anadolu baş örtüsü.' },
+  { id: 'head_sef_kepi', type: 'headwear', name: 'Gaziantep Usta Aşçı Başlığı', icon: '🥐', price: 250, tier: 'tier-common', tierName: 'Lezzet', desc: 'Bembeyaz yüksek usta aşçı kebi.' },
+  { id: 'head_bere_dagci', type: 'headwear', name: 'Kaçkar Yün Ponponlu Kış Beresi', icon: '❄️', price: 200, tier: 'tier-common', tierName: 'Kışlık', desc: 'Kırmızı ponponlu, sıcak tutan el örgüsü dağcı beresi.' },
   { id: 'head_captain', type: 'headwear', name: 'Boğaz Kaptan Kasketi', icon: '⚓', price: 300, tier: 'tier-common', tierName: 'Denizci', desc: 'Altın çapalı resmi beyaz kaptan şapkası.' },
   { id: 'head_straw', type: 'headwear', name: 'Anadolu Çiftçi Hasır Şapkası', icon: '🌾', price: 200, tier: 'tier-common', tierName: 'Doğal', desc: 'Ekin tarlalarında güneşi kesen hafif hasır şapka.' },
   { id: 'head_fedora', type: 'headwear', name: 'Deri Kâşif Fötrü', icon: '🤠', price: 150, tier: 'tier-common', tierName: 'Klasik', desc: 'Güneşten koruyan klasik arkeolog ve kâşif şapkası.' },
   { id: 'head_bunny', type: 'headwear', name: 'Hareketli Tavşan Kulakları', icon: '🐰', price: 400, tier: 'tier-cute', tierName: 'Tatlı', desc: 'Kıpır kıpır oynayan pamuk gibi sevimli pembe tavşan kulakları.' },
   { id: 'head_alien', type: 'headwear', name: 'Uzaylı Antenli Kask', icon: '👽', price: 1100, tier: 'tier-epic', tierName: 'Egzantrik', desc: 'Haritadaki gölleri uzaydan tarayan neon yeşil ışıklı antenler.' },
 
-  // --- 🧔 YÜZ & BIYIK & GÖZLÜK ---
+  // --- 🧔 YÜZ, MAKYAJ & GÖZLÜK ---
   { id: 'face_none', type: 'face', name: 'Sade Doğal Yüz', icon: '😊', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Doğal yüz ifadesi.' },
+  { id: 'face_allik_kalp', type: 'face', name: 'Pembe Yanaklar & Kalp Çiller', icon: '💖', price: 200, tier: 'tier-cute', tierName: 'Sevimli Makyaj', desc: 'Yanaklarda tatlı pembe allık ve sevimli mini kalp desenleri.' },
+  { id: 'face_yildiz_sim', type: 'face', name: 'Işıltılı Yıldız & Sim Makyajı', icon: '✨', price: 300, tier: 'tier-cute', tierName: 'Işıltılı', desc: 'Göz altında parıldayan altın yıldız ve elmas simleri.' },
+  { id: 'face_kalp_gozluk', type: 'face', name: 'Sevimli Pembe Kalp Gözlük', icon: '🕶️', price: 350, tier: 'tier-common', tierName: 'Trend', desc: 'Toz pembe çerçeveli havalı kalp güneş gözlüğü.' },
+  { id: 'face_yuvarlak_rose', type: 'face', name: 'Rose Gold Yuvarlak Tel Gözlük', icon: '👓', price: 300, tier: 'tier-common', tierName: 'Zarif', desc: 'Zarif vintage pembe-altın ince çerçeveli gözlük.' },
+  { id: 'face_sakiz_balon', type: 'face', name: 'Çilekli Sakız Balonu', icon: '🫧', price: 250, tier: 'tier-common', tierName: 'Eğlenceli', desc: 'Ağızda patlamak üzere olan pembe dev sakız balonu.' },
+  { id: 'face_sevimli_ciller', type: 'face', name: 'Doğal Güneş Çilleri & Gülümseme', icon: '😊', price: 150, tier: 'tier-common', tierName: 'Doğal', desc: 'Burun ve yanak üstünde tatlı doğal yaz çilleri.' },
   { id: 'face_pala_biyik', type: 'face', name: 'Heybetli Türk Pala Bıyığı', icon: '🧔', price: 250, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Uçları yukarı kıvrık, gür ve heybetli geleneksel Türk pala bıyığı.' },
+  { id: 'face_posbiyik', type: 'face', name: 'Heybetli Köroğlu Pos Bıyığı', icon: '🧔‍♂️', price: 300, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Bolu Dağları destanlarından çıkma gür ve heybetli pos bıyık.' },
   { id: 'face_katip_biyik', type: 'face', name: 'Zarif İnce Kâtip Bıyığı', icon: '🥸', price: 200, tier: 'tier-common', tierName: 'Klasik', desc: 'Nezaketi ve zekayı simgeleyen ince kesim bıyık.' },
+  { id: 'face_surme', type: 'face', name: 'Otantik Sürmeli Kâşif Bakışı', icon: '✨', price: 250, tier: 'tier-common', tierName: 'Otantik', desc: 'Göz çevresine çekilmiş geleneksel taş sürme.' },
+  { id: 'face_nazar_nokta', type: 'face', name: 'Yanakta Cam Nazar Boncuğu', icon: '🧿', price: 150, tier: 'tier-common', tierName: 'Otantik', desc: 'Nazar değmesin diye yanağa kondurulmuş minik nazar boncuğu.' },
+  { id: 'face_gozluk_antika', type: 'face', name: 'Antika Haritacı Pirinç Gözlüğü', icon: '👓', price: 350, tier: 'tier-common', tierName: 'Akademik', desc: 'Eski atlasları ve topoğrafya haritalarını inceleyen yuvarlak pirinç gözlük.' },
+  { id: 'face_gozluk_kar', type: 'face', name: 'Ağrı Dağı Aynalı Kar Vizörü', icon: '🕶️', price: 450, tier: 'tier-common', tierName: 'Ekstrem', desc: 'Buzul güneşinde parlayan gökkuşağı aynalı dağcı gözlüğü.' },
   { id: 'face_monocle', type: 'face', name: 'Altın Zincirli Beyefendi Monoklu', icon: '🧐', price: 700, tier: 'tier-epic', tierName: 'Asil', desc: 'Altın zincirli zarif Osmanlı beyefendi büyüteci.' },
   { id: 'face_pilot', type: 'face', name: 'Havalı Pilot Gözlüğü', icon: '🕶️', price: 400, tier: 'tier-common', tierName: 'Modern', desc: 'Güneşi kesen altın çerçeveli havacı gözlüğü.' },
   { id: 'face_sunglasses', type: 'face', name: 'Neon Matrix Siber Gözlük', icon: '🥽', price: 550, tier: 'tier-epic', tierName: 'Havalı', desc: 'Karanlıkta parlayan fütüristik siber vizör.' },
@@ -3077,37 +3633,74 @@ const WARDROBE_CATALOG = [
 
   // --- ☕ AKSESUARLAR & EL EŞYALARI ---
   { id: 'acc_none', type: 'accessory', name: 'Aksesuarsız', icon: '✨', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Sade seyahat.' },
+  { id: 'acc_boba_tea', type: 'accessory', name: 'Çilekli & İncili Bubble Tea (Boba)', icon: '🧋', price: 250, tier: 'tier-cute', tierName: 'Popüler İçecek', desc: 'Buzlu pembe sütlü çay ve tapyoka incili sevimli boba bardağı.' },
+  { id: 'acc_cicek_buketi', type: 'accessory', name: 'Gül & Lavanta Bahar Buketi', icon: '💐', price: 300, tier: 'tier-cute', tierName: 'Mis Kokulu', desc: 'Kraft kağıdına sarılı taze pembe güller ve lavanta demeti.' },
+  { id: 'acc_pamuk_seker', type: 'accessory', name: 'Gökkuşağı Bulutu Pamuk Şeker', icon: '🍭', price: 200, tier: 'tier-common', tierName: 'Tatlı', desc: 'Kocaman pastel renkli pofuduk pamuk şeker çubuğu.' },
+  { id: 'acc_sihirli_asa', type: 'accessory', name: 'Yıldızlı Ay & Kalp Sihirli Asa', icon: '🪄', price: 900, tier: 'tier-epic', tierName: 'Sihirli', desc: 'Sailor Moon tarzı kristal pembe ışıltılı kalp asa.' },
+  { id: 'acc_pelus_ayi', type: 'accessory', name: 'Yumuşacık Kucak Pelüş Ayıcığı', icon: '🧸', price: 400, tier: 'tier-cute', tierName: 'Sevimli Dost', desc: 'Kâşifin kollarında sımsıkı tuttuğu pofuduk ayıcık.' },
+  { id: 'acc_polaroid', type: 'accessory', name: 'Pastel Pembe Anlık Polaroid Kamera', icon: '📷', price: 500, tier: 'tier-common', tierName: 'Estetik', desc: 'Boynunda asılı vintage pastel pembe fotoğraf makinesi.' },
+  { id: 'acc_makaron', type: 'accessory', name: 'Rengarenk Paris Makaron Kutusu', icon: '🧁', price: 350, tier: 'tier-common', tierName: 'Gurme Tatlı', desc: 'Fıstıklı, çilekli ve vanilyalı Fransız makaronları tabağı.' },
+  { id: 'acc_kalp_balonlar', type: 'accessory', name: 'Uçan Kalp Helyum Balonları', icon: '🎈', price: 300, tier: 'tier-cute', tierName: 'Uçuşan', desc: 'Gökyüzüne yükselen pembe ve fuşya kalp balon demeti.' },
+  { id: 'acc_simit', type: 'accessory', name: 'Çıtır Susamlı İstanbul Simidi', icon: '🥯', price: 150, tier: 'tier-common', tierName: 'Lezzet', desc: 'Fırından yeni çıkmış, dumanı tüten gevrek susamlı sokak simidi.' },
+  { id: 'acc_baklava', type: 'accessory', name: 'Gaziantep Fıstıklı Havuç Dilimi', icon: '🥧', price: 350, tier: 'tier-cute', tierName: 'Geleneksel Tat', desc: 'Bol yeşil fıstıklı, çıtır katmerli ve altın şerbetli Gaziantep baklavası.' },
   { id: 'acc_cay', type: 'accessory', name: 'Dumanı Tüten İnce Belli Çay', icon: '☕', price: 200, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Altın tabaklı, dumanı tüten tavşan kanı Türk çayı.' },
-  { id: 'acc_baglama', type: 'accessory', name: 'Anadolu Bağlaması / Saz', icon: '🪕', price: 650, tier: 'tier-cute', tierName: 'Kültürel', desc: 'Usta elinden çıkma ahşap gövdeli geleneksel Türk sazı.' },
   { id: 'acc_kahve', type: 'accessory', name: 'Közde Türk Kahvesi & Lokum', icon: '🫖', price: 300, tier: 'tier-cute', tierName: 'Geleneksel', desc: 'Bakır cezveli bol köpüklü kahve ve güllü lokum tepsisi.' },
+  { id: 'acc_cezve', type: 'accessory', name: 'Oymalı Bakır Türk Cezvesi', icon: '🫖', price: 300, tier: 'tier-common', tierName: 'Kültürel', desc: 'Gaziantep bakırcılar çarşısından el oyması köz cezvesi.' },
+  { id: 'acc_tesbih', type: 'accessory', name: 'Erzurum Oltu Taşı Gümüş Püsküllü Tesbih', icon: '📿', price: 500, tier: 'tier-cute', tierName: 'Yöresel', desc: 'Simsiyah parlayan Oltu taşından el dizimi 33’lük gümüş tesbih.' },
+  { id: 'acc_nazar', type: 'accessory', name: 'Ege Cam Nazar Boncuğu Tılsımı', icon: '🧿', price: 250, tier: 'tier-common', tierName: 'Kültürel', desc: 'Nazarköy cam atölyelerinden fırınlanmış orijinal cam nazar boncuğu.' },
+  { id: 'acc_baglama', type: 'accessory', name: 'Anadolu Bağlaması / Saz', icon: '🪕', price: 650, tier: 'tier-cute', tierName: 'Kültürel', desc: 'Usta elinden çıkma ahşap gövdeli geleneksel Türk sazı.' },
   { id: 'acc_dondurma', type: 'accessory', name: 'Maraş Dövme Dondurma Külahı', icon: '🍦', price: 250, tier: 'tier-common', tierName: 'Yöresel', desc: 'Erimeyen meşhur Maraş keçi sütlü dövme dondurması.' },
+  { id: 'acc_yay', type: 'accessory', name: 'Geleneksel Türk Kemankeş Yayı', icon: '🏹', price: 1200, tier: 'tier-epic', tierName: 'Tarihi Asil', desc: 'Akçaağaç ve manda boynuzundan yapılma organik Türk okçu yayı.' },
+  { id: 'acc_kayak', type: 'accessory', name: 'Uludağ Kar Kayak Takımı', icon: '🎿', price: 800, tier: 'tier-cute', tierName: 'Kış Sporu', desc: 'Pistlerde hız rekorları kıran modern yarış kayağı takımı.' },
   { id: 'acc_compass', type: 'accessory', name: 'Piri Reis Antik Seyir Pusulası', icon: '🧭', price: 150, tier: 'tier-common', tierName: 'Klasik', desc: 'Tarihi denizcilerin yön bulma pusulası.' },
   { id: 'acc_binoculars', type: 'accessory', name: 'Altın Mercekli Kâşif Dürbünü', icon: '🔭', price: 250, tier: 'tier-common', tierName: 'Keşif', desc: 'Ufuktaki dağları ve ovaları görmeni sağlayan pirinç dürbün.' },
   { id: 'acc_fener', type: 'accessory', name: 'Ege Denizci Feneri', icon: '🏮', price: 350, tier: 'tier-common', tierName: 'Denizci', desc: 'Gece denizinde yol gösteren pirinç gemici feneri.' },
   { id: 'acc_light_saber', type: 'accessory', name: 'Mavi Plazma Işın Kılıcı', icon: '⚔️', price: 1800, tier: 'tier-epic', tierName: 'Egzantrik', desc: 'Karanlığı yaran mavi plazma ışın kılıcı.' },
   { id: 'acc_asa', type: 'accessory', name: 'Efsanevi Zirve Asası', icon: '⚡', price: 4000, tier: 'tier-epic', tierName: 'Zirve Şampiyonu', desc: 'Yüksek dağların rüzgarını taşıyan asil asa.' },
 
-  // --- 🐾 TÜRKİYE'YE ÖZGÜ HAYVANLAR & YOLDAŞLAR ---
+  // --- 🐾 SEVİMLİ HAYVANLAR & YOLDAŞLAR ---
   { id: 'pet_none', type: 'pet', name: 'Yoldaşsız', icon: '🚫', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Tek başına seyahat.' },
+  { id: 'pet_pomeranian', type: 'pet', name: 'Pofuduk Pomeranian Boo Yavrusu', icon: '🐕', price: 1400, tier: 'tier-cute', tierName: 'Oyuncak Dost', desc: 'Oyuncak gibi kabarık tüylü, sevimli dilli minik Boo köpeği.' },
+  { id: 'pet_scottish_fold', type: 'pet', name: 'Kıvrık Kulaklı Gri Scottish Kedisi', icon: '🐱', price: 1300, tier: 'tier-cute', tierName: 'Pofuduk Dost', desc: 'Kocaman yuvarlak kehribar gözlü pofuduk gri kedi yavrusu.' },
+  { id: 'pet_kuzu', type: 'pet', name: 'Kınalı Kuzu / Pamuk Yavrusu', icon: '🐑', price: 950, tier: 'tier-cute', tierName: 'Sevimli Köy', desc: 'Boynunda çıngırağı ve kırmızı fiyonk kurdelesi olan pamuk kuzu.' },
+  { id: 'pet_ceylan', type: 'pet', name: 'Kelebek Konan Ceylan Yavrusu (Bambi)', icon: '🦌', price: 1500, tier: 'tier-epic', tierName: 'Zarif Doğa', desc: 'Benekli sırtına mor kelebek konmuş minik ceylan yavrusu.' },
+  { id: 'pet_panda', type: 'pet', name: 'Bambu Yiyen Bebek Panda', icon: '🐼', price: 1600, tier: 'tier-epic', tierName: 'Tombul Sevimli', desc: 'Elinde yeşil bambu yaprağı tutan tatlı bebek panda.' },
+  { id: 'pet_unicorn', type: 'pet', name: 'Gökkuşağı Boynuzlu Mini Midilli', icon: '🦄', price: 3500, tier: 'tier-epic', tierName: 'Efsanevi Masal', desc: 'Yeleleri gökkuşağı renginde ışıltılı mini tek boynuzlu at.' },
+  { id: 'pet_hamster', type: 'pet', name: 'Tombik Yanaklı Ayçiçeği Hamsterı', icon: '🐹', price: 700, tier: 'tier-cute', tierName: 'Minik Dost', desc: 'Avucun içinde ayçekirdeği kemiren sevimli tombul hamster.' },
   { id: 'pet_van_cat', type: 'pet', name: 'Renkli Gözlü Van Kedisi', icon: '🐱', price: 850, tier: 'tier-cute', tierName: 'Yerli & Sevimli', desc: 'Biri mavi biri kehribar gözlü pamuk beyazı Van kedisi yavrusu.' },
   { id: 'pet_kangal', type: 'pet', name: 'Sivas Kangal Çoban Köpeği', icon: '🐶', price: 1100, tier: 'tier-cute', tierName: 'Sadık Dost', desc: 'Siyah maskeli ve dik kulaklı sadık Kangal yavrusu.' },
+  { id: 'pet_kangal_yavru', type: 'pet', name: 'Tombik Sivas Kangal Yavrusu', icon: '🐕', price: 1250, tier: 'tier-cute', tierName: 'Sadık Dost', desc: 'Kocaman yumuşak patileri ve siyah maskesiyle oyuncu Kangal yavrusu.' },
+  { id: 'pet_angora_cat', type: 'pet', name: 'İpeksi Beyaz Ankara Kedisi', icon: '🐈', price: 900, tier: 'tier-cute', tierName: 'Başkent Güzeli', desc: 'İpeksi uzun tüyleri ve asil duruşuyla dünyaca ünlü Ankara kedisi.' },
+  { id: 'pet_karakulak', type: 'pet', name: 'Anadolu Karakulak Kedisi (Caracal)', icon: '🐱', price: 1600, tier: 'tier-epic', tierName: 'Vahşi Doğa', desc: 'Kulak uçlarında siyah püskülleriyle Torosların nadir yırtıcı kedisi.' },
   { id: 'pet_kartal', type: 'pet', name: 'Anadolu Kaya Kartalı', icon: '🦅', price: 1500, tier: 'tier-epic', tierName: 'Heybetli', desc: 'Kâşifin omzuna konan asil ve keskin bakışlı Anadolu kartalı.' },
   { id: 'pet_tavsan', type: 'pet', name: 'Pamuk Beyazı Ankara Tavşanı', icon: '🐇', price: 600, tier: 'tier-cute', tierName: 'Yerli & Tatlı', desc: 'İpeksi uzun beyaz tüyleriyle dünyaca ünlü Ankara tavşanı.' },
   { id: 'pet_fok', type: 'pet', name: 'Akdeniz Foku Yavrusu', icon: '🦭', price: 950, tier: 'tier-cute', tierName: 'Nadir & Koruma', desc: 'Akdeniz ve Ege mağaralarında yaşayan sevimli fok.' },
+  { id: 'pet_keklik', type: 'pet', name: 'Kınalı Anadolu Dağ Kekliği', icon: '🐦', price: 750, tier: 'tier-common', tierName: 'Yöresel', desc: 'Kırmızı gagası ve kanatlarındaki şeritleriyle türkülere konu olan dağ kekliği.' },
   { id: 'pet_horoz', type: 'pet', name: 'Denizli Horozu', icon: '🐓', price: 700, tier: 'tier-common', tierName: 'Yöresel', desc: 'Uzun ve ahenkli ötüşüyle meşhur asil Türk horozu.' },
   { id: 'pet_flamingo', type: 'pet', name: 'Tuz Gölü Pembe Flamingosu', icon: '🦩', price: 900, tier: 'tier-cute', tierName: 'Doğal Güzellik', desc: 'Tuz Gölü kuluçka cennetinden zarif pembe flamingo.' },
   { id: 'pet_keci', type: 'pet', name: 'Ankara Tiftik Keçisi', icon: '🐐', price: 650, tier: 'tier-common', tierName: 'Yerli', desc: 'Yumuşacık parlak tiftik yünüyle ünlü yerli keçi yavrusu.' },
+  { id: 'pet_sincap', type: 'pet', name: 'Karadeniz Fındık Sincabı', icon: '🐿️', price: 800, tier: 'tier-cute', tierName: 'Sevimli Dost', desc: 'Minik patilerinde Giresun fındığı tutan şirin orman sincabı.' },
   { id: 'pet_bozayi', type: 'pet', name: 'Toroslar Bozayı Yavrusu', icon: '🐻', price: 1300, tier: 'tier-epic', tierName: 'Güçlü Dost', desc: 'Toros Dağları ormanlarının sevimli bozayı yavrusu.' },
   { id: 'pet_parrot', type: 'pet', name: 'Akdeniz Korsan Papağanı', icon: '🦜', price: 600, tier: 'tier-cute', tierName: 'Eğlenceli', desc: 'Sürekli konuşan renkli Akdeniz papağanı.' },
   { id: 'pet_dragon', type: 'pet', name: 'Sevimli Mini Ejderha', icon: '🐉', price: 5000, tier: 'tier-epic', tierName: 'Efsanevi', desc: 'Kıvılcımlar saçan mor yavru ejderha.' },
 
-  // --- 🌄 BÖLGESEL SAHNELER & ARKA PLANLAR ---
+  // --- 🌄 BÖLGESEL & MASALSI SAHNELER ---
   { id: 'bg_dark', type: 'background', name: 'Kozmik Gece Haritası', icon: '🌌', price: 0, tier: 'tier-common', tierName: 'Standart', desc: 'Karanlık minimalist gece gökyüzü.' },
+  { id: 'bg_isparta_lavanta', type: 'background', name: 'Isparta Sonsuz Mor Lavanta Tarlaları', icon: '🪻', price: 500, tier: 'tier-cute', tierName: 'Akdeniz Lavanta', desc: 'Ufka uzanan büyüleyici mor lavanta tarlaları ve lila gökyüzü.' },
+  { id: 'bg_sakura', type: 'background', name: 'Pembe Kiraz Çiçekleri (Sakura) Bahçesi', icon: '🌸', price: 550, tier: 'tier-cute', tierName: 'Bahar Masalı', desc: 'Uçuşan pembe çiçek yaprakları ve berrak gölet manzarası.' },
+  { id: 'bg_butterfly_valley', type: 'background', name: 'Fethiye Kelebekler Vadisi & Şelale', icon: '🦋', price: 600, tier: 'tier-epic', tierName: 'Ege Cenneti', desc: 'Uçuşan kaplan kelebekleri, sarp kanyon ve turkuaz deniz.' },
+  { id: 'bg_pembe_tuzgolu', type: 'background', name: 'Rüya Gibi Pastel Pembe Tuz Gölü', icon: '🪞', price: 450, tier: 'tier-cute', tierName: 'Pastel Doğa', desc: 'Ayna gibi yansıyan sonsuz toz pembe ve altın gün batımı.' },
+  { id: 'bg_prenses_odasi', type: 'background', name: 'Masalsı Peri Sarayı & Yıldızlar', icon: '🏰', price: 800, tier: 'tier-epic', tierName: 'Büyülü Saray', desc: 'Tüllü saray balkonu, parıldayan yıldızlar ve pembe gece göğü.' },
+  { id: 'bg_aesthetic_cafe', type: 'background', name: 'Çiçekli Butik Pastel Kafe', icon: '☕', price: 400, tier: 'tier-common', tierName: 'Estetik Şehir', desc: 'Sarmaşık gülleri ve vintage pastel bistro masaları.' },
   { id: 'bg_cappadocia', type: 'background', name: 'Kapadokya Peri Bacaları & Balonlar', icon: '🎈', price: 300, tier: 'tier-cute', tierName: 'İç Anadolu', desc: 'Peri bacaları üzerinde sıcak hava balonları ve gün doğumu.' },
   { id: 'bg_pamukkale', type: 'background', name: 'Pamukkale Travertenleri', icon: '🏛️', price: 400, tier: 'tier-cute', tierName: 'Ege Bölgesi', desc: 'Bembeyaz traverten terasları ve şifalı turkuaz sular.' },
   { id: 'bg_bosphorus', type: 'background', name: 'İstanbul Boğazı & Kız Kulesi', icon: '🌊', price: 500, tier: 'tier-epic', tierName: 'Marmara', desc: 'Boğazın serin suları ve gün batımında Kız Kulesi silüeti.' },
+  { id: 'bg_mardin', type: 'background', name: 'Mardin Taş Konakları & Mezopotamya', icon: '🏰', price: 550, tier: 'tier-epic', tierName: 'Güneydoğu', desc: 'Altın renkli taş konaklar ve batan güneş altında sonsuz Mezopotamya ovası.' },
+  { id: 'bg_sumela', type: 'background', name: 'Sümela Manastırı & Sisli Kaçkarlar', icon: '⛪', price: 600, tier: 'tier-epic', tierName: 'Karadeniz', desc: 'Sarp kayalıklara kurulu tarihi manastır ve vadiden yükselen yayla sisi.' },
+  { id: 'bg_oludeniz', type: 'background', name: 'Fethiye Ölüdeniz Lagünü & Babadağ', icon: '🪂', price: 450, tier: 'tier-cute', tierName: 'Ege & Akdeniz', desc: 'Büyüleyici turkuaz lagün ve gökyüzünde süzülen rengarenk yamaç paraşütleri.' },
   { id: 'bg_uzungol', type: 'background', name: 'Uzungöl & Kaçkar Yaylaları', icon: '🌲', price: 450, tier: 'tier-cute', tierName: 'Karadeniz', desc: 'Yemyeşil sisli yaylalar ve berrak dağ gölü manzarası.' },
   { id: 'bg_salda', type: 'background', name: 'Salda Gölü Türk Maldivleri', icon: '🏖️', price: 400, tier: 'tier-cute', tierName: 'Akdeniz', desc: 'Bembeyaz kumsallar ve cam berraklığında turkuaz sular.' },
+  { id: 'bg_ani', type: 'background', name: 'Kars Tarihi Ani Ören Yeri', icon: '🏛️', price: 500, tier: 'tier-epic', tierName: 'Doğu Anadolu', desc: 'Binbir kiliseli tarihi Ani surları ve derin Arpaçay kanyonu manzarası.' },
   { id: 'bg_nemrut', type: 'background', name: 'Nemrut Dağı Taş Heykelleri', icon: '🗿', price: 600, tier: 'tier-epic', tierName: 'Güneydoğu', desc: 'Güneşin doğuşu ve batışının izlendiği tarihi dev heykeller.' },
   { id: 'bg_tuzgolu', type: 'background', name: 'Tuz Gölü Sonsuz Gün Batımı', icon: '🪞', price: 350, tier: 'tier-common', tierName: 'İç Anadolu', desc: 'Ayna gibi yansıyan sonsuz pembe-altın tuz gölü ufku.' },
   { id: 'bg_mountain', type: 'background', name: 'Ağrı Dağı Karlı Zirvesi', icon: '🏔️', price: 350, tier: 'tier-common', tierName: 'Doğu Anadolu', desc: 'Türkiye’nin en yüksek volkanik karlı zirvesi.' },
@@ -3213,6 +3806,189 @@ const SUPABASE_CONFIG = {
 
 let supabaseClient = null;
 
+/* KÂŞİF KARAKTERİ & GİRİŞ AYRICALIKLARI VİTRİNİ PRESETLERİ */
+const AUTH_PRESETS = [
+  {
+    title: 'Masalsı Pembe Saray Prensesi',
+    icon: '🌸',
+    outfit: 'outfit_prenses_pembe',
+    headwear: 'head_inci_tac',
+    face: 'face_allik_kalp',
+    accessory: 'acc_boba_tea',
+    pet: 'pet_pomeranian',
+    background: 'bg_prenses_odasi',
+    gender: 'female'
+  },
+  {
+    title: 'Isparta Lavanta Kır Perisi',
+    icon: '🪻',
+    outfit: 'outfit_lavanta',
+    headwear: 'head_cicek_taci',
+    face: 'face_yildiz_sim',
+    accessory: 'acc_cicek_buketi',
+    pet: 'pet_ceylan',
+    background: 'bg_isparta_lavanta',
+    gender: 'female'
+  },
+  {
+    title: 'Görkemli Padişah Kâşif',
+    icon: '👑',
+    outfit: 'outfit_padisah',
+    headwear: 'head_kavuk',
+    face: 'face_pala_biyik',
+    accessory: 'acc_tesbih',
+    pet: 'pet_kartal',
+    background: 'bg_bosphorus',
+    gender: 'male'
+  },
+  {
+    title: 'Pastel Boba & Kedili Trend',
+    icon: '🧋',
+    outfit: 'outfit_oversize_pink',
+    headwear: 'head_kedi_kulak_isikli',
+    face: 'face_kalp_gozluk',
+    accessory: 'acc_polaroid',
+    pet: 'pet_scottish_fold',
+    background: 'bg_sakura',
+    gender: 'female'
+  },
+  {
+    title: 'Kelebekler Vadisi Orman Perisi',
+    icon: '🧚‍♀️',
+    outfit: 'outfit_peri',
+    headwear: 'head_kelebek_toka',
+    face: 'face_sevimli_ciller',
+    accessory: 'acc_sihirli_asa',
+    pet: 'pet_unicorn',
+    background: 'bg_butterfly_valley',
+    gender: 'female'
+  },
+  {
+    title: 'Topkapı Saray Sultanı',
+    icon: '👸',
+    outfit: 'outfit_gelin_bindalli',
+    headwear: 'head_tac',
+    face: 'face_surme',
+    accessory: 'acc_baklava',
+    pet: 'pet_angora_cat',
+    background: 'bg_mardin',
+    gender: 'female'
+  },
+  {
+    title: 'Efe & Zeybek Kâşifi',
+    icon: '⚡',
+    outfit: 'outfit_zeybek',
+    headwear: 'head_efe',
+    face: 'face_posbiyik',
+    accessory: 'acc_baglama',
+    pet: 'pet_kangal_yavru',
+    background: 'bg_pamukkale',
+    gender: 'male'
+  },
+  {
+    title: 'Van Kedili Dağ Gezgini',
+    icon: '🐾',
+    outfit: 'outfit_dagci',
+    headwear: 'head_bere_dagci',
+    face: 'face_gozluk_kar',
+    accessory: 'acc_fener',
+    pet: 'pet_van_cat',
+    background: 'bg_uzungol',
+    gender: 'female'
+  },
+  {
+    title: 'Pembe Göl Masal Gezgini',
+    icon: '🪞',
+    outfit: 'outfit_vintage_polka',
+    headwear: 'head_fiyonk_dev',
+    face: 'face_sakiz_balon',
+    accessory: 'acc_kalp_balonlar',
+    pet: 'pet_flamingo',
+    background: 'bg_pembe_tuzgolu',
+    gender: 'female'
+  },
+  {
+    title: 'Kuva-yi Milliye Seymeni',
+    icon: '🇹🇷',
+    outfit: 'outfit_seymen',
+    headwear: 'head_kuvayimilliye',
+    face: 'face_katip_biyik',
+    accessory: 'acc_yay',
+    pet: 'pet_keklik',
+    background: 'bg_cappadocia',
+    gender: 'male'
+  }
+];
+
+let authPresetIndex = 0;
+let authPresetTimer = null;
+
+function renderAuthShowcasePreset(index) {
+  const preset = AUTH_PRESETS[index % AUTH_PRESETS.length];
+  if (!preset) return;
+  
+  const titleEl = document.getElementById('authPresetTitle');
+  const textEl = document.getElementById('authPresetText');
+  if (titleEl && textEl) {
+    textEl.textContent = preset.title;
+    const iconSpan = titleEl.querySelector('span:first-child');
+    if (iconSpan) iconSpan.textContent = preset.icon;
+  }
+  
+  const customEquipped = {
+    outfit: preset.outfit,
+    headwear: preset.headwear,
+    face: preset.face,
+    accessory: preset.accessory,
+    pet: preset.pet,
+    background: preset.background
+  };
+  
+  render3DAvatar('authShowcaseAvatar', 110, customEquipped, preset.gender);
+}
+
+function nextAuthPreset() {
+  authPresetIndex = (authPresetIndex + 1) % AUTH_PRESETS.length;
+  renderAuthShowcasePreset(authPresetIndex);
+}
+
+function openAuthPrivilegesModal(origin = 'general') {
+  const modal = document.getElementById('modalAuthPrivileges');
+  if (!modal) return;
+  modal.classList.add('active');
+  authPresetIndex = Math.floor(Math.random() * AUTH_PRESETS.length);
+  renderAuthShowcasePreset(authPresetIndex);
+  
+  clearInterval(authPresetTimer);
+  authPresetTimer = setInterval(function() {
+    nextAuthPreset();
+  }, 2800);
+}
+
+function closeAuthPrivilegesModal() {
+  const modal = document.getElementById('modalAuthPrivileges');
+  if (modal) modal.classList.remove('active');
+  clearInterval(authPresetTimer);
+}
+
+function exploreAsGuest() {
+  closeAuthPrivilegesModal();
+  showScreen('screen-profile');
+  showToast('ℹ️ Misafir Modu: Karakterini inceleyebilirsin! Puanlarını kaydetmek için istediğin an Google ile giriş yap.');
+}
+
+function handleNavProfileClick() {
+  if (!profileState.isLoggedIn) {
+    openAuthPrivilegesModal('profile');
+  } else {
+    showScreen('screen-profile');
+  }
+}
+
+function handleNavDuelClick() {
+  showScreen('screen-duel');
+}
+
 function closeAuthModal() {
   const m = document.getElementById('modalAuthRequired');
   if (m) m.classList.remove('active');
@@ -3220,19 +3996,91 @@ function closeAuthModal() {
 
 function requireAuthGate(actionTitle, actionDesc) {
   if (!profileState.isLoggedIn) {
-    document.getElementById('authModalTitle').textContent = actionTitle || 'Giriş Yapmanız Gerekiyor';
-    document.getElementById('authModalDesc').textContent = actionDesc || 'Harita oyunlarını oynamak, puan toplamak ve rozet kazanmak için lütfen Google hesabınızla giriş yapın.';
-    document.getElementById('modalAuthRequired').classList.add('active');
+    openAuthPrivilegesModal(actionTitle || 'gate');
     return false;
   }
   return true;
 }
 
+const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+
+function getNameChangeCooldownRemaining() {
+  if (!profileState.lastNameChangeDate) return 0;
+  const lastTime = new Date(profileState.lastNameChangeDate).getTime();
+  if (isNaN(lastTime)) return 0;
+  const now = Date.now();
+  const elapsed = now - lastTime;
+  if (elapsed >= THREE_DAYS_MS) return 0;
+  return THREE_DAYS_MS - elapsed;
+}
+
+function formatRemainingDuration(ms) {
+  const totalHours = Math.floor(ms / (1000 * 60 * 60));
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const mins = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+  
+  if (days > 0) {
+    return days + ' gün, ' + hours + ' saat';
+  } else if (hours > 0) {
+    return hours + ' saat, ' + mins + ' dakika';
+  } else {
+    return (mins || 1) + ' dakika';
+  }
+}
+
 function promptChangeUsername() {
   const input = document.getElementById('inputNewUsername');
-  if (input) input.value = profileState.username || 'Kâşif';
+  const cooldownBox = document.getElementById('nameChangeCooldownNotice');
+  const saveBtn = document.getElementById('btnSaveUsername');
+  const currentName = profileState.username || 'Kâşif';
+  
+  if (input) input.value = currentName;
+  
+  const remaining = getNameChangeCooldownRemaining();
+  if (remaining > 0) {
+    const formattedTime = formatRemainingDuration(remaining);
+    if (cooldownBox) {
+      cooldownBox.style.display = 'block';
+      cooldownBox.style.background = 'rgba(239, 68, 68, 0.15)';
+      cooldownBox.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+      cooldownBox.style.color = '#fca5a5';
+      cooldownBox.innerHTML = '⏳ <strong>İsim Değiştirme Kilitli:</strong><br>Kötüye kullanımı önlemek amacıyla isminizi 3 günde bir değiştirebilirsiniz.<br>Bir sonraki değişiklik için kalan süre: <strong>' + formattedTime + '</strong>';
+    }
+    if (input) {
+      input.disabled = true;
+      input.style.opacity = '0.6';
+      input.style.cursor = 'not-allowed';
+    }
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.style.opacity = '0.5';
+      saveBtn.style.cursor = 'not-allowed';
+      saveBtn.textContent = '⏳ Bekleme Süresinde (' + formattedTime + ')';
+    }
+  } else {
+    if (cooldownBox) {
+      cooldownBox.style.display = 'block';
+      cooldownBox.style.background = 'rgba(242, 177, 52, 0.12)';
+      cooldownBox.style.borderColor = 'rgba(242, 177, 52, 0.35)';
+      cooldownBox.style.color = 'var(--cream)';
+      cooldownBox.innerHTML = '💡 <strong>Bilgi:</strong> İsim değişikliği yapıldıktan sonra bir sonraki değişiklik için <strong>3 gün</strong> beklemeniz gerekecektir.';
+    }
+    if (input) {
+      input.disabled = false;
+      input.style.opacity = '1';
+      input.style.cursor = 'text';
+    }
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.style.opacity = '1';
+      saveBtn.style.cursor = 'pointer';
+      saveBtn.textContent = '💾 Kaydet & Güncelle';
+    }
+  }
+
   document.getElementById('modalEditName').classList.add('active');
-  setTimeout(function() { if (input) input.focus(); }, 150);
+  setTimeout(function() { if (input && !input.disabled) input.focus(); }, 150);
 }
 
 function closeEditNameModal() {
@@ -3240,6 +4088,13 @@ function closeEditNameModal() {
 }
 
 function saveNewUsername() {
+  const remaining = getNameChangeCooldownRemaining();
+  if (remaining > 0) {
+    const formattedTime = formatRemainingDuration(remaining);
+    alert('⏳ İsminizi 3 günde bir değiştirebilirsiniz. Kalan bekleme süresi: ' + formattedTime);
+    return;
+  }
+
   const input = document.getElementById('inputNewUsername');
   const rawName = (input ? input.value : '').trim();
   const newName = rawName.replace(/<[^>]*>?/gm, '').substring(0, 18);
@@ -3247,13 +4102,20 @@ function saveNewUsername() {
     alert('Lütfen geçerli bir isim girin.');
     return;
   }
+  
+  if (newName === profileState.username) {
+    closeEditNameModal();
+    return;
+  }
+
   profileState.username = newName;
+  profileState.lastNameChangeDate = new Date().toISOString();
   localStorage.setItem('golkasifi_has_custom_name', 'true');
   saveProfileState();
   updateProfileNameDisplays();
-  if (typeof syncPlayerToSupabase === 'function') syncPlayerToSupabase(); updateProfileNameDisplays(); checkAuthSession();
+  if (typeof syncPlayerToSupabase === 'function') syncPlayerToSupabase();
   closeEditNameModal();
-  showToast('✅ Kâşif isminiz "' + newName + '" olarak güncellendi!');
+  showToast('✅ Kâşif isminiz "' + newName + '" olarak güncellendi! (3 gün kilitlendi)');
 }
 
 function updateProfileNameDisplays() {
@@ -3273,6 +4135,11 @@ function showToast(msg) {
 }
 
 async function handleGoogleAuth() {
+  if (window.location.protocol === 'file:') {
+    alert('⚠️ Google ile Giriş Uyarısı:\n\nGoogle OAuth güvenliği gereği "file://" (dosyaya çift tıklayarak açma) üzerinden giriş yapılamaz.\n\nLütfen projeyi yerel sunucu ("node server.js" çalıştırıp http://localhost:5500 açarak) veya bir web sunucusu (Netlify, Vercel, GitHub Pages) üzerinden açın.');
+    return;
+  }
+
   if (!supabaseClient) {
     alert('Supabase bağlantısı henüz hazır değil.');
     return;
@@ -3293,10 +4160,11 @@ async function handleGoogleAuth() {
       return;
     }
 
+    const cleanRedirectUrl = window.location.origin + window.location.pathname;
     const res = await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + window.location.pathname
+        redirectTo: cleanRedirectUrl
       }
     });
     if (res && res.error) {
@@ -3311,20 +4179,55 @@ async function handleGoogleAuth() {
 async function checkAuthSession() {
   if (!supabaseClient) return;
   try {
+    // Check URL parameters for OAuth errors
+    const hash = window.location.hash;
+    const search = window.location.search;
+    if (hash.includes('error=') || search.includes('error=')) {
+      const params = new URLSearchParams(hash.startsWith('#') ? hash.substring(1) : search);
+      const errDesc = params.get('error_description') || params.get('error') || 'Yetkilendirme hatası oluştu.';
+      console.warn('OAuth URL Hatası:', errDesc);
+      showToast('⚠️ Giriş Hatası: ' + decodeURIComponent(errDesc.replace(/\+/g, ' ')));
+    }
+
     const sessionRes = await supabaseClient.auth.getSession();
     const session = sessionRes && sessionRes.data ? sessionRes.data.session : null;
     updateAuthUI(session);
 
-    supabaseClient.auth.onAuthStateChange(function(event, currentSession) {
-      updateAuthUI(currentSession);
-      if (currentSession && currentSession.user) {
-        handleAuthUserSync(currentSession.user);
-      }
-    });
-
     if (session && session.user) {
       handleAuthUserSync(session.user);
+      if (window.location.hash || window.location.search.includes('code=')) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
     }
+
+    supabaseClient.auth.onAuthStateChange(function(event, currentSession) {
+      updateAuthUI(currentSession);
+      if (event === 'SIGNED_IN' && currentSession && currentSession.user) {
+        handleAuthUserSync(currentSession.user);
+        const name = profileState.username || 'Kâşif';
+        showToast('🎉 Hoş geldin, ' + name + '!');
+        
+        // Welcome bonus check (+500 Puan)
+        if (!localStorage.getItem('golkasifi_welcome_bonus_given')) {
+          state.totalScore += 500;
+          localStorage.setItem('golkasifi_total_score', state.totalScore);
+          localStorage.setItem('golkasifi_welcome_bonus_given', 'true');
+          updateGlobalScoreDisplay();
+          setTimeout(function() {
+            if (typeof confetti === 'function') {
+              confetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
+            }
+            showToast('🎁 Tebrikler! 500 Hoş Geldin Kâşif Puanı Hesabınıza Eklendi!');
+          }, 600);
+        }
+        
+        if (window.location.hash || window.location.search.includes('code=')) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } else if (event === 'SIGNED_OUT') {
+        updateAuthUI(null);
+      }
+    });
   } catch(e) {
     console.warn('Auth check error:', e);
   }
@@ -3332,19 +4235,37 @@ async function checkAuthSession() {
 
 function updateAuthUI(session) {
   profileState.isLoggedIn = !!(session && session.user);
+  
+  // Profile stage button
   const authBtn = document.getElementById('btnGoogleAuth');
   const authText = document.getElementById('googleAuthText');
   const authIcon = document.getElementById('googleAuthIcon');
 
+  // Topbar Google button
+  const topbarGoogleBtn = document.getElementById('topbarGoogleAuthBtn');
+  const topbarGoogleText = document.getElementById('topbarGoogleText');
+
+  // Guest alert banner in wardrobe
+  const guestBanner = document.getElementById('profileGuestBanner');
+
   if (session && session.user) {
     const userMeta = session.user.user_metadata || {};
-    const fullName = userMeta.full_name || (session.user.email ? session.user.email.split('@')[0] : 'Kullanıcı');
+    const fullName = userMeta.full_name || userMeta.name || (session.user.email ? session.user.email.split('@')[0] : 'Kullanıcı');
+    
     if (authText) authText.textContent = fullName.substring(0, 14) + ' (Çıkış)';
     if (authIcon) authIcon.textContent = '🟢';
     if (authBtn) {
       authBtn.style.borderColor = '#10b981';
       authBtn.style.color = '#34d399';
     }
+
+    if (topbarGoogleText) topbarGoogleText.textContent = fullName.substring(0, 12);
+    if (topbarGoogleBtn) {
+      topbarGoogleBtn.classList.add('logged-in');
+      topbarGoogleBtn.title = 'Hesap: ' + fullName + ' (Çıkış için tıkla)';
+    }
+
+    if (guestBanner) guestBanner.style.display = 'none';
   } else {
     if (authText) authText.textContent = 'Google ile Giriş';
     if (authIcon) authIcon.textContent = '🔑';
@@ -3352,6 +4273,14 @@ function updateAuthUI(session) {
       authBtn.style.borderColor = 'rgba(242, 177, 52, 0.4)';
       authBtn.style.color = 'var(--cream)';
     }
+
+    if (topbarGoogleText) topbarGoogleText.textContent = 'Google Giriş';
+    if (topbarGoogleBtn) {
+      topbarGoogleBtn.classList.remove('logged-in');
+      topbarGoogleBtn.title = 'Google ile Giriş Yap & Karakterini Oluştur';
+    }
+
+    if (guestBanner) guestBanner.style.display = 'flex';
   }
 }
 
@@ -3399,6 +4328,7 @@ function initSupabase() {
         cloudStatusEl.style.display = 'flex';
       }
 
+      checkAuthSession();
       fetchLeaderboardFromSupabase();
       listenToRealtimeLeaderboard();
       syncPlayerToSupabase();
@@ -3491,30 +4421,22 @@ function renderSupabaseLeaderboard(cloudPlayers) {
     const row = document.createElement('div');
     row.className = 'lb-row ' + rowClass;
 
-    const equipped = u.equipped_items || {};
-    const avatarSvg = generateFullAvatarSvg('lb_' + (u.id || idx), {
-      gender: u.gender || 'male',
-      skin: 'light',
-      hairColor: 'black',
-      outfit: equipped.outfit || 'form_turkey',
-      headwear: equipped.headwear || 'head_fes',
-      face: equipped.face || 'none',
-      accessory: equipped.accessory || 'acc_cay',
-      pet: equipped.pet || 'pet_vankedisi',
-      bgEffect: 'none'
-    });
+    const slotId = 'lb_avatar_' + idx;
 
     row.innerHTML = '<div class="lb-left">' +
       '<div class="lb-rank">' + rankBadge + '</div>' +
-      '<div class="lb-avatar">' + avatarSvg + '</div>' +
+      '<div class="lb-avatar" id="' + slotId + '" style="width:32px;height:32px;border-radius:50%;overflow:hidden;background:#071922;"></div>' +
       '<div class="lb-name-box">' +
       '<div class="lb-name">' + escapeHtml(u.username || 'Kâşif') + (isUser ? ' (Sen)' : '') + '</div>' +
-      '<div class="lb-league">' + (u.league || 'Bronz Lig') + ' • ' + (u.unlocked_badges ? u.unlocked_badges.length : 0) + ' Rozet</div>' +
+      '<div class="lb-league">' + escapeHtml(u.league || 'Bronz Lig') + ' • ' + (u.unlocked_badges ? u.unlocked_badges.length : 0) + ' Rozet</div>' +
       '</div>' +
       '</div>' +
       '<div class="lb-score">' + (u.total_score || 0).toLocaleString('tr-TR') + ' P</div>';
 
     container.appendChild(row);
+
+    const equipped = u.equipped_items || {};
+    render3DAvatar(slotId, 32, equipped, u.gender || 'male');
   });
 }
 
@@ -3588,11 +4510,31 @@ function saveProfileState() {
   updateProfileRankDisplay();
 }
 
-/* Audio Synthesis */
+/* ==========================================================================
+   🔊 STUDIO AUDIO SYNTHESIS ENGINE (RICH WEB AUDIO & DYNAMICS COMPRESSOR)
+   ========================================================================== */
 let audioCtx = null;
+let masterCompressor = null;
+let masterGain = null;
+
 function getAudioCtx() {
   if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioCtxClass();
+
+    // Studio dynamics compressor & limiter to ensure punchy, rich, distortion-free sound
+    masterCompressor = audioCtx.createDynamicsCompressor();
+    masterCompressor.threshold.setValueAtTime(-12, audioCtx.currentTime);
+    masterCompressor.knee.setValueAtTime(20, audioCtx.currentTime);
+    masterCompressor.ratio.setValueAtTime(4, audioCtx.currentTime);
+    masterCompressor.attack.setValueAtTime(0.002, audioCtx.currentTime);
+    masterCompressor.release.setValueAtTime(0.1, audioCtx.currentTime);
+
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+
+    masterCompressor.connect(masterGain);
+    masterGain.connect(audioCtx.destination);
   }
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
@@ -3600,83 +4542,326 @@ function getAudioCtx() {
   return audioCtx;
 }
 
+// Global auto-unlock on any user interaction
+if (typeof window !== 'undefined') {
+  ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'click'].forEach(function(evt) {
+    window.addEventListener(evt, function() {
+      try {
+        if (!audioCtx) {
+          getAudioCtx();
+        } else if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch(e){}
+    }, { passive: true });
+  });
+}
+
+// 1. Tactile Bubble Pop (Chips drag start, wardrobe clicks, tab switching)
 function sndPickup() {
   try {
     const ctx = getAudioCtx();
+    const t = ctx.currentTime;
+
+    // Crisp transient click
+    const clickOsc = ctx.createOscillator();
+    const clickGain = ctx.createGain();
+    clickOsc.type = 'sine';
+    clickOsc.frequency.setValueAtTime(1400, t);
+    clickOsc.frequency.exponentialRampToValueAtTime(320, t + 0.025);
+    clickGain.gain.setValueAtTime(0.18, t);
+    clickGain.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
+    clickOsc.connect(clickGain);
+    clickGain.connect(masterCompressor);
+    clickOsc.start(t);
+    clickOsc.stop(t + 0.025);
+
+    // Warm rounded marimba body
+    const bodyOsc = ctx.createOscillator();
+    const bodyGain = ctx.createGain();
+    bodyOsc.type = 'triangle';
+    bodyOsc.frequency.setValueAtTime(420, t);
+    bodyOsc.frequency.exponentialRampToValueAtTime(680, t + 0.06);
+    bodyGain.gain.setValueAtTime(0.22, t);
+    bodyGain.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+    bodyOsc.connect(bodyGain);
+    bodyGain.connect(masterCompressor);
+    bodyOsc.start(t);
+    bodyOsc.stop(t + 0.07);
+  } catch(e){}
+}
+
+// 2. Magnetic Pin Hover Tick (Subtle feedback during drag & drop)
+function sndHover() {
+  try {
+    const ctx = getAudioCtx();
+    const t = ctx.currentTime;
     const osc = ctx.createOscillator();
     const g = ctx.createGain();
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(520, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1050, ctx.currentTime + 0.05);
-    g.gain.setValueAtTime(0.14, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+    osc.frequency.setValueAtTime(950, t);
+    osc.frequency.exponentialRampToValueAtTime(700, t + 0.018);
+    g.gain.setValueAtTime(0.08, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.018);
     osc.connect(g);
-    g.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.05);
+    g.connect(masterCompressor);
+    osc.start(t);
+    osc.stop(t + 0.018);
   } catch(e){}
 }
 
+// 3. Ultra-Satisfying Correct Match with Combo scaling (Sub bass + Marimba chime + Crystal sparkle)
 function sndHarmonicCorrect(multiplier = 1) {
   try {
     const ctx = getAudioCtx();
-    const chords = [
-      [523.25, 659.25, 783.99],
-      [587.33, 739.99, 880.00],
-      [659.25, 830.61, 987.77, 1318.51],
-      [783.99, 987.77, 1174.66, 1567.98]
-    ];
-    const chordIdx = Math.min(chords.length - 1, Math.max(0, Math.floor(multiplier) - 1));
-    const chord = chords[chordIdx];
+    const t = ctx.currentTime;
 
-    chord.forEach((freq, idx) => {
-      const osc = ctx.createOscillator();
-      const g = ctx.createGain();
-      osc.type = multiplier >= 2 ? 'sawtooth' : 'triangle';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.04);
-      g.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.04);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.04 + 0.3);
-      osc.connect(g);
-      g.connect(ctx.destination);
-      osc.start(ctx.currentTime + idx * 0.04);
-      osc.stop(ctx.currentTime + idx * 0.04 + 0.3);
+    // A. Punchy Sub Bass Thud (Physics weight & satisfying punch)
+    const subOsc = ctx.createOscillator();
+    const subGain = ctx.createGain();
+    subOsc.type = 'sine';
+    subOsc.frequency.setValueAtTime(140, t);
+    subOsc.frequency.exponentialRampToValueAtTime(48, t + 0.12);
+    subGain.gain.setValueAtTime(0.35, t);
+    subGain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    subOsc.connect(subGain);
+    subGain.connect(masterCompressor);
+    subOsc.start(t);
+    subOsc.stop(t + 0.12);
+
+    // B. Rich Harmonic Scales (Scales into sparkling higher chords with streak)
+    const chordProgression = [
+      // 1x: Warm C Major 7 (C5, E5, G5, B5)
+      [523.25, 659.25, 783.99, 987.77],
+      // 2x: Radiant D Major (D5, F#5, A5, D6)
+      [587.33, 739.99, 880.00, 1174.66],
+      // 3x: Sparkling E Major 9 (E5, G#5, B5, E6, F#6)
+      [659.25, 830.61, 987.77, 1318.51, 1479.98],
+      // 4x: High Voltage G Pentatonic (G5, B5, D6, E6, G6)
+      [783.99, 987.77, 1174.66, 1318.51, 1567.98],
+      // 5x+: Godlike Diamond Ascendancy (A5, C#6, E6, A6, C#7, E7)
+      [880.00, 1108.73, 1318.51, 1760.00, 2217.46, 2637.02]
+    ];
+
+    const idx = Math.min(chordProgression.length - 1, Math.max(0, Math.floor(multiplier) - 1));
+    const notes = chordProgression[idx];
+    const isHighCombo = multiplier >= 3;
+
+    notes.forEach((freq, i) => {
+      const noteTime = t + i * (isHighCombo ? 0.032 : 0.04);
+      
+      // Warm Sine/Triangle body
+      const osc1 = ctx.createOscillator();
+      const g1 = ctx.createGain();
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(freq, noteTime);
+      g1.gain.setValueAtTime(0.24, noteTime);
+      g1.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.38);
+      osc1.connect(g1);
+      g1.connect(masterCompressor);
+      osc1.start(noteTime);
+      osc1.stop(noteTime + 0.38);
+
+      // Bell / Glockenspiel Shimmer Overtones
+      const osc2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(freq * 2, noteTime);
+      g2.gain.setValueAtTime(0.12, noteTime);
+      g2.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.22);
+      osc2.connect(g2);
+      g2.connect(masterCompressor);
+      osc2.start(noteTime);
+      osc2.stop(noteTime + 0.22);
     });
+
+    // C. High Diamond Sparkle Flare
+    if (multiplier >= 2) {
+      const sparkleOsc = ctx.createOscillator();
+      const sparkleGain = ctx.createGain();
+      sparkleOsc.type = 'sine';
+      const startSparkle = 1800 + idx * 400;
+      sparkleOsc.frequency.setValueAtTime(startSparkle, t + 0.1);
+      sparkleOsc.frequency.exponentialRampToValueAtTime(startSparkle * 1.6, t + 0.28);
+      sparkleGain.gain.setValueAtTime(0.15, t + 0.1);
+      sparkleGain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+      sparkleOsc.connect(sparkleGain);
+      sparkleGain.connect(masterCompressor);
+      sparkleOsc.start(t + 0.1);
+      sparkleOsc.stop(t + 0.28);
+    }
   } catch(e){}
 }
 
+// 4. Soft Organic "Uh-Oh" Double Thud (Clean error feedback, never harsh)
 function sndCleanWrong() {
   try {
     const ctx = getAudioCtx();
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(200, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.22);
-    g.gain.setValueAtTime(0.2, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
-    osc.connect(g);
-    g.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.22);
+    const t = ctx.currentTime;
+
+    // Filter node for mellow, non-abrasive tone
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(600, t);
+    filter.connect(masterCompressor);
+
+    // Tone 1: Drop
+    const osc1 = ctx.createOscillator();
+    const g1 = ctx.createGain();
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(220, t);
+    osc1.frequency.exponentialRampToValueAtTime(120, t + 0.12);
+    g1.gain.setValueAtTime(0.25, t);
+    g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    osc1.connect(g1);
+    g1.connect(filter);
+    osc1.start(t);
+    osc1.stop(t + 0.12);
+
+    // Tone 2: Lower follow-up boop
+    const osc2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(160, t + 0.09);
+    osc2.frequency.exponentialRampToValueAtTime(75, t + 0.24);
+    g2.gain.setValueAtTime(0.28, t + 0.09);
+    g2.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
+    osc2.connect(g2);
+    g2.connect(filter);
+    osc2.start(t + 0.09);
+    osc2.stop(t + 0.24);
   } catch(e){}
 }
 
+// 5. Triumphant Fanfare (Category completion & round win)
 function sndComplete() {
   try {
     const ctx = getAudioCtx();
-    const chord = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-    chord.forEach((freq, idx) => {
+    const t = ctx.currentTime;
+
+    const fanfareNotes = [
+      { f: 523.25, delay: 0.00, dur: 0.18 }, // C5
+      { f: 659.25, delay: 0.08, dur: 0.18 }, // E5
+      { f: 783.99, delay: 0.16, dur: 0.22 }, // G5
+      { f: 1046.50, delay: 0.26, dur: 0.55 }, // C6 (Sustained peak)
+      { f: 1318.51, delay: 0.30, dur: 0.65 }  // E6 (Harmonic halo)
+    ];
+
+    fanfareNotes.forEach(n => {
+      const startTime = t + n.delay;
       const osc = ctx.createOscillator();
       const g = ctx.createGain();
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.06);
-      g.gain.setValueAtTime(0.18, ctx.currentTime + idx * 0.06);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.06 + 0.55);
+      osc.frequency.setValueAtTime(n.f, startTime);
+      g.gain.setValueAtTime(0.28, startTime);
+      g.gain.exponentialRampToValueAtTime(0.001, startTime + n.dur);
       osc.connect(g);
-      g.connect(ctx.destination);
-      osc.start(ctx.currentTime + idx * 0.06);
-      osc.stop(ctx.currentTime + idx * 0.06 + 0.55);
+      g.connect(masterCompressor);
+      osc.start(startTime);
+      osc.stop(startTime + n.dur);
+
+      const bell = ctx.createOscillator();
+      const bellG = ctx.createGain();
+      bell.type = 'sine';
+      bell.frequency.setValueAtTime(n.f * 2, startTime);
+      bellG.gain.setValueAtTime(0.12, startTime);
+      bellG.gain.exponentialRampToValueAtTime(0.001, startTime + n.dur * 0.7);
+      bell.connect(bellG);
+      bellG.connect(masterCompressor);
+      bell.start(startTime);
+      bell.stop(startTime + n.dur * 0.7);
     });
+
+    const boom = ctx.createOscillator();
+    const boomG = ctx.createGain();
+    boom.type = 'sine';
+    boom.frequency.setValueAtTime(110, t + 0.26);
+    boom.frequency.exponentialRampToValueAtTime(40, t + 0.8);
+    boomG.gain.setValueAtTime(0.35, t + 0.26);
+    boomG.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+    boom.connect(boomG);
+    boomG.connect(masterCompressor);
+    boom.start(t + 0.26);
+    boom.stop(t + 0.8);
+  } catch(e){}
+}
+
+// 6. Magical Golden Badge Unlock
+function sndBadgeUnlocked() {
+  try {
+    const ctx = getAudioCtx();
+    const t = ctx.currentTime;
+    const arpeggio = [587.33, 739.99, 880.00, 1174.66, 1479.98, 1760.00, 2217.46];
+    arpeggio.forEach((freq, idx) => {
+      const noteT = t + idx * 0.045;
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, noteT);
+      g.gain.setValueAtTime(0.2, noteT);
+      g.gain.exponentialRampToValueAtTime(0.001, noteT + 0.45);
+      osc.connect(g);
+      g.connect(masterCompressor);
+      osc.start(noteT);
+      osc.stop(noteT + 0.45);
+    });
+  } catch(e){}
+}
+
+// 7. Coin Rattle & Cash Purchase Chime
+function sndPurchase() {
+  try {
+    const ctx = getAudioCtx();
+    const t = ctx.currentTime;
+
+    [0, 0.04, 0.08].forEach((del, i) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(1800 + i * 350, t + del);
+      osc.frequency.exponentialRampToValueAtTime(2400 + i * 400, t + del + 0.04);
+      g.gain.setValueAtTime(0.18, t + del);
+      g.gain.exponentialRampToValueAtTime(0.001, t + del + 0.04);
+      osc.connect(g);
+      g.connect(masterCompressor);
+      osc.start(t + del);
+      osc.stop(t + del + 0.04);
+    });
+
+    [1244.51, 1567.98, 1864.66].forEach(freq => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t + 0.1);
+      g.gain.setValueAtTime(0.22, t + 0.1);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+      osc.connect(g);
+      g.connect(masterCompressor);
+      osc.start(t + 0.1);
+      osc.stop(t + 0.7);
+    });
+  } catch(e){}
+}
+
+// 8. Card / Chip Shuffle Flutter
+function sndShuffle() {
+  try {
+    const ctx = getAudioCtx();
+    const t = ctx.currentTime;
+    for (let i = 0; i < 5; i++) {
+      const noteT = t + i * 0.035;
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(350 + Math.random() * 250, noteT);
+      osc.frequency.exponentialRampToValueAtTime(600 + Math.random() * 200, noteT + 0.03);
+      g.gain.setValueAtTime(0.14, noteT);
+      g.gain.exponentialRampToValueAtTime(0.001, noteT + 0.03);
+      osc.connect(g);
+      g.connect(masterCompressor);
+      osc.start(noteT);
+      osc.stop(noteT + 0.03);
+    }
   } catch(e){}
 }
 
@@ -3694,7 +4879,7 @@ function calculateGeoDistanceKm(lat1, lon1, lat2, lon2) {
 /* ==========================================================================
    HIGH-FIDELITY 3D VECTOR AVATAR ENGINE (TÜRKİYE & SAYGIN KÜLTÜREL ÖGELER)
    ========================================================================== */
-function render3DAvatar(containerId, size = 145) {
+function render3DAvatar(containerId, size = 145, customEquipped = null, forcedGender = null) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -3714,9 +4899,9 @@ function render3DAvatar(containerId, size = 145) {
 
   const skinObj = skinGradients[profileState.skin] || skinGradients.light;
   const hairColor = hairColors[profileState.hairColor] || hairColors.black;
-  const gender = profileState.gender || 'male';
+  const gender = forcedGender || profileState.gender || 'male';
 
-  const equipped = previewEquipped || profileState.equipped || {};
+  const equipped = customEquipped || previewEquipped || profileState.equipped || {};
   const outfit = equipped.outfit || 'outfit_basic';
   const headwear = equipped.headwear || 'head_none';
   const faceAcc = equipped.face || 'face_none';
@@ -3731,6 +4916,14 @@ function render3DAvatar(containerId, size = 145) {
     bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="50%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#f8fafc"/></linearGradient>';
   } else if (background === 'bg_bosphorus') {
     bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="40%" stop-color="#0284c7"/><stop offset="100%" stop-color="#0f172a"/></linearGradient>';
+  } else if (background === 'bg_mardin') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fef08a"/><stop offset="40%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#78350f"/></linearGradient>';
+  } else if (background === 'bg_sumela') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#94a3b8"/><stop offset="45%" stop-color="#334155"/><stop offset="100%" stop-color="#064e3b"/></linearGradient>';
+  } else if (background === 'bg_oludeniz') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#67e8f9"/><stop offset="50%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#0284c7"/></linearGradient>';
+  } else if (background === 'bg_ani') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fdba74"/><stop offset="50%" stop-color="#c2410c"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient>';
   } else if (background === 'bg_uzungol') {
     bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#34d399"/><stop offset="45%" stop-color="#059669"/><stop offset="100%" stop-color="#064e3b"/></linearGradient>';
   } else if (background === 'bg_salda') {
@@ -3743,6 +4936,18 @@ function render3DAvatar(containerId, size = 145) {
     bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="60%" stop-color="#0284c7"/><stop offset="100%" stop-color="#082f49"/></linearGradient>';
   } else if (background === 'bg_golden_aura') {
     bgGradient = '<radialGradient id="bgG_' + uid + '" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#fef08a"/><stop offset="45%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#451a03"/></radialGradient>';
+  } else if (background === 'bg_isparta_lavanta') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#d8b4fe"/><stop offset="45%" stop-color="#a855f7"/><stop offset="100%" stop-color="#3b0764"/></linearGradient>';
+  } else if (background === 'bg_sakura') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fce7f3"/><stop offset="50%" stop-color="#f472b6"/><stop offset="100%" stop-color="#9d174d"/></linearGradient>';
+  } else if (background === 'bg_butterfly_valley') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#a7f3d0"/><stop offset="50%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#047857"/></linearGradient>';
+  } else if (background === 'bg_pembe_tuzgolu') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fdf2f8"/><stop offset="50%" stop-color="#f472b6"/><stop offset="100%" stop-color="#fde047"/></linearGradient>';
+  } else if (background === 'bg_prenses_odasi') {
+    bgGradient = '<radialGradient id="bgG_' + uid + '" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#fce7f3"/><stop offset="40%" stop-color="#db2777"/><stop offset="100%" stop-color="#4c0519"/></radialGradient>';
+  } else if (background === 'bg_aesthetic_cafe') {
+    bgGradient = '<linearGradient id="bgG_' + uid + '" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fed7aa"/><stop offset="45%" stop-color="#fb7185"/><stop offset="100%" stop-color="#4c0519"/></linearGradient>';
   }
 
   // --- OUTFIT VECTORS ---
@@ -3750,6 +4955,76 @@ function render3DAvatar(containerId, size = 145) {
   if (outfit === 'outfit_basic') {
     outfitSvg = '<path d="M22 100 C22 76, 38 66, 50 66 C62 66, 78 76, 78 100 Z" fill="url(#teeGrad_' + uid + ')" filter="url(#drop3D_' + uid + ')" />' +
       '<path d="M42 66 Q50 76 58 66 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_prenses_pembe') {
+    outfitSvg = '<!-- Masalsı Pembe Saray Elbisesi -->' +
+      '<path d="M14 100 C14 66, 32 58, 50 58 C68 58, 86 66, 86 100 Z" fill="#f472b6" stroke="#db2777" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="24" cy="68" r="8" fill="#fbcfe8" />' +
+      '<circle cx="76" cy="68" r="8" fill="#fbcfe8" />' +
+      '<path d="M34 68 Q50 82 66 68 Z" fill="#ffffff" />' +
+      '<polygon points="50,78 44,74 44,82" fill="#fbbf24" /><polygon points="50,78 56,74 56,82" fill="#fbbf24" /><circle cx="50" cy="78" r="2.5" fill="#f43f5e" />' +
+      '<path d="M20 92 Q50 84 80 92 L80 100 L20 100 Z" fill="#fbcfe8" />' +
+      '<circle cx="36" cy="70" r="1.5" fill="#ffffff" /><circle cx="44" cy="74" r="1.5" fill="#ffffff" /><circle cx="56" cy="74" r="1.5" fill="#ffffff" /><circle cx="64" cy="70" r="1.5" fill="#ffffff" />' +
+      '<path d="M42 58 Q50 68 58 58 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_lavanta') {
+    outfitSvg = '<!-- Isparta Lavanta Hasadı Elbisesi -->' +
+      '<path d="M18 100 C18 70, 34 62, 50 62 C66 62, 82 70, 82 100 Z" fill="#c084fc" stroke="#a855f7" stroke-width="1.2" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="28" cy="70" r="7" fill="#e9d5ff" />' +
+      '<circle cx="72" cy="70" r="7" fill="#e9d5ff" />' +
+      '<rect x="24" y="86" width="52" height="7" rx="1.5" fill="#ca8a04" />' +
+      '<circle cx="50" cy="89.5" r="3" fill="#a855f7" stroke="#ffffff" stroke-width="0.8" />' +
+      '<path d="M38 62 Q50 74 62 62 Z" fill="#ffffff" />' +
+      '<path d="M42 62 Q50 70 58 62 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_denizkizi') {
+    outfitSvg = '<!-- Ege Turkuaz Denizkızı Kostümü -->' +
+      '<path d="M20 100 C20 72, 36 62, 50 62 C64 62, 80 72, 80 100 Z" fill="#06b6d4" stroke="#22d3ee" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="38" cy="72" r="7" fill="#c084fc" stroke="#a855f7" stroke-width="1" />' +
+      '<circle cx="62" cy="72" r="7" fill="#c084fc" stroke="#a855f7" stroke-width="1" />' +
+      '<circle cx="50" cy="72" r="2.5" fill="#ffffff" filter="url(#glow3D_' + uid + ')" />' +
+      '<path d="M28 88 Q35 84 42 88 Q50 84 58 88 Q65 84 72 88" stroke="#a5f3fc" stroke-width="2" fill="none" />' +
+      '<path d="M42 62 Q50 72 58 62 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_peri') {
+    outfitSvg = '<!-- Kelebekler Vadisi Orman Perisi -->' +
+      '<path d="M12 60 C8 44, 28 42, 34 56 Z" fill="#a7f3d0" opacity="0.85" filter="url(#glow3D_' + uid + ')" />' +
+      '<path d="M88 60 C92 44, 72 42, 66 56 Z" fill="#a7f3d0" opacity="0.85" filter="url(#glow3D_' + uid + ')" />' +
+      '<path d="M20 100 C20 72, 36 62, 50 62 C64 62, 80 72, 80 100 Z" fill="#34d399" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M34 62 Q50 78 66 62 Z" fill="#fbcfe8" />' +
+      '<circle cx="50" cy="80" r="4" fill="#f472b6" stroke="#fbbf24" stroke-width="1" />' +
+      '<path d="M42 62 Q50 70 58 62 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_oversize_pink') {
+    outfitSvg = '<!-- Pastel Pembe Oversize Sweatshirt -->' +
+      '<path d="M16 100 C16 68, 32 60, 50 60 C68 60, 84 68, 84 100 Z" fill="#f9a8d4" stroke="#f472b6" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M42 60 Q50 68 58 60 Z" fill="#ffffff" />' +
+      '<path d="M50 78 C47 74, 42 74, 42 78 C42 83, 50 88, 50 88 C50 88, 58 83, 58 78 C58 74, 53 74, 50 78 Z" fill="#e11d48" filter="url(#glow3D_' + uid + ')" />' +
+      '<path d="M44 60 Q50 66 56 60 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_vintage_polka') {
+    outfitSvg = '<!-- Vintage Puantiyeli Bahar Elbisesi -->' +
+      '<path d="M20 100 C20 72, 36 62, 50 62 C64 62, 80 72, 80 100 Z" fill="#e11d48" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="32" cy="74" r="2.5" fill="#ffffff" /><circle cx="48" cy="72" r="2.5" fill="#ffffff" /><circle cx="64" cy="74" r="2.5" fill="#ffffff" /><circle cx="40" cy="84" r="2.5" fill="#ffffff" /><circle cx="56" cy="84" r="2.5" fill="#ffffff" /><circle cx="32" cy="94" r="2.5" fill="#ffffff" /><circle cx="48" cy="94" r="2.5" fill="#ffffff" /><circle cx="64" cy="94" r="2.5" fill="#ffffff" />' +
+      '<path d="M38 62 Q50 76 62 62 Z" fill="#ffffff" stroke="#e11d48" stroke-width="1" />' +
+      '<path d="M42 62 Q50 70 58 62 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_kpop_idol') {
+    outfitSvg = '<!-- Harajuku Pastel Yıldız Kombini -->' +
+      '<path d="M18 100 C18 70, 34 60, 50 60 C66 60, 82 70, 82 100 Z" fill="#c084fc" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M36 60 L50 82 L64 60 Z" fill="#1e293b" />' +
+      '<polygon points="50,78 52,73 57,73 53,70 55,65 50,68 45,65 47,70 43,73 48,73" fill="#fde047" filter="url(#glow3D_' + uid + ')" />' +
+      '<rect x="22" y="86" width="56" height="14" fill="#e9d5ff" />' +
+      '<line x1="36" y1="86" x2="36" y2="100" stroke="#a855f7" stroke-width="1.5" /><line x1="50" y1="86" x2="50" y2="100" stroke="#a855f7" stroke-width="1.5" /><line x1="64" y1="86" x2="64" y2="100" stroke="#a855f7" stroke-width="1.5" />' +
+      '<path d="M42 60 Q50 68 58 60 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_kedi_tulum') {
+    outfitSvg = '<!-- Pofuduk Pembe Kedi Tulumu -->' +
+      '<path d="M18 100 C18 70, 34 60, 50 60 C66 60, 82 70, 82 100 Z" fill="#f472b6" filter="url(#drop3D_' + uid + ')" />' +
+      '<ellipse cx="50" cy="85" rx="16" ry="13" fill="#ffffff" />' +
+      '<circle cx="50" cy="86" r="3" fill="#f472b6" /><circle cx="45" cy="82" r="1.5" fill="#f472b6" /><circle cx="50" cy="80" r="1.5" fill="#f472b6" /><circle cx="55" cy="82" r="1.5" fill="#f472b6" />' +
+      '<path d="M43 62 Q50 70 57 62 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_gelin_bindalli') {
+    outfitSvg = '<!-- Geleneksel Kadife Bindallı -->' +
+      '<path d="M14 100 C14 66, 32 56, 50 56 C68 56, 86 66, 86 100 Z" fill="#881337" stroke="#fbbf24" stroke-width="1.8" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M30 56 C30 76, 40 88, 50 90 C60 88, 70 76, 70 56 Z" fill="#991b1b" stroke="#fde047" stroke-width="1.5" />' +
+      '<path d="M34 68 Q50 82 66 68" stroke="#fde047" stroke-width="2" fill="none" />' +
+      '<path d="M32 78 Q50 92 68 78" stroke="#fde047" stroke-width="2" fill="none" />' +
+      '<circle cx="50" cy="74" r="3" fill="#10b981" stroke="#fde047" stroke-width="1" />' +
+      '<circle cx="50" cy="84" r="3" fill="#10b981" stroke="#fde047" stroke-width="1" />' +
+      '<path d="M42 58 Q50 68 58 58 Z" fill="url(#skinGrad_' + uid + ')" />';
   } else if (outfit === 'outfit_milli_takim') {
     outfitSvg = '<!-- Ay-Yıldızlı Kâşif Forması -->' +
       '<path d="M20 100 C20 74, 36 64, 50 64 C64 64, 80 74, 80 100 Z" fill="#dc2626" stroke="#991b1b" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
@@ -3775,6 +5050,49 @@ function render3DAvatar(containerId, size = 145) {
       '<circle cx="50" cy="82" r="3" fill="#3b82f6" stroke="#fde047" stroke-width="1" />' +
       '<circle cx="50" cy="92" r="3" fill="#10b981" stroke="#fde047" stroke-width="1" />' +
       '<path d="M42 60 Q50 70 58 60 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_padisah') {
+    outfitSvg = '<!-- Görkemli Padişah Kaftanı & Samur Kürk -->' +
+      '<path d="M14 100 C14 66, 32 56, 50 56 C68 56, 86 66, 86 100 Z" fill="#881337" stroke="#f59e0b" stroke-width="2" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M30 56 C30 76, 40 88, 50 90 C60 88, 70 76, 70 56 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5" />' +
+      '<path d="M50 64 L50 100" stroke="#fbbf24" stroke-width="3" />' +
+      '<circle cx="50" cy="70" r="3.5" fill="#e11d48" stroke="#facc15" stroke-width="1" />' +
+      '<circle cx="50" cy="80" r="3.5" fill="#0284c7" stroke="#facc15" stroke-width="1" />' +
+      '<circle cx="50" cy="90" r="3.5" fill="#15803d" stroke="#facc15" stroke-width="1" />' +
+      '<path d="M42 58 Q50 68 58 58 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_seymen') {
+    outfitSvg = '<!-- Ankara Seymen Yeleği & Gümüş Köstek -->' +
+      '<path d="M20 100 C20 74, 36 64, 50 64 C64 64, 80 74, 80 100 Z" fill="#14532d" stroke="#166534" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M36 64 L50 86 L64 64 Z" fill="#ffffff" />' +
+      '<rect x="22" y="85" width="56" height="8" rx="2" fill="#991b1b" />' +
+      '<path d="M32 76 Q45 88 58 76" stroke="#e2e8f0" stroke-width="2" fill="none" />' +
+      '<path d="M42 64 Q50 74 58 64 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_bar') {
+    outfitSvg = '<!-- Doğu Anadolu Bar & Kafkas Cepkeni -->' +
+      '<path d="M18 100 C18 70, 34 60, 50 60 C66 60, 82 70, 82 100 Z" fill="#0f172a" stroke="#cbd5e1" stroke-width="1" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M42 60 L50 80 L58 60 Z" fill="#f8fafc" />' +
+      '<rect x="25" y="72" width="14" height="6" rx="1" fill="#e2e8f0" stroke="#475569" stroke-width="1" />' +
+      '<rect x="61" y="72" width="14" height="6" rx="1" fill="#e2e8f0" stroke="#475569" stroke-width="1" />' +
+      '<rect x="20" y="86" width="60" height="7" rx="1" fill="#b91c1c" />' +
+      '<path d="M44 60 Q50 68 56 60 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_kilim') {
+    outfitSvg = '<!-- Anadolu Dokuma Kilim Hırkası -->' +
+      '<path d="M20 100 C20 74, 36 64, 50 64 C64 64, 80 74, 80 100 Z" fill="#b45309" filter="url(#drop3D_' + uid + ')" />' +
+      '<polygon points="34,74 42,66 50,74 42,82" fill="#dc2626" />' +
+      '<polygon points="50,74 58,66 66,74 58,82" fill="#0284c7" />' +
+      '<polygon points="42,84 50,76 58,84 50,92" fill="#facc15" />' +
+      '<path d="M42 64 Q50 74 58 64 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_asci') {
+    outfitSvg = '<!-- Gaziantep Ustabaşı Önlüğü -->' +
+      '<path d="M20 100 C20 74, 36 64, 50 64 C64 64, 80 74, 80 100 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M44 64 L50 74 L56 64 Z" fill="#dc2626" />' +
+      '<rect x="26" y="82" width="48" height="18" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1" />' +
+      '<path d="M42 64 Q50 72 58 64 Z" fill="url(#skinGrad_' + uid + ')" />';
+  } else if (outfit === 'outfit_dagci') {
+    outfitSvg = '<!-- Kaçkarlar Dağcı Termal Montu -->' +
+      '<path d="M18 100 C18 70, 34 60, 50 60 C66 60, 82 70, 82 100 Z" fill="#f97316" stroke="#ea580c" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M30 60 C30 76, 40 86, 50 88 C60 86, 70 76, 70 60 Z" fill="#0f172a" />' +
+      '<line x1="50" y1="62" x2="50" y2="100" stroke="#e2e8f0" stroke-width="2.5" />' +
+      '<path d="M42 62 Q50 70 58 62 Z" fill="url(#skinGrad_' + uid + ')" />';
   } else if (outfit === 'outfit_yoruk') {
     outfitSvg = '<!-- Toros Yörük Çoban Cepkeni -->' +
       '<path d="M20 100 C20 74, 36 64, 50 64 C64 64, 80 74, 80 100 Z" fill="#78350f" stroke="#451a03" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
@@ -3855,7 +5173,68 @@ function render3DAvatar(containerId, size = 145) {
 
   // --- HEADWEAR VECTORS ---
   let headwearSvg = '';
-  if (headwear === 'head_fes') {
+  if (headwear === 'head_cicek_taci') {
+    headwearSvg = '<!-- Bahar Çiçekleri & Papatya Tacı -->' +
+      '<path d="M30 30 Q50 24 70 30" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="34" cy="28" r="4.5" fill="#ffffff" /><circle cx="34" cy="28" r="2" fill="#facc15" />' +
+      '<circle cx="44" cy="24" r="5" fill="#f472b6" /><circle cx="44" cy="24" r="2" fill="#fde047" />' +
+      '<circle cx="56" cy="24" r="5" fill="#f472b6" /><circle cx="56" cy="24" r="2" fill="#fde047" />' +
+      '<circle cx="66" cy="28" r="4.5" fill="#ffffff" /><circle cx="66" cy="28" r="2" fill="#facc15" />';
+  } else if (headwear === 'head_fiyonk_dev') {
+    headwearSvg = '<!-- Dev Pastel Pembe Saten Fiyonk -->' +
+      '<g transform="translate(50, 20)" filter="url(#drop3D_' + uid + ')">' +
+      '<polygon points="0,0 -16,-10 -14,10" fill="#f472b6" stroke="#db2777" stroke-width="1" />' +
+      '<polygon points="0,0 16,-10 14,10" fill="#f472b6" stroke="#db2777" stroke-width="1" />' +
+      '<circle cx="0" cy="0" r="4" fill="#db2777" />' +
+      '<path d="M-4 3 L-8 14" stroke="#f472b6" stroke-width="3" stroke-linecap="round" />' +
+      '<path d="M4 3 L8 14" stroke="#f472b6" stroke-width="3" stroke-linecap="round" />' +
+      '</g>';
+  } else if (headwear === 'head_kedi_kulak_isikli') {
+    headwearSvg = '<!-- Işıklı Neon Kedi Kulaklığı -->' +
+      '<path d="M26 40 C26 20, 74 20, 74 40" stroke="#1e293b" stroke-width="4.5" fill="none" />' +
+      '<polygon points="32,24 24,8 38,16" fill="#ec4899" stroke="#f472b6" stroke-width="1.5" filter="url(#glow3D_' + uid + ')" />' +
+      '<polygon points="31,21 26,12 35,17" fill="#fbcfe8" />' +
+      '<polygon points="68,24 76,8 62,16" fill="#ec4899" stroke="#f472b6" stroke-width="1.5" filter="url(#glow3D_' + uid + ')" />' +
+      '<polygon points="69,21 74,12 65,17" fill="#fbcfe8" />' +
+      '<circle cx="26" cy="40" r="6.5" fill="#ec4899" filter="url(#glow3D_' + uid + ')" />' +
+      '<circle cx="74" cy="40" r="6.5" fill="#ec4899" filter="url(#glow3D_' + uid + ')" />';
+  } else if (headwear === 'head_kelebek_toka') {
+    headwearSvg = '<!-- Uçuşan Simli Kelebek Tokalar -->' +
+      '<g transform="translate(30, 26)" filter="url(#glow3D_' + uid + ')">' +
+      '<ellipse cx="-4" cy="-4" rx="4" ry="6" fill="#c084fc" transform="rotate(-30 -4 -4)" />' +
+      '<ellipse cx="4" cy="-4" rx="4" ry="6" fill="#c084fc" transform="rotate(30 4 -4)" />' +
+      '<circle cx="0" cy="0" r="1.5" fill="#fde047" />' +
+      '</g>' +
+      '<g transform="translate(70, 26)" filter="url(#glow3D_' + uid + ')">' +
+      '<ellipse cx="-4" cy="-4" rx="4" ry="6" fill="#38bdf8" transform="rotate(-30 -4 -4)" />' +
+      '<ellipse cx="4" cy="-4" rx="4" ry="6" fill="#38bdf8" transform="rotate(30 4 -4)" />' +
+      '<circle cx="0" cy="0" r="1.5" fill="#fde047" />' +
+      '</g>';
+  } else if (headwear === 'head_cadı_pembe') {
+    headwearSvg = '<!-- Pastel Yıldızlı Peri Büyücüsü Şapkası -->' +
+      '<ellipse cx="50" cy="30" rx="26" ry="6" fill="#f472b6" stroke="#db2777" stroke-width="1" filter="url(#drop3D_' + uid + ')" />' +
+      '<polygon points="34,29 50,6 66,29" fill="#db2777" />' +
+      '<polygon points="50,28 48,25 50,22 52,25" fill="#fde047" filter="url(#glow3D_' + uid + ')" />';
+  } else if (headwear === 'head_inci_tac') {
+    headwearSvg = '<!-- Kuğu Gölü İnci Tacı -->' +
+      '<path d="M34 30 Q50 22 66 30" stroke="#e2e8f0" stroke-width="2" fill="none" filter="url(#glow3D_' + uid + ')" />' +
+      '<polygon points="36,30 40,20 44,28 50,14 56,28 60,20 64,30" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.8" />' +
+      '<circle cx="50" cy="14" r="2.5" fill="#ffffff" filter="url(#glow3D_' + uid + ')" />' +
+      '<circle cx="40" cy="20" r="2" fill="#ffffff" /><circle cx="60" cy="20" r="2" fill="#ffffff" />' +
+      '<circle cx="44" cy="28" r="1.5" fill="#38bdf8" /><circle cx="56" cy="28" r="1.5" fill="#38bdf8" />';
+  } else if (headwear === 'head_bere_ayi') {
+    headwearSvg = '<!-- Ayıcık Kulaklı Pelüş Bere -->' +
+      '<circle cx="34" cy="18" r="6" fill="#e2d4b7" /><circle cx="34" cy="18" r="3.5" fill="#b29b7a" />' +
+      '<circle cx="66" cy="18" r="6" fill="#e2d4b7" /><circle cx="66" cy="18" r="3.5" fill="#b29b7a" />' +
+      '<path d="M30 32 C30 14, 70 14, 70 32 Z" fill="#f5ebe0" stroke="#e2d4b7" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />';
+  } else if (headwear === 'head_hasir_kurdele') {
+    headwearSvg = '<!-- Hasır Şapka & Uçuşan Kurdele -->' +
+      '<ellipse cx="50" cy="30" rx="28" ry="7" fill="#fde047" stroke="#ca8a04" stroke-width="1.2" filter="url(#drop3D_' + uid + ')" />' +
+      '<path d="M34 30 C34 16, 66 16, 66 30 Z" fill="#facc15" />' +
+      '<rect x="34" y="26" width="32" height="4" fill="#f472b6" />' +
+      '<path d="M64 28 Q74 34 78 48" stroke="#f472b6" stroke-width="3" fill="none" stroke-linecap="round" />' +
+      '<path d="M64 28 Q70 38 72 52" stroke="#f472b6" stroke-width="3" fill="none" stroke-linecap="round" />';
+  } else if (headwear === 'head_fes') {
     headwearSvg = '<!-- Püsküllü Kırmızı Osmanlı Fesi -->' +
       '<polygon points="37,32 39,15 61,15 63,32" fill="#dc2626" stroke="#991b1b" stroke-width="1.2" filter="url(#drop3D_' + uid + ')" />' +
       '<ellipse cx="50" cy="15" rx="11" ry="3" fill="#ef4444" />' +
@@ -3870,6 +5249,35 @@ function render3DAvatar(containerId, size = 145) {
       '<circle cx="50" cy="33" r="2" fill="#10b981" />' +
       '<circle cx="56" cy="33" r="2" fill="#f59e0b" />' +
       '<circle cx="62" cy="33" r="2" fill="#ec4899" />';
+  } else if (headwear === 'head_sarik_alperen') {
+    headwearSvg = '<!-- Alperen Kürklü Savaşçı Börkü -->' +
+      '<polygon points="38,30 50,8 62,30" fill="#b91c1c" />' +
+      '<ellipse cx="50" cy="30" rx="20" ry="6" fill="#52525b" stroke="#71717a" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="50" cy="20" r="3.5" fill="#f59e0b" stroke="#78350f" stroke-width="1" />';
+  } else if (headwear === 'head_kuvayimilliye') {
+    headwearSvg = '<!-- Kuva-yi Milliye İstiklal Kalpağı -->' +
+      '<path d="M30 32 C30 12, 70 12, 70 32 Z" fill="#09090b" stroke="#27272a" stroke-width="2" filter="url(#drop3D_' + uid + ')" />' +
+      '<ellipse cx="50" cy="32" rx="21" ry="5" fill="#18181b" />' +
+      '<circle cx="50" cy="22" r="3" fill="#dc2626" />';
+  } else if (headwear === 'head_tac') {
+    headwearSvg = '<!-- Topkapı Saray Sultanı Zümrüt Tacı -->' +
+      '<polygon points="32,30 36,15 43,24 50,10 57,24 64,15 68,30" fill="#f59e0b" stroke="#d97706" stroke-width="1" filter="url(#glow3D_' + uid + ')" />' +
+      '<circle cx="50" cy="20" r="2.5" fill="#10b981" />' +
+      '<circle cx="36" cy="20" r="1.8" fill="#ef4444" />' +
+      '<circle cx="64" cy="20" r="1.8" fill="#ef4444" />';
+  } else if (headwear === 'head_yemeni') {
+    headwearSvg = '<!-- Oymalı İpek Yemeni -->' +
+      '<path d="M28 36 C28 14, 72 14, 72 36 C74 48, 70 56, 68 62 C60 48, 40 48, 32 62 C30 56, 26 48, 28 36 Z" fill="#be123c" stroke="#fbbf24" stroke-width="1" filter="url(#drop3D_' + uid + ')" />' +
+      '<circle cx="34" cy="32" r="1.5" fill="#facc15" /><circle cx="50" cy="20" r="1.5" fill="#facc15" /><circle cx="66" cy="32" r="1.5" fill="#facc15" />';
+  } else if (headwear === 'head_sef_kepi') {
+    headwearSvg = '<!-- Usta Aşçı Başlığı -->' +
+      '<rect x="34" y="24" width="32" height="8" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />' +
+      '<ellipse cx="50" cy="14" rx="18" ry="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#drop3D_' + uid + ')" />';
+  } else if (headwear === 'head_bere_dagci') {
+    headwearSvg = '<!-- Ponponlu Kış Beresi -->' +
+      '<path d="M30 32 C30 15, 70 15, 70 32 Z" fill="#dc2626" filter="url(#drop3D_' + uid + ')" />' +
+      '<rect x="28" y="28" width="44" height="6" rx="2" fill="#f8fafc" />' +
+      '<circle cx="50" cy="12" r="5" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />';
   } else if (headwear === 'head_kavuk') {
     headwearSvg = '<!-- Zümrütlü Sarık & Kavuk -->' +
       '<ellipse cx="50" cy="22" rx="22" ry="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#drop3D_' + uid + ')" />' +
@@ -3918,9 +5326,62 @@ function render3DAvatar(containerId, size = 145) {
 
   // --- FACE & EYEPARTS VECTORS ---
   let faceSvg = '';
-  if (faceAcc === 'face_pala_biyik') {
+  if (faceAcc === 'face_allik_kalp') {
+    faceSvg = '<!-- Pembe Allık & Kalp Çiller -->' +
+      '<ellipse cx="38" cy="46" rx="5" ry="3" fill="#f472b6" opacity="0.65" />' +
+      '<ellipse cx="62" cy="46" rx="5" ry="3" fill="#f472b6" opacity="0.65" />' +
+      '<path d="M38 46 C37 44, 35 44, 35 46 C35 48, 38 50, 38 50 C38 50, 41 48, 41 46 C41 44, 39 44, 38 46 Z" fill="#e11d48" />' +
+      '<path d="M62 46 C61 44, 59 44, 59 46 C59 48, 62 50, 62 50 C62 50, 65 48, 65 46 C65 44, 63 44, 62 46 Z" fill="#e11d48" />';
+  } else if (faceAcc === 'face_yildiz_sim') {
+    faceSvg = '<!-- Işıltılı Yıldız Makyajı -->' +
+      '<ellipse cx="38" cy="45" rx="5" ry="2.5" fill="#fbcfe8" opacity="0.5" />' +
+      '<ellipse cx="62" cy="45" rx="5" ry="2.5" fill="#fbcfe8" opacity="0.5" />' +
+      '<polygon points="38,45 39,43 40,45 42,45 40.5,46 41,48 39,47 37,48 37.5,46 36,45" fill="#facc15" filter="url(#glow3D_' + uid + ')" />' +
+      '<polygon points="62,45 63,43 64,45 66,45 64.5,46 65,48 63,47 61,48 61.5,46 60,45" fill="#facc15" filter="url(#glow3D_' + uid + ')" />';
+  } else if (faceAcc === 'face_kalp_gozluk') {
+    faceSvg = '<!-- Sevimli Pembe Kalp Gözlük -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<path d="M42 41 C40 37, 34 37, 34 41 C34 46, 42 50, 42 50 C42 50, 50 46, 50 41 C50 37, 44 37, 42 41 Z" fill="#f43f5e" stroke="#be123c" stroke-width="1.2" opacity="0.9" />' +
+      '<path d="M58 41 C56 37, 50 37, 50 41 C50 46, 58 50, 58 50 C58 50, 66 46, 66 41 C66 37, 60 37, 58 41 Z" fill="#f43f5e" stroke="#be123c" stroke-width="1.2" opacity="0.9" />' +
+      '<line x1="48" y1="41" x2="52" y2="41" stroke="#be123c" stroke-width="2" />' +
+      '</g>';
+  } else if (faceAcc === 'face_yuvarlak_rose') {
+    faceSvg = '<!-- Rose Gold Yuvarlak Gözlük -->' +
+      '<circle cx="42" cy="41" r="6" fill="rgba(251,207,232,0.2)" stroke="#f472b6" stroke-width="1.5" />' +
+      '<circle cx="58" cy="41" r="6" fill="rgba(251,207,232,0.2)" stroke="#f472b6" stroke-width="1.5" />' +
+      '<line x1="48" y1="41" x2="52" y2="41" stroke="#f472b6" stroke-width="1.5" />';
+  } else if (faceAcc === 'face_sakiz_balon') {
+    faceSvg = '<!-- Çilekli Sakız Balonu -->' +
+      '<circle cx="50" cy="48" r="8.5" fill="#f472b6" stroke="#db2777" stroke-width="1" opacity="0.92" filter="url(#glow3D_' + uid + ')" />' +
+      '<ellipse cx="47" cy="45" rx="2.5" ry="1.5" fill="#ffffff" opacity="0.75" />';
+  } else if (faceAcc === 'face_sevimli_ciller') {
+    faceSvg = '<!-- Doğal Güneş Çilleri -->' +
+      '<circle cx="42" cy="45" r="0.7" fill="#b45309" /><circle cx="45" cy="46" r="0.7" fill="#b45309" /><circle cx="50" cy="45" r="0.7" fill="#b45309" /><circle cx="55" cy="46" r="0.7" fill="#b45309" /><circle cx="58" cy="45" r="0.7" fill="#b45309" />';
+  } else if (faceAcc === 'face_pala_biyik') {
     faceSvg = '<!-- Heybetli Türk Pala Bıyığı -->' +
       '<path d="M34 49 Q42 54 50 49 Q58 54 66 49 Q68 44 64 43 Q58 48 50 47 Q42 48 36 43 Q32 44 34 49 Z" fill="#18181b" filter="url(#drop3D_' + uid + ')" />';
+  } else if (faceAcc === 'face_posbiyik') {
+    faceSvg = '<!-- Heybetli Köroğlu Pos Bıyığı -->' +
+      '<path d="M32 50 Q42 58 50 51 Q58 58 68 50 Q70 42 63 43 Q56 50 50 48 Q44 50 37 43 Q30 42 32 50 Z" fill="#262626" filter="url(#drop3D_' + uid + ')" />';
+  } else if (faceAcc === 'face_surme') {
+    faceSvg = '<!-- Otantik Sürmeli Kâşif Bakışı -->' +
+      '<path d="M36 38 Q42 34 48 38" stroke="#09090b" stroke-width="1.8" fill="none" stroke-linecap="round" />' +
+      '<path d="M52 38 Q58 34 64 38" stroke="#09090b" stroke-width="1.8" fill="none" stroke-linecap="round" />' +
+      '<circle cx="48" cy="36" r="1.5" fill="#38bdf8" filter="url(#glow3D_' + uid + ')" />';
+  } else if (faceAcc === 'face_nazar_nokta') {
+    faceSvg = '<!-- Yanakta Nazar Boncuğu -->' +
+      '<circle cx="63" cy="46" r="3" fill="#0284c7" stroke="#ffffff" stroke-width="0.8" />' +
+      '<circle cx="63" cy="46" r="1.5" fill="#facc15" />' +
+      '<circle cx="63" cy="46" r="0.7" fill="#000000" />';
+  } else if (faceAcc === 'face_gozluk_antika') {
+    faceSvg = '<!-- Antika Haritacı Pirinç Gözlüğü -->' +
+      '<circle cx="42" cy="41" r="6" fill="rgba(254,240,138,0.2)" stroke="#ca8a04" stroke-width="1.5" />' +
+      '<circle cx="58" cy="41" r="6" fill="rgba(254,240,138,0.2)" stroke="#ca8a04" stroke-width="1.5" />' +
+      '<line x1="48" y1="41" x2="52" y2="41" stroke="#ca8a04" stroke-width="1.5" />';
+  } else if (faceAcc === 'face_gozluk_kar') {
+    faceSvg = '<!-- Ağrı Dağı Aynalı Kar Vizörü -->' +
+      '<rect x="33" y="37" width="34" height="10" rx="3" fill="#0369a1" stroke="#e0f2fe" stroke-width="1.5" filter="url(#glow3D_' + uid + ')" />' +
+      '<line x1="35" y1="42" x2="65" y2="42" stroke="#f43f5e" stroke-width="1.5" opacity="0.8" />';
   } else if (faceAcc === 'face_katip_biyik') {
     faceSvg = '<!-- İnce Kâtip Bıyığı -->' +
       '<path d="M40 48 Q45 50 50 48 Q55 50 60 48" stroke="#18181b" stroke-width="2" fill="none" stroke-linecap="round" />';
@@ -3947,7 +5408,118 @@ function render3DAvatar(containerId, size = 145) {
 
   // --- ACCESSORY / HAND VECTORS ---
   let accSvg = '';
-  if (accessory === 'acc_cay') {
+  if (accessory === 'acc_boba_tea') {
+    accSvg = '<!-- Çilekli Bubble Tea (Boba) -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<path d="M72 68 L84 68 L82 88 L74 88 Z" fill="#fbcfe8" stroke="#f472b6" stroke-width="1" />' +
+      '<rect x="71" y="66" width="14" height="3" rx="1.5" fill="#ffffff" stroke="#f472b6" stroke-width="1" />' +
+      '<circle cx="76" cy="85" r="1.5" fill="#18181b" /><circle cx="80" cy="85" r="1.5" fill="#18181b" /><circle cx="78" cy="82" r="1.5" fill="#18181b" />' +
+      '<line x1="78" y1="60" x2="78" y2="86" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" />' +
+      '</g>';
+  } else if (accessory === 'acc_cicek_buketi') {
+    accSvg = '<!-- Gül & Lavanta Bahar Buketi -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<polygon points="78,92 70,76 86,76" fill="#d97706" />' +
+      '<circle cx="74" cy="72" r="4.5" fill="#f43f5e" /><circle cx="82" cy="72" r="4.5" fill="#a855f7" /><circle cx="78" cy="67" r="4.5" fill="#f472b6" />' +
+      '<circle cx="78" cy="67" r="1.5" fill="#fde047" />' +
+      '</g>';
+  } else if (accessory === 'acc_pamuk_seker') {
+    accSvg = '<!-- Gökkuşağı Bulutu Pamuk Şeker -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<line x1="78" y1="62" x2="78" y2="94" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />' +
+      '<circle cx="78" cy="66" r="11" fill="#fbcfe8" filter="url(#glow3D_' + uid + ')" />' +
+      '<circle cx="74" cy="64" r="7" fill="#bae6fd" />' +
+      '<circle cx="82" cy="68" r="7" fill="#fef08a" />' +
+      '</g>';
+  } else if (accessory === 'acc_sihirli_asa') {
+    accSvg = '<!-- Yıldızlı Ay & Kalp Sihirli Asa -->' +
+      '<g filter="url(#glow3D_' + uid + ')">' +
+      '<line x1="74" y1="92" x2="84" y2="60" stroke="#f472b6" stroke-width="3" stroke-linecap="round" />' +
+      '<circle cx="84" cy="58" r="7" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.2" />' +
+      '<circle cx="87" cy="56" r="5.5" fill="#fdf2f8" />' +
+      '<polygon points="84,58 82,55 85,55" fill="#f43f5e" />' +
+      '</g>';
+  } else if (accessory === 'acc_pelus_ayi') {
+    accSvg = '<!-- Sevimli Pelüş Ayıcık -->' +
+      '<g transform="translate(68, 64) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="8" ry="10" fill="#b45309" />' +
+      '<circle cx="14" cy="10" r="7" fill="#b45309" />' +
+      '<circle cx="8" cy="5" r="3" fill="#b45309" /><circle cx="20" cy="5" r="3" fill="#b45309" />' +
+      '<ellipse cx="14" cy="12" rx="3.5" ry="2.5" fill="#fef3c7" />' +
+      '<circle cx="14" cy="11.5" r="1" fill="#000" /><circle cx="11" cy="9" r="0.8" fill="#000" /><circle cx="17" cy="9" r="0.8" fill="#000" />' +
+      '</g>';
+  } else if (accessory === 'acc_polaroid') {
+    accSvg = '<!-- Pastel Pembe Polaroid Kamera -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<path d="M70 56 Q78 50 86 56" stroke="#f472b6" stroke-width="1.5" fill="none" />' +
+      '<rect x="70" y="72" width="16" height="14" rx="3" fill="#fbcfe8" stroke="#f472b6" stroke-width="1.5" />' +
+      '<circle cx="78" cy="79" r="4.5" fill="#1e293b" stroke="#ffffff" stroke-width="1" />' +
+      '<circle cx="78" cy="79" r="2" fill="#0284c7" />' +
+      '<circle cx="83" cy="74" r="1" fill="#ef4444" />' +
+      '</g>';
+  } else if (accessory === 'acc_makaron') {
+    accSvg = '<!-- Paris Makaron Kutusu -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="78" cy="85" rx="8" ry="3.5" fill="#f472b6" stroke="#db2777" stroke-width="0.8" />' +
+      '<ellipse cx="78" cy="78" rx="8" ry="3.5" fill="#4ade80" stroke="#16a34a" stroke-width="0.8" />' +
+      '<ellipse cx="78" cy="71" rx="8" ry="3.5" fill="#c084fc" stroke="#9333ea" stroke-width="0.8" />' +
+      '</g>';
+  } else if (accessory === 'acc_kalp_balonlar') {
+    accSvg = '<!-- Uçan Kalp Helyum Balonları -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<line x1="78" y1="84" x2="72" y2="58" stroke="#ffffff" stroke-width="1" />' +
+      '<line x1="78" y1="84" x2="84" y2="52" stroke="#ffffff" stroke-width="1" />' +
+      '<path d="M72 52 C70 48, 64 48, 64 52 C64 57, 72 61, 72 61 C72 61, 80 57, 80 52 C80 48, 74 48, 72 52 Z" fill="#f472b6" />' +
+      '<path d="M84 46 C82 42, 76 42, 76 46 C76 51, 84 55, 84 55 C84 55, 92 51, 92 46 C92 42, 86 42, 84 46 Z" fill="#e11d48" />' +
+      '</g>';
+  } else if (accessory === 'acc_simit') {
+    accSvg = '<!-- Çıtır Susamlı İstanbul Simidi -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<circle cx="78" cy="76" r="11" fill="#b45309" stroke="#78350f" stroke-width="2" />' +
+      '<circle cx="78" cy="76" r="5.5" fill="#071922" />' +
+      '<circle cx="75" cy="70" r="0.8" fill="#fde047" /><circle cx="81" cy="71" r="0.8" fill="#fde047" /><circle cx="84" cy="77" r="0.8" fill="#fde047" /><circle cx="73" cy="78" r="0.8" fill="#fde047" /><circle cx="77" cy="84" r="0.8" fill="#fde047" />' +
+      '</g>';
+  } else if (accessory === 'acc_baklava') {
+    accSvg = '<!-- Gaziantep Fıstıklı Baklava -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<polygon points="70,82 78,70 88,76 80,88" fill="#ca8a04" stroke="#854d0e" stroke-width="1.2" />' +
+      '<polygon points="72,80 78,72 86,76 80,84" fill="#15803d" />' +
+      '</g>';
+  } else if (accessory === 'acc_cezve') {
+    accSvg = '<!-- Oymalı Bakır Cezve -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<path d="M72 74 L84 74 L81 88 L75 88 Z" fill="#b45309" stroke="#78350f" stroke-width="1.2" />' +
+      '<line x1="72" y1="74" x2="62" y2="66" stroke="#451a03" stroke-width="2.5" stroke-linecap="round" />' +
+      '<path d="M78 70 Q80 64 76 60" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round" />' +
+      '</g>';
+  } else if (accessory === 'acc_tesbih') {
+    accSvg = '<!-- Oltu Taşı Gümüş Püsküllü Tesbih -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<circle cx="76" cy="72" r="7" fill="none" stroke="#18181b" stroke-width="3" stroke-dasharray="2 1" />' +
+      '<line x1="76" y1="79" x2="76" y2="90" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" />' +
+      '<circle cx="76" cy="91" r="1.5" fill="#94a3b8" />' +
+      '</g>';
+  } else if (accessory === 'acc_nazar') {
+    accSvg = '<!-- Ege Cam Nazar Boncuğu Tılsımı -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<circle cx="78" cy="76" r="11" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" />' +
+      '<circle cx="78" cy="76" r="7.5" fill="#ffffff" />' +
+      '<circle cx="78" cy="76" r="4.5" fill="#38bdf8" />' +
+      '<circle cx="78" cy="76" r="2.2" fill="#000000" />' +
+      '</g>';
+  } else if (accessory === 'acc_yay') {
+    accSvg = '<!-- Geleneksel Türk Kemankeş Yayı -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<path d="M72 50 Q86 72 72 94" stroke="#78350f" stroke-width="3.5" fill="none" stroke-linecap="round" />' +
+      '<line x1="72" y1="50" x2="72" y2="94" stroke="#f8fafc" stroke-width="1" />' +
+      '</g>';
+  } else if (accessory === 'acc_kayak') {
+    accSvg = '<!-- Uludağ Kar Kayak Takımı -->' +
+      '<g filter="url(#drop3D_' + uid + ')">' +
+      '<line x1="70" y1="46" x2="86" y2="96" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" />' +
+      '<line x1="74" y1="46" x2="90" y2="96" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round" />' +
+      '</g>';
+  } else if (accessory === 'acc_cay') {
     accSvg = '<!-- İnce Belli Türk Çayı -->' +
       '<g filter="url(#drop3D_' + uid + ')">' +
       '<ellipse cx="78" cy="85" rx="10" ry="3" fill="#f59e0b" stroke="#b45309" stroke-width="1" />' +
@@ -3999,9 +5571,82 @@ function render3DAvatar(containerId, size = 145) {
       '<polygon points="86,40 92,30 84,34 90,20 78,32 84,28" fill="#facc15" filter="url(#glow3D_' + uid + ')" />';
   }
 
-  // --- PETS / TURKISH FAUNA VECTORS ---
+  // --- PETS VECTORS ---
   let petSvg = '';
-  if (pet === 'pet_van_cat') {
+  if (pet === 'pet_pomeranian') {
+    petSvg = '<!-- Pofuduk Pomeranian Boo Yavrusu -->' +
+      '<g transform="translate(10, 48) scale(0.95)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="15" cy="18" rx="11" ry="11" fill="#ea580c" />' +
+      '<circle cx="15" cy="10" r="9" fill="#f97316" />' +
+      '<circle cx="9" cy="4" r="3" fill="#ea580c" /><circle cx="21" cy="4" r="3" fill="#ea580c" />' +
+      '<ellipse cx="15" cy="12" rx="4.5" ry="3" fill="#ffedd5" />' +
+      '<circle cx="15" cy="11" r="1.4" fill="#000000" /><circle cx="11.5" cy="8.5" r="1.4" fill="#000000" /><circle cx="18.5" cy="8.5" r="1.4" fill="#000000" />' +
+      '<ellipse cx="15" cy="14" rx="1.5" ry="2" fill="#f43f5e" />' +
+      '</g>';
+  } else if (pet === 'pet_scottish_fold') {
+    petSvg = '<!-- Kıvrık Kulaklı Scottish Kedisi -->' +
+      '<g transform="translate(12, 50) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="9" ry="10" fill="#94a3b8" />' +
+      '<circle cx="14" cy="10" r="8" fill="#94a3b8" />' +
+      '<polygon points="8,7 11,4 12,8" fill="#64748b" /><polygon points="20,7 17,4 16,8" fill="#64748b" />' +
+      '<circle cx="10.5" cy="9.5" r="2" fill="#f59e0b" /><circle cx="17.5" cy="9.5" r="2" fill="#f59e0b" />' +
+      '<circle cx="10.5" cy="9.5" r="1" fill="#000" /><circle cx="17.5" cy="9.5" r="1" fill="#000" />' +
+      '<circle cx="14" cy="12" r="1" fill="#f472b6" />' +
+      '</g>';
+  } else if (pet === 'pet_kuzu') {
+    petSvg = '<!-- Pamuk Kuzu Yavrusu -->' +
+      '<g transform="translate(10, 48) scale(0.95)" filter="url(#drop3D_' + uid + ')">' +
+      '<circle cx="15" cy="18" r="9" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" />' +
+      '<circle cx="15" cy="10" r="7.5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2" />' +
+      '<ellipse cx="8" cy="11" rx="2" ry="4.5" fill="#fbcfe8" /><ellipse cx="22" cy="11" rx="2" ry="4.5" fill="#fbcfe8" />' +
+      '<circle cx="12" cy="9" r="1.3" fill="#000000" /><circle cx="18" cy="9" r="1.3" fill="#000000" />' +
+      '<rect x="10" y="15" width="10" height="2.5" rx="1" fill="#ef4444" />' +
+      '<circle cx="15" cy="18" r="2" fill="#facc15" />' +
+      '</g>';
+  } else if (pet === 'pet_ceylan') {
+    petSvg = '<!-- Kelebek Konan Ceylan Yavrusu -->' +
+      '<g transform="translate(10, 46) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="20" rx="8" ry="10" fill="#d97706" />' +
+      '<circle cx="14" cy="10" r="6.5" fill="#d97706" />' +
+      '<polygon points="8,5 11,1 12,6" fill="#b45309" /><polygon points="20,5 17,1 16,6" fill="#b45309" />' +
+      '<circle cx="11.5" cy="9" r="1.8" fill="#18181b" /><circle cx="16.5" cy="9" r="1.8" fill="#18181b" />' +
+      '<circle cx="10" cy="18" r="0.9" fill="#ffffff" /><circle cx="16" cy="19" r="0.9" fill="#ffffff" /><circle cx="13" cy="22" r="0.9" fill="#ffffff" />' +
+      '<g transform="translate(18, 14)" filter="url(#glow3D_' + uid + ')">' +
+      '<ellipse cx="0" cy="0" rx="3" ry="2" fill="#c084fc" /><circle cx="0" cy="0" r="0.8" fill="#fde047" />' +
+      '</g>' +
+      '</g>';
+  } else if (pet === 'pet_panda') {
+    petSvg = '<!-- Bambu Yiyen Bebek Panda -->' +
+      '<g transform="translate(10, 48) scale(0.95)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="15" cy="18" rx="9" ry="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />' +
+      '<circle cx="15" cy="10" r="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />' +
+      '<circle cx="8" cy="4" r="3" fill="#18181b" /><circle cx="22" cy="4" r="3" fill="#18181b" />' +
+      '<ellipse cx="11.5" cy="9.5" rx="2.5" ry="3" fill="#18181b" /><circle cx="11.5" cy="9.5" r="1" fill="#ffffff" />' +
+      '<ellipse cx="18.5" cy="9.5" rx="2.5" ry="3" fill="#18181b" /><circle cx="18.5" cy="9.5" r="1" fill="#ffffff" />' +
+      '<circle cx="15" cy="13" r="1.2" fill="#18181b" />' +
+      '<line x1="20" y1="12" x2="26" y2="24" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" />' +
+      '</g>';
+  } else if (pet === 'pet_unicorn') {
+    petSvg = '<!-- Gökkuşağı Boynuzlu Mini Midilli -->' +
+      '<g transform="translate(8, 44) scale(0.95)" filter="url(#glow3D_' + uid + ')">' +
+      '<ellipse cx="16" cy="20" rx="9" ry="10" fill="#ffffff" stroke="#f1f5f9" stroke-width="1" />' +
+      '<circle cx="16" cy="10" r="7.5" fill="#ffffff" stroke="#f1f5f9" stroke-width="1" />' +
+      '<polygon points="16,3 13,-6 19,-6" fill="#fde047" filter="url(#glow3D_' + uid + ')" />' +
+      '<path d="M10 6 Q6 14 8 22" stroke="#f472b6" stroke-width="2" fill="none" />' +
+      '<path d="M12 6 Q8 14 10 22" stroke="#38bdf8" stroke-width="2" fill="none" />' +
+      '<path d="M14 6 Q10 14 12 22" stroke="#facc15" stroke-width="2" fill="none" />' +
+      '<circle cx="18" cy="9.5" r="1.6" fill="#0284c7" /><circle cx="18.5" cy="9" r="0.6" fill="#ffffff" />' +
+      '</g>';
+  } else if (pet === 'pet_hamster') {
+    petSvg = '<!-- Tombik Yanaklı Ayçiçeği Hamsterı -->' +
+      '<g transform="translate(12, 52) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="16" rx="9" ry="9" fill="#f59e0b" />' +
+      '<ellipse cx="14" cy="16" rx="6" ry="6" fill="#ffffff" />' +
+      '<circle cx="7" cy="9" r="2.5" fill="#f59e0b" /><circle cx="21" cy="9" r="2.5" fill="#f59e0b" />' +
+      '<circle cx="10" cy="12" r="1.4" fill="#000000" /><circle cx="18" cy="12" r="1.4" fill="#000000" />' +
+      '<ellipse cx="14" cy="17" rx="2" ry="3" fill="#18181b" stroke="#ffffff" stroke-width="0.5" />' +
+      '</g>';
+  } else if (pet === 'pet_van_cat') {
     petSvg = '<!-- Gözleri Farklı Renkli Van Kedisi -->' +
       '<g transform="translate(14, 52) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
       '<ellipse cx="14" cy="18" rx="8" ry="10" fill="#ffffff" />' +
@@ -4012,7 +5657,7 @@ function render3DAvatar(containerId, size = 145) {
       '<circle cx="17" cy="9.5" r="1.6" fill="#f59e0b" />' +
       '<circle cx="14" cy="12" r="1" fill="#f472b6" />' +
       '</g>';
-  } else if (pet === 'pet_kangal') {
+  } else if (pet === 'pet_kangal_yavru' || pet === 'pet_kangal') {
     petSvg = '<!-- Sivas Kangal Çoban Köpeği Yavrusu -->' +
       '<g transform="translate(10, 50) scale(0.95)" filter="url(#drop3D_' + uid + ')">' +
       '<ellipse cx="15" cy="18" rx="9" ry="11" fill="#e2d4b7" />' +
@@ -4023,6 +5668,38 @@ function render3DAvatar(containerId, size = 145) {
       '<circle cx="18" cy="8.5" r="1.2" fill="#451a03" />' +
       '<ellipse cx="8" cy="10" rx="2.5" ry="4" fill="#1c1917" />' +
       '<ellipse cx="22" cy="10" rx="2.5" ry="4" fill="#1c1917" />' +
+      '</g>';
+  } else if (pet === 'pet_angora_cat') {
+    petSvg = '<!-- İpeksi Beyaz Ankara Kedisi -->' +
+      '<g transform="translate(12, 52) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="9" ry="10" fill="#ffffff" stroke="#f1f5f9" stroke-width="1" />' +
+      '<circle cx="14" cy="10" r="7" fill="#ffffff" />' +
+      '<polygon points="9,5 12,1 14,5" fill="#fbcfe8" /><polygon points="19,5 16,1 14,5" fill="#fbcfe8" />' +
+      '<circle cx="11" cy="9.5" r="1.5" fill="#10b981" /><circle cx="17" cy="9.5" r="1.5" fill="#10b981" />' +
+      '</g>';
+  } else if (pet === 'pet_karakulak') {
+    petSvg = '<!-- Anadolu Karakulak Kedisi -->' +
+      '<g transform="translate(12, 50) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="8" ry="10" fill="#d97706" />' +
+      '<circle cx="14" cy="10" r="7" fill="#d97706" />' +
+      '<polygon points="8,6 10,0 13,5" fill="#18181b" /><polygon points="20,6 18,0 15,5" fill="#18181b" />' +
+      '<circle cx="11" cy="9" r="1.5" fill="#fef08a" /><circle cx="17" cy="9" r="1.5" fill="#fef08a" />' +
+      '</g>';
+  } else if (pet === 'pet_keklik') {
+    petSvg = '<!-- Kınalı Anadolu Dağ Kekliği -->' +
+      '<g transform="translate(12, 48) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="7" ry="10" fill="#a8a29e" />' +
+      '<circle cx="14" cy="10" r="6" fill="#78716c" />' +
+      '<polygon points="8,10 3,11 8,13" fill="#dc2626" />' +
+      '<line x1="10" y1="16" x2="18" y2="16" stroke="#18181b" stroke-width="1.5" />' +
+      '</g>';
+  } else if (pet === 'pet_sincap') {
+    petSvg = '<!-- Karadeniz Fındık Sincabı -->' +
+      '<g transform="translate(12, 50) scale(0.9)" filter="url(#drop3D_' + uid + ')">' +
+      '<ellipse cx="14" cy="18" rx="8" ry="10" fill="#b45309" />' +
+      '<circle cx="14" cy="10" r="6.5" fill="#b45309" />' +
+      '<circle cx="11" cy="9" r="1.2" fill="#000" /><circle cx="17" cy="9" r="1.2" fill="#000" />' +
+      '<circle cx="14" cy="16" r="3" fill="#78350f" stroke="#451a03" stroke-width="0.8" />' +
       '</g>';
   } else if (pet === 'pet_kartal') {
     petSvg = '<!-- Anadolu Kaya Kartalı (Omzunda) -->' +
@@ -4239,7 +5916,7 @@ function checkBadgeProgress() {
 }
 
 function triggerBadgeUnlockModal(badge) {
-  sndComplete();
+  sndBadgeUnlocked();
   confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
 
   document.getElementById('unlockedBadgeIcon').textContent = badge.icon;
@@ -4576,7 +6253,7 @@ function executePurchase(item) {
   cancelTryOn();
   updateGlobalScoreDisplay();
   saveProfileState();
-  sndHarmonicCorrect(2);
+  sndPurchase();
 
   checkBadgeProgress();
 
@@ -4670,16 +6347,29 @@ function showScreen(screenId) {
     if (bottomNav) bottomNav.style.display = 'flex';
   }
 
+  // Mobile nav links
   document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
   if (screenId === 'screen-home') document.getElementById('navHome')?.classList.add('active');
+  if (screenId === 'screen-duel') document.getElementById('navDuel')?.classList.add('active');
+  if (screenId === 'screen-profile') document.getElementById('navProfile')?.classList.add('active');
+
+  // Desktop nav links
+  document.querySelectorAll('.desktop-nav-link').forEach(btn => btn.classList.remove('active'));
+  if (screenId === 'screen-home') document.getElementById('deskNavHome')?.classList.add('active');
+  if (screenId === 'screen-duel') document.getElementById('deskNavDuel')?.classList.add('active');
+  if (screenId === 'screen-profile') document.getElementById('deskNavProfile')?.classList.add('active');
+
   if (screenId === 'screen-duel') {
-    document.getElementById('navDuel')?.classList.add('active');
     renderLeaderboard();
   }
   if (screenId === 'screen-profile') {
-    document.getElementById('navProfile')?.classList.add('active');
+    const guestBanner = document.getElementById('profileGuestBanner');
+    if (guestBanner) {
+      guestBanner.style.display = profileState.isLoggedIn ? 'none' : 'flex';
+    }
     switchSlot(state.currentSlot || 'outfit');
   }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderThemeGrid() {
@@ -5082,7 +6772,7 @@ function shuffleRemainingChips() {
 
   state.unplacedItems = shuffle(state.unplacedItems);
   renderGameChips();
-  sndPickup();
+  sndShuffle();
 }
 
 function shuffle(arr) {
@@ -5139,7 +6829,10 @@ function attachChipPointerEvents(chip, item) {
 
       if (nearest !== currentHoveredPin) {
         if (currentHoveredPin) currentHoveredPin.classList.remove('drop-hover');
-        if (nearest) nearest.classList.add('drop-hover');
+        if (nearest) {
+          nearest.classList.add('drop-hover');
+          sndHover();
+        }
         currentHoveredPin = nearest;
       }
     }
